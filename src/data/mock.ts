@@ -32,12 +32,13 @@ const placeholderProjects = projectImages.map((imageUrl, index) => {
   const number = index + 1;
   const slug = `project-${String(number).padStart(2, "0")}`;
   const technologies = projectTechnologies[index] ?? placeholderProjectDetails.technologies;
+  const category = projectCategories[index] ?? "Data Science";
   return {
     id: slug,
     slug,
     index: String(number).padStart(2, "0"),
-    meta: projectCategories[index],
-    category: projectCategories[index],
+    meta: category,
+    category,
     title: `Project ${String(number).padStart(2, "0")}`,
     description: "A clearly labeled placeholder case study awaiting verified project context, implementation details and outcomes.",
     tags: technologies,
