@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Define the monochrome design tokens, fonts, and fluid type scale
-- [ ] Build shared navigation, footer, cards, headings, buttons, badges, states, motion, smooth scroll, and preloader
-- [ ] Add typed portfolio models, mock-data service boundary, and site configuration
-- [ ] Create all requested placeholder routes and the styled 404
-- [ ] Verify build, route behavior, desktop layout, and mobile menu
+- [x] Build only the Home hero in `src/components/home/Hero`
+- [x] Source every hero string and link through `getSiteContent()`
+- [x] Add the monochrome editorial layout, subtle data visual, responsive composition, and restrained motion/interactions
+- [x] Render the hero on the home page without changing other site areas
+- [x] Verify build and desktop/mobile presentation
