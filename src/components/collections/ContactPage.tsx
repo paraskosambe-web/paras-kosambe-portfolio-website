@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowUpRight } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
+import type { ReactNode } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -58,6 +59,6 @@ export function ContactPage() {
   </div></main>;
 }
 
-function FormField({ label, error, counter, children }: { label: string; error?: string; counter?: string; children: React.ReactNode }) {
+function FormField({ label, error, counter, children }: { label: string; error?: string; counter?: string; children: ReactNode }) {
   return <label className="contact-field"><span>{label}</span>{children}<small>{error ?? counter ?? "\u00a0"}</small></label>;
 }
