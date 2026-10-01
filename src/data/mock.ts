@@ -283,7 +283,6 @@ export const siteContent: SiteContent = {
     intro: "Art is another way I explore ideas, composition and creativity. These locally generated pieces are placeholders for original work.",
     filters: ["ALL", "DIGITAL", "SKETCH", "EXPERIMENTAL"],
     portfolioLabel: "Instagram / Art portfolio",
-    portfolioUrl: siteConfig.instagram || undefined,
     items: [art01, art02, art03, art04, art05, art06].map((imageUrl, index) => {
       const categories = ["DIGITAL", "SKETCH", "EXPERIMENTAL", "DIGITAL", "SKETCH", "EXPERIMENTAL"] as const;
       const category = categories[index] ?? "DIGITAL";

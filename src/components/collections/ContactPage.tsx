@@ -59,6 +59,6 @@ export function ContactPage() {
   </div></main>;
 }
 
-function FormField({ label, error, counter, children }: { label: string; error?: string; counter?: string; children: ReactNode }) {
+function FormField({ label, error, counter, children }: { label: string; error: string | undefined; counter?: string | undefined; children: ReactNode }) {
   return <label className="contact-field"><span>{label}</span>{children}<small>{error ?? counter ?? "\u00a0"}</small></label>;
 }
