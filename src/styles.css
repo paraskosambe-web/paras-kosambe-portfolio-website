@@ -136,6 +136,10 @@
 }
 
 @layer base {
+  html {
+    overflow-x: hidden;
+  }
+
   * {
     border-color: var(--color-border);
   }
@@ -434,3 +438,65 @@
 
 @media (max-width: 900px) { .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 639px) { .collection-controls { display: grid; grid-template-columns: 1fr 1fr; } .collection-controls button:first-child { grid-column: 1 / -1; } .collection-grid { grid-template-columns: 1fr; } }
+
+@utility about-page-layout { display: grid; grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr); align-items: start; gap: clamp(4rem, 9vw, 9rem); padding-block: clamp(5rem, 9vw, 9rem); }
+@utility about-page-portrait { position: sticky; top: 3rem; }
+@utility about-bio { & p { margin: 0 0 1.4rem; font-family: var(--font-display); font-size: clamp(1.45rem, 2.8vw, 2.65rem); font-weight: 500; line-height: 1.2; } }
+@utility about-detail-block { display: grid; grid-template-columns: minmax(120px, 0.28fr) minmax(0, 0.72fr); border-top: 1px solid var(--color-border); padding-block: 2rem; }
+@utility about-detail-block { & > span { color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; } & h2 { margin: 0; font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.6rem); } & p { grid-column: 2; margin: 0.45rem 0 0; color: var(--color-muted-foreground); line-height: 1.65; } & ol { grid-column: 2; margin: 0; padding: 0; list-style: none; } & li { display: grid; grid-template-columns: 2.8rem 1fr; border-bottom: 1px solid var(--color-border); padding-block: 0.85rem; } & b { color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.62rem; font-weight: 400; } }
+@utility about-looking { color: var(--color-foreground) !important; font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.7rem); }
+
+@utility skills-page-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 1rem; padding-top: 2rem; }
+@utility skill-page-card { display: flex; min-height: 530px; flex-direction: column; border: 1px solid var(--color-border); background: var(--color-card); padding: 1.6rem; transition: border-color 220ms ease; }
+@utility skill-page-card { &:hover { border-color: var(--color-muted-foreground); } & h2 { margin: 2.8rem 0 0; font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3.2rem); line-height: 0.95; } & > p { margin: 1rem 0 0; color: var(--color-muted-foreground); line-height: 1.6; } }
+@utility skill-page-card-head { display: flex; align-items: flex-start; justify-content: space-between; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.65rem; }
+@utility skill-page-card-head { & strong { color: color-mix(in oklab, var(--color-foreground) 15%, transparent); font-family: var(--font-display); font-size: 5rem; line-height: 0.75; } }
+@utility skill-page-tags { display: flex; height: 154px; align-content: flex-start; flex-wrap: wrap; gap: 0.45rem; margin-top: auto; overflow: hidden; border-top: 1px solid var(--color-border); padding-top: 1.35rem; }
+@utility skill-page-tags { & span { border: 1px solid var(--color-border); padding: 0.45rem 0.6rem; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; } }
+
+@utility resume-page-meta { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding-block: 2rem; }
+@utility resume-page-meta { & > span { color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; } & > strong { font-family: var(--font-display); font-size: 1.2rem; } & > div { display: flex; gap: 0.75rem; } }
+@utility resume-frame { height: min(78svh, 980px); border: 1px solid var(--color-border); background: var(--color-card); }
+@utility resume-frame { & object { width: 100%; height: 100%; } & p { padding: 2rem; color: var(--color-muted-foreground); } & a { color: var(--color-foreground); text-decoration: underline; } }
+
+@utility art-controls { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-block: 2rem; }
+@utility art-link-placeholder { color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; }
+@utility art-grid { & .portfolio-card-media img { filter: none; } & .portfolio-card:hover .portfolio-card-media img { filter: none; } }
+@utility art-lightbox { width: min(calc(100% - 2rem), 1080px); max-width: 1080px; border-radius: 2px; border-color: var(--color-border); background: var(--color-card); }
+@utility art-lightbox { & h2 { padding-right: 2rem; font-family: var(--font-display); font-size: 1.4rem; } & img { width: 100%; max-height: 72svh; border: 1px solid var(--color-border); object-fit: contain; } & > span { color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; } }
+
+@utility contact-page { min-height: 100svh; background: oklch(0 0 0); padding-block: clamp(5rem, 9vw, 9rem); }
+@utility contact-page-header { min-height: 52svh; border-bottom: 1px solid var(--color-border); padding-block: 3rem; }
+@utility contact-page-header { & > span { color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; } & h1 { max-width: 1160px; margin: clamp(4rem, 9vw, 8rem) 0 0; font-family: var(--font-display); font-size: clamp(4rem, 10vw, 10rem); font-weight: 900; line-height: 0.78; } & p { max-width: 620px; margin: 2rem 0 0 auto; color: var(--color-muted-foreground); line-height: 1.65; } }
+@utility contact-layout { display: grid; grid-template-columns: minmax(260px, 0.42fr) minmax(0, 0.58fr); gap: clamp(3rem, 8vw, 8rem); padding-block: clamp(4rem, 8vw, 8rem); }
+@utility contact-links { & a { position: relative; display: grid; grid-template-columns: 1fr auto; border-top: 1px solid var(--color-border); padding-block: 1.4rem; color: var(--color-foreground); } & a:last-child { border-bottom: 1px solid var(--color-border); } & a[aria-disabled="true"] { color: var(--color-muted-foreground); cursor: default; } & span { grid-column: 1 / -1; margin-bottom: 0.65rem; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; } & strong { font-family: var(--font-display); font-size: 1.25rem; } & svg { width: 1rem; transition: transform 180ms ease; } & a:not([aria-disabled="true"]):hover svg { transform: translate(4px, -4px); } }
+@utility contact-form { display: grid; gap: 1.35rem; }
+@utility contact-field { display: grid; gap: 0.55rem; }
+@utility contact-field { & > span { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; } & input, & textarea, & button[role="combobox"] { border-radius: 2px; border-color: var(--color-border); background: var(--color-card); color: var(--color-foreground); box-shadow: none; } & input { height: 3.2rem; } & textarea { min-height: 190px; resize: vertical; } & input:focus-visible, & textarea:focus-visible, & button[role="combobox"]:focus-visible { border-color: var(--color-muted-foreground); outline: none; } & [aria-invalid="true"] { border-color: var(--color-destructive); } & small { min-height: 1rem; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.58rem; } & [aria-invalid="true"] + small { color: var(--color-destructive); } }
+@utility honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+@media (max-width: 900px) {
+  .about-page-layout, .contact-layout { grid-template-columns: 1fr; }
+  .about-page-portrait { position: relative; top: auto; width: min(72vw, 480px); }
+  .skills-page-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .art-controls { align-items: stretch; flex-direction: column; }
+}
+
+@media (max-width: 639px) {
+  .about-page-layout { padding-block: 4rem; }
+  .about-page-portrait { width: calc(100% - 1rem); }
+  .about-detail-block { grid-template-columns: 1fr; gap: 1rem; }
+  .about-detail-block p, .about-detail-block ol { grid-column: 1; }
+  .skills-page-grid { grid-template-columns: 1fr; }
+  .skill-page-card { min-height: 500px; }
+  .resume-page-meta { grid-template-columns: 1fr; }
+  .resume-page-meta > div { display: grid; }
+  .resume-page-meta a { width: 100%; }
+  .resume-frame { height: 68svh; }
+  .art-controls .project-filters { display: grid; grid-template-columns: 1fr 1fr; }
+  .art-controls .project-filters button:first-child { grid-column: 1 / -1; }
+  .contact-page { padding-block: 3rem 5rem; }
+  .contact-page-header { min-height: 56svh; }
+  .contact-page-header h1 { font-size: clamp(3.6rem, 19vw, 6rem); overflow-wrap: anywhere; }
+  .contact-layout { padding-block: 4rem; }
+}

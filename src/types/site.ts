@@ -83,6 +83,74 @@ export interface AchievementsContent extends CollectionPageContent<AchievementIt
   filters: ("ALL" | AchievementCategory)[];
 }
 
+export interface AboutContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  imageUrl?: string;
+  imageAlt: string;
+  bio: string[];
+  educationLabel: string;
+  education: { degree: string; institution: string; status: string };
+  currentlyLabel: string;
+  currently: string[];
+  lookingForLabel: string;
+  lookingFor: string;
+}
+
+export interface SkillsContent extends CollectionPageContent<SkillsCategory> {}
+
+export interface ResumeContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  updatedLabel: string;
+  updated: string;
+  pdfUrl: string;
+  downloadLabel: string;
+  fullscreenLabel: string;
+  fallbackText: string;
+  fallbackLabel: string;
+}
+
+export type ArtCategory = "ALL" | "DIGITAL" | "SKETCH" | "EXPERIMENTAL";
+
+export interface ArtItem extends PortfolioItem {
+  category: Exclude<ArtCategory, "ALL">;
+  medium: string;
+  year: string;
+  imageUrl: string;
+}
+
+export interface ArtContent extends CollectionPageContent<ArtItem> {
+  filters: ArtCategory[];
+  portfolioLabel: string;
+  portfolioUrl?: string;
+}
+
+export interface ContactLink {
+  label: string;
+  value: string;
+  href: string;
+}
+
+export interface ContactContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  links: ContactLink[];
+  form: {
+    nameLabel: string;
+    emailLabel: string;
+    interestLabel: string;
+    messageLabel: string;
+    submitLabel: string;
+    interests: string[];
+    successMessage: string;
+    errorMessage: string;
+  };
+}
+
 export type ProjectCategory = "Data Science" | "Data Analytics" | "AI/ML" | "Full-Stack";
 
 export interface ProjectItem extends PortfolioItem {
@@ -197,4 +265,9 @@ export interface SiteContent {
   experience: ExperienceContent;
   certifications: CertificationsContent;
   achievements: AchievementsContent;
+  about: AboutContent;
+  skills: SkillsContent;
+  resume: ResumeContent;
+  art: ArtContent;
+  contact: ContactContent;
 }

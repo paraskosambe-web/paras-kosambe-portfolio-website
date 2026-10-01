@@ -1,5 +1,5 @@
 import { siteContent } from "@/data/mock";
-import type { AchievementsContent, CertificationsContent, ExperienceContent, HomeContent, ProjectItem, ProjectsContent, SiteContent } from "@/types/site";
+import type { AboutContent, AchievementsContent, ArtContent, CertificationsContent, ContactContent, ExperienceContent, HomeContent, ProjectItem, ProjectsContent, ResumeContent, SiteContent, SkillsContent } from "@/types/site";
 
 export function getSiteContent(): SiteContent {
   return siteContent;
@@ -32,3 +32,9 @@ export function getCertificationsContent(): CertificationsContent {
 export function getAchievementsContent(): AchievementsContent {
   return siteContent.achievements;
 }
+
+export function getAboutContent(): AboutContent { return siteContent.about; }
+export function getSkillsContent(): SkillsContent { return siteContent.skills; }
+export function getResumeContent(): ResumeContent { return siteContent.resume; }
+export function getArtContent(): ArtContent { return siteContent.art; }
+export function getContactContent(): ContactContent { return siteContent.contact; }
