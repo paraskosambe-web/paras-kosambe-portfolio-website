@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep all displayed portfolio copy behind typed service functions so the mock source can later be replaced without changing components.
+- Build portfolio collection pages from the shared PortfolioCard shell so card dimensions and interaction language remain consistent.

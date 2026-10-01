@@ -156,4 +156,78 @@ export const siteContent: SiteContent = {
     },
     items: placeholderProjects,
   },
+  experience: {
+    eyebrow: "Experience / Placeholder records",
+    title: "Experience",
+    intro: "A structured space for verified roles, responsibilities and practical contributions. All current entries are clearly marked placeholders.",
+    dialogResponsibilitiesLabel: "Responsibilities",
+    dialogTechnologiesLabel: "Technologies",
+    items: [1, 2, 3].map((number) => ({
+      id: `experience-record-${number}`,
+      index: String(number).padStart(2, "0"),
+      meta: "PLACEHOLDER",
+      title: "Placeholder",
+      organization: "Organization placeholder",
+      role: "Role placeholder",
+      type: "Type placeholder",
+      dateRange: "Date range placeholder",
+      location: "Location placeholder",
+      description: "A clearly labeled placeholder awaiting verified organization, role, contribution and outcome details.",
+      tags: ["Technology", "Tool", "Method"],
+      technologies: ["Technology placeholder", "Tool placeholder", "Method placeholder"],
+      responsibilities: ["Responsibility placeholder awaiting verified details.", "Contribution placeholder awaiting verified details.", "Outcome placeholder awaiting verified details."],
+      imageAlt: `Placeholder visual for experience record ${number}`,
+      action: { label: "View details", href: `#experience-record-${number}` },
+    })),
+  },
+  certifications: {
+    eyebrow: "Credentials / Placeholder records",
+    title: "Certifications",
+    intro: "A filterable archive prepared for verified certificates, issuers and credential details. Current records are placeholders.",
+    filters: ["ALL", "DATA", "AI-ML", "DEVELOPMENT", "CLOUD", "OTHER"],
+    loadMoreLabel: "Load more",
+    lightboxCloseLabel: "Close preview",
+    items: projectImages.map((imageUrl, index) => {
+      const number = index + 1;
+      const categories = ["DATA", "AI-ML", "DEVELOPMENT", "CLOUD", "OTHER", "DATA"] as const;
+      const category = categories[index] ?? "OTHER";
+      return {
+        id: `certification-record-${number}`,
+        index: String(number).padStart(2, "0"),
+        meta: category,
+        category,
+        title: "Placeholder",
+        issuer: "Issuer placeholder",
+        date: "Date placeholder",
+        credentialId: "Credential ID placeholder",
+        description: "A clearly labeled placeholder awaiting verified certificate and issuer information.",
+        tags: [category, "Credential pending"],
+        imageUrl,
+        imageAlt: `Generated grayscale placeholder for certification ${number}`,
+        action: { label: "View Credential", href: `#certification-record-${number}` },
+      };
+    }),
+  },
+  achievements: {
+    eyebrow: "Milestones / Placeholder records",
+    title: "Achievements",
+    intro: "Selected milestones will appear here only with verified context and attribution. Current records are placeholders.",
+    filters: ["ALL", "ACADEMIC", "TECHNICAL", "COMMUNITY", "OTHER"],
+    items: [1, 2, 3].map((number) => {
+      const categories = ["ACADEMIC", "TECHNICAL", "COMMUNITY"] as const;
+      const category = categories[number - 1] ?? "OTHER";
+      return {
+        id: `achievement-record-${number}`,
+        index: String(number).padStart(2, "0"),
+        meta: category,
+        category,
+        title: "Placeholder",
+        organization: "Organization placeholder",
+        date: "Date placeholder",
+        description: "A clearly labeled placeholder awaiting a verified milestone, supporting context and outcome.",
+        tags: [category, "Details pending"],
+        imageAlt: `Placeholder visual for achievement ${number}`,
+      };
+    }),
+  },
 };
