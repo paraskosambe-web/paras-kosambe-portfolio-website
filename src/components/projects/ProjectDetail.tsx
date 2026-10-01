@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Github } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 import { getProjectsContent } from "@/services/site";
 import type { ProjectItem } from "@/types/site";
 
-function DetailSection({ index, title, children }: { index: string; title: string; children: React.ReactNode }) {
+function DetailSection({ index, title, children }: { index: string; title: string; children: ReactNode }) {
   const reduceMotion = useReducedMotion();
   return (
     <motion.section className="project-detail-section" initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.18 }}>
