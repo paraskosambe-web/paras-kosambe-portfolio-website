@@ -43,9 +43,9 @@ export function PortfolioCard({ item, visual, compact = false, details = [], del
           {visibleTags.map((tag) => <span key={tag}>{tag}</span>)}
           {extraTags > 0 ? <span>+{extraTags}</span> : null}
         </div>
-        <a className="portfolio-card-action" href={item.action.href} onClick={(event) => event.stopPropagation()}>
+        {item.action ? <a className="portfolio-card-action" href={item.action.href} onClick={(event) => event.stopPropagation()}>
           {item.action.label}<ArrowUpRight aria-hidden="true" />
-        </a>
+        </a> : null}
       </div>
     </motion.article>
   );

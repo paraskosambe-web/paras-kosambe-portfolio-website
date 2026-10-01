@@ -11,7 +11,7 @@
 - [x] Build the filterable Projects index with six equal-size cards
 - [x] Build the project detail route with unknown-project state
 - [x] Verify Projects pages on desktop and mobile
-- [ ] Build the Experience page with three placeholder cards and detail dialogs
-- [ ] Build the Certifications page with filters, lightbox, and load-more behavior
-- [ ] Build the Achievements page with category filters and optional links
+- [x] Build the Experience page with three placeholder cards and detail dialogs
+- [x] Build the Certifications page with filters, lightbox, and load-more behavior
+- [x] Build the Achievements page with category filters and optional links
 - [ ] Verify all three pages on desktop and mobile

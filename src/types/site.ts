@@ -29,7 +29,7 @@ export interface PortfolioItem {
   tags: string[];
   imageUrl?: string;
   imageAlt: string;
-  action: LinkContent;
+  action?: LinkContent;
 }
 
 export interface ExperienceItem extends PortfolioItem {

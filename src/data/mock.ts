@@ -227,7 +227,6 @@ export const siteContent: SiteContent = {
         description: "A clearly labeled placeholder awaiting a verified milestone, supporting context and outcome.",
         tags: [category, "Details pending"],
         imageAlt: `Placeholder visual for achievement ${number}`,
-        action: { label: "View details", href: `#achievement-record-${number}` },
       };
     }),
   },
