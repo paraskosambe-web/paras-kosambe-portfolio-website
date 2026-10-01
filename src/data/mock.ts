@@ -136,6 +136,8 @@ export const siteContent: SiteContent = {
     loadMoreLabel: "Load more",
     emptyTitle: "No projects found",
     emptyDescription: "Try another category or search term.",
+    notFoundTitle: "Project not found",
+    notFoundDescription: "This project does not exist or may have moved.",
     backLabel: "Back to projects",
     githubLabel: "GitHub",
     liveLabel: "Live Demo",

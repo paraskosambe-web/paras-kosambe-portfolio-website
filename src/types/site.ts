@@ -35,6 +35,7 @@ export interface PortfolioItem {
 export type ProjectCategory = "Data Science" | "Data Analytics" | "AI/ML" | "Full-Stack";
 
 export interface ProjectItem extends PortfolioItem {
+  imageUrl: string;
   slug: string;
   category: ProjectCategory;
   githubUrl: string;
@@ -59,6 +60,8 @@ export interface ProjectsContent {
   loadMoreLabel: string;
   emptyTitle: string;
   emptyDescription: string;
+  notFoundTitle: string;
+  notFoundDescription: string;
   backLabel: string;
   githubLabel: string;
   liveLabel: string;
