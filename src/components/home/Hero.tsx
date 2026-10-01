@@ -104,7 +104,7 @@ export function Hero() {
           initial="hidden"
           animate="visible"
           transition={{ staggerChildren: reduceMotion ? 0 : 0.13, delayChildren: reduceMotion ? 0 : 0.16 }}
-          style={reduceMotion ? undefined : { x: shift.x * -0.28, y: shift.y * -0.28 }}
+          style={reduceMotion ? {} : { x: shift.x * -0.28, y: shift.y * -0.28 }}
         >
           <motion.p className="hero-eyebrow" variants={reveal} transition={transition}>{hero.eyebrow}</motion.p>
           <h1 className="hero-name" aria-label={`${hero.firstName} ${hero.lastName}`}>
@@ -138,7 +138,7 @@ export function Hero() {
         </motion.div>
         <motion.div
           className="hero-visual-wrap"
-          animate={reduceMotion ? undefined : { x: shift.x, y: shift.y }}
+          animate={reduceMotion ? false : { x: shift.x, y: shift.y }}
           transition={{ type: "spring", stiffness: 80, damping: 24 }}
         >
           <DataVisual labels={hero.coordinates} />

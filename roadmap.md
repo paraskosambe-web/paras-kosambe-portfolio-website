@@ -7,4 +7,4 @@
 - [x] Verify build and desktop/mobile presentation
 - [x] Build all Home overview sections from typed service data
 - [x] Add the shared fixed-size PortfolioCard and SectionOverview shells
-- [ ] Verify the complete Home page on desktop and mobile
+- [x] Verify the complete Home page on desktop and mobile
