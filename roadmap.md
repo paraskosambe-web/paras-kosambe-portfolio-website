@@ -15,3 +15,9 @@
 - [x] Build the Certifications page with filters, lightbox, and load-more behavior
 - [x] Build the Achievements page with category filters and optional links
 - [x] Verify all three pages on desktop and mobile
+- [ ] Build the About page from editable service data
+- [ ] Build the Skills page with equal-size category cards
+- [ ] Build the Resume viewer page with fallback actions
+- [ ] Build the filterable Art page with lightbox
+- [ ] Build the validated WhatsApp Contact page
+- [ ] Verify all five pages on desktop and mobile
