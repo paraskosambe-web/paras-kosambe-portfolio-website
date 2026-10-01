@@ -340,6 +340,7 @@
 @utility page-header { & > span { grid-column: 1 / -1; align-self: start; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; } & > p { margin: 0 0 0.6rem; color: var(--color-muted-foreground); font-size: 1rem; line-height: 1.65; } }
 @utility page-header-mask { overflow: hidden; }
 @utility page-header-mask { & h1 { margin: 0; font-family: var(--font-display); font-size: clamp(5rem, 12vw, 11rem); font-weight: 900; line-height: 0.78; letter-spacing: 0; text-transform: uppercase; } }
+@utility page-header-mask-long { & h1 { font-size: clamp(4rem, 9vw, 8.5rem); } }
 @utility project-controls { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-block: 2rem; }
 @utility project-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 @utility project-filters { & button { height: 2.35rem; border-radius: 2px; border-color: var(--color-border); background: transparent; padding-inline: 0.85rem; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; box-shadow: none; } & button[aria-pressed="true"] { border-color: var(--color-foreground); background: var(--color-foreground); color: var(--color-background); } }
@@ -396,6 +397,7 @@
   .projects-inner, .project-detail-inner { width: min(100% - 2rem, 1360px); }
   .page-header { min-height: 50svh; }
   .page-header-mask h1 { font-size: clamp(4rem, 20vw, 6rem); }
+  .page-header-mask-long h1 { font-size: clamp(2.75rem, 14vw, 4.5rem); }
   .project-filters { display: grid; grid-template-columns: 1fr 1fr; }
   .project-filters button:first-child { grid-column: 1 / -1; }
   .projects-grid { grid-template-columns: 1fr; }
