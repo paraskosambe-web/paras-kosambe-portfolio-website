@@ -10,4 +10,4 @@
 - [x] Verify the complete Home page on desktop and mobile
 - [x] Build the filterable Projects index with six equal-size cards
 - [x] Build the project detail route with unknown-project state
-- [ ] Verify Projects pages on desktop and mobile
+- [x] Verify Projects pages on desktop and mobile
