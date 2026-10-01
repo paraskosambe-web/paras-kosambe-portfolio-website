@@ -6,6 +6,12 @@ import project03 from "@/assets/projects/project-03.png";
 import project04 from "@/assets/projects/project-04.png";
 import project05 from "@/assets/projects/project-05.png";
 import project06 from "@/assets/projects/project-06.png";
+import art01 from "@/assets/art/art-01.png";
+import art02 from "@/assets/art/art-02.png";
+import art03 from "@/assets/art/art-03.png";
+import art04 from "@/assets/art/art-04.png";
+import art05 from "@/assets/art/art-05.png";
+import art06 from "@/assets/art/art-06.png";
 
 const placeholderProjectDetails = {
   overview: "A structured placeholder for a future case study, designed to document context, process and measurable results.",
@@ -230,4 +236,84 @@ export const siteContent: SiteContent = {
       };
     }),
   },
+  about: {
+    eyebrow: "Profile / About",
+    title: "About",
+    intro: "The person behind the data, systems and digital experiences.",
+    imageAlt: "Portrait of Paras Kosambe",
+    bio: [
+      "I am a final-year B.Sc. Computer Science student at the University of Mumbai, developing a practical foundation across data science, analytics, artificial intelligence and software engineering.",
+      "My work is driven by curiosity: understanding how information becomes insight, how models become useful tools, and how thoughtful interfaces make complex systems easier to use.",
+      "I enjoy moving between analysis and implementation—exploring a problem, structuring the data, testing an approach and shaping the result into a clear digital experience.",
+    ],
+    educationLabel: "Education",
+    education: { degree: "B.Sc. Computer Science", institution: "University of Mumbai", status: "Final year" },
+    currentlyLabel: "Currently",
+    currently: ["Building practical data science projects", "Strengthening machine learning fundamentals", "Exploring scalable full-stack systems"],
+    lookingForLabel: "What I'm looking for",
+    lookingFor: "Opportunities to contribute to meaningful data, analytics, AI/ML or full-stack work while learning from experienced teams and solving real problems.",
+  },
+  skills: {
+    eyebrow: "Capabilities / Working toolkit",
+    title: "Skills",
+    intro: "A focused toolkit across data, intelligence and product engineering—shown without arbitrary proficiency scores.",
+    items: [
+      { ...siteContentPlaceholderSkill("skill-page-ds", "01", "Data Science", "Methods for exploring data, testing assumptions and building reproducible models.", ["Python", "Pandas", "NumPy", "Statistics", "Scikit-learn", "EDA", "Feature Engineering", "Jupyter"]) },
+      { ...siteContentPlaceholderSkill("skill-page-da", "02", "Data Analytics", "Tools for querying, cleaning and communicating information for clearer decisions.", ["SQL", "Excel", "Power BI", "Tableau", "Data Cleaning", "Dashboards", "Reporting"]) },
+      { ...siteContentPlaceholderSkill("skill-page-ai", "03", "AI/ML", "Applied workflows for training, evaluating and integrating intelligent systems.", ["Machine Learning", "TensorFlow", "NLP", "Model Evaluation", "Deep Learning", "Prompting"]) },
+      { ...siteContentPlaceholderSkill("skill-page-fs", "04", "Full-Stack", "Modern application foundations from accessible interfaces to reliable APIs.", ["React", "TypeScript", "Node.js", "REST APIs", "HTML", "CSS", "PostgreSQL", "Git"]) },
+      { ...siteContentPlaceholderSkill("skill-page-tools", "05", "Tools", "Everyday tools for analysis, building, iteration and team collaboration.", ["Git", "GitHub", "VS Code", "Jupyter", "Figma", "Docker", "Postman"]) },
+    ],
+  },
+  resume: {
+    eyebrow: "Profile / Resume",
+    title: "Resume",
+    intro: "A concise record of education, capabilities and selected work. The current document is a clearly marked placeholder until the verified resume is uploaded.",
+    updatedLabel: "Last updated",
+    updated: "October 2026",
+    pdfUrl: "/resume.pdf",
+    downloadLabel: "Download Resume",
+    fullscreenLabel: "View fullscreen",
+    fallbackText: "Your browser cannot display the resume here.",
+    fallbackLabel: "Open the PDF",
+  },
+  art: {
+    eyebrow: "Beyond code / Visual work",
+    title: "Art",
+    intro: "Art is another way I explore ideas, composition and creativity. These locally generated pieces are placeholders for original work.",
+    filters: ["ALL", "DIGITAL", "SKETCH", "EXPERIMENTAL"],
+    portfolioLabel: "Instagram / Art portfolio",
+    portfolioUrl: siteConfig.instagram || undefined,
+    items: [art01, art02, art03, art04, art05, art06].map((imageUrl, index) => {
+      const categories = ["DIGITAL", "SKETCH", "EXPERIMENTAL", "DIGITAL", "SKETCH", "EXPERIMENTAL"] as const;
+      const category = categories[index] ?? "DIGITAL";
+      const number = index + 1;
+      return { id: `artwork-${number}`, index: String(number).padStart(2, "0"), meta: `${category} · PLACEHOLDER`, category, title: `Artwork placeholder ${String(number).padStart(2, "0")}`, description: "A locally generated color study holding space for verified original artwork and its story.", medium: "Medium placeholder", year: "2026", tags: [category, "Artwork pending"], imageUrl, imageAlt: `Color artwork placeholder ${number}` };
+    }),
+  },
+  contact: {
+    eyebrow: "Contact / New opportunities",
+    title: "LET'S WORK TOGETHER",
+    intro: "Have a project, opportunity or idea worth exploring? Start a conversation through any channel or send a structured WhatsApp message.",
+    links: [
+      { label: "Email", value: "Email pending", href: siteConfig.email ? `mailto:${siteConfig.email}` : "#" },
+      { label: "LinkedIn", value: "Paras Kosambe", href: siteConfig.linkedin },
+      { label: "GitHub", value: "paraskosambe-web", href: siteConfig.github },
+      { label: "WhatsApp", value: "+91 91379 35311", href: `https://wa.me/${siteConfig.whatsapp}` },
+    ],
+    form: {
+      nameLabel: "Name",
+      emailLabel: "Email",
+      interestLabel: "What are you interested in?",
+      messageLabel: "Message",
+      submitLabel: "Continue on WhatsApp",
+      interests: ["Data Science", "Data Analytics", "AI-ML", "Full-Stack Development", "Collaboration", "Other"],
+      successMessage: "Your message is ready in WhatsApp.",
+      errorMessage: "WhatsApp could not be opened. Please try again.",
+    },
+  },
 };
+
+function siteContentPlaceholderSkill(id: string, index: string, title: string, description: string, skills: string[]) {
+  return { id, index, meta: `${String(skills.length).padStart(2, "0")} SKILLS`, title, count: skills.length, description, skills, tags: skills, imageAlt: `${title} skill category` };
+}
