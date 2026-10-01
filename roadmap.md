@@ -5,6 +5,6 @@
 - [x] Add the monochrome editorial layout, subtle data visual, responsive composition, and restrained motion/interactions
 - [x] Render the hero on the home page without changing other site areas
 - [x] Verify build and desktop/mobile presentation
-- [ ] Build all Home overview sections from typed service data
-- [ ] Add the shared fixed-size PortfolioCard and SectionOverview shells
+- [x] Build all Home overview sections from typed service data
+- [x] Add the shared fixed-size PortfolioCard and SectionOverview shells
 - [ ] Verify the complete Home page on desktop and mobile
