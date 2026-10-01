@@ -8,3 +8,6 @@
 - [x] Build all Home overview sections from typed service data
 - [x] Add the shared fixed-size PortfolioCard and SectionOverview shells
 - [x] Verify the complete Home page on desktop and mobile
+- [x] Build the filterable Projects index with six equal-size cards
+- [x] Build the project detail route with unknown-project state
+- [x] Verify Projects pages on desktop and mobile
