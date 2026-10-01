@@ -397,7 +397,7 @@
   .projects-inner, .project-detail-inner { width: min(100% - 2rem, 1360px); }
   .page-header { min-height: 50svh; }
   .page-header-mask h1 { font-size: clamp(4rem, 20vw, 6rem); }
-  .page-header-mask-long h1 { font-size: clamp(2.75rem, 14vw, 4.5rem); }
+  .page-header-mask-long h1 { font-size: clamp(2.45rem, 12.5vw, 4.2rem); }
   .project-filters { display: grid; grid-template-columns: 1fr 1fr; }
   .project-filters button:first-child { grid-column: 1 / -1; }
   .projects-grid { grid-template-columns: 1fr; }

@@ -14,4 +14,4 @@
 - [x] Build the Experience page with three placeholder cards and detail dialogs
 - [x] Build the Certifications page with filters, lightbox, and load-more behavior
 - [x] Build the Achievements page with category filters and optional links
-- [ ] Verify all three pages on desktop and mobile
+- [x] Verify all three pages on desktop and mobile
