@@ -417,3 +417,18 @@
 }
 
 @media (pointer: coarse) { .project-view-cursor { display: none; } }
+
+@utility collection-controls { padding-block: 2rem; }
+@utility collection-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 1rem; }
+@utility collection-grid { & .portfolio-card { cursor: pointer; transition: border-color 220ms ease; } & .portfolio-card:hover { border-color: var(--color-muted-foreground); } & .portfolio-card:hover .portfolio-card-media img { transform: scale(1.06) translate3d(1%, -1%, 0); } & .portfolio-card:hover h3 { transform: translateX(4px); } & .portfolio-card:hover .portfolio-card-action svg { transform: translate(4px, -4px); } }
+@utility portfolio-card-details { display: grid; gap: 0.35rem; margin-top: 1rem; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; }
+@utility portfolio-card-media { &.is-interactive { cursor: zoom-in; } & img { transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1); } }
+@utility portfolio-card-body { & h3 { transition: transform 220ms ease; } }
+@utility portfolio-card-action { & svg { transition: transform 220ms ease; } }
+@utility record-dialog { width: min(calc(100% - 2rem), 760px); max-width: 760px; border-radius: 2px; border-color: var(--color-border); background: var(--color-card); padding: clamp(1.5rem, 4vw, 3rem); }
+@utility record-dialog { & header > span { color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; } & h2 { margin-top: 1rem; font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 4rem); text-transform: uppercase; } & section { border-top: 1px solid var(--color-border); padding-top: 1.5rem; } & h3 { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; } & ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted-foreground); line-height: 1.7; } }
+@utility certificate-lightbox { width: min(calc(100% - 2rem), 1080px); max-width: 1080px; border-radius: 2px; border-color: var(--color-border); background: var(--color-card); }
+@utility certificate-lightbox { & h2 { padding-right: 2rem; font-family: var(--font-display); font-size: 1.4rem; } & img { width: 100%; max-height: 72svh; border: 1px solid var(--color-border); object-fit: contain; filter: grayscale(1); } & > span { color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; } }
+
+@media (max-width: 900px) { .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px) { .collection-controls { display: grid; grid-template-columns: 1fr 1fr; } .collection-controls button:first-child { grid-column: 1 / -1; } .collection-grid { grid-template-columns: 1fr; } }

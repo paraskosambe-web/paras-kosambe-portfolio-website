@@ -32,6 +32,57 @@ export interface PortfolioItem {
   action: LinkContent;
 }
 
+export interface ExperienceItem extends PortfolioItem {
+  organization: string;
+  role: string;
+  type: string;
+  dateRange: string;
+  location: string;
+  responsibilities: string[];
+  technologies: string[];
+}
+
+export type CertificationCategory = "DATA" | "AI-ML" | "DEVELOPMENT" | "CLOUD" | "OTHER";
+
+export interface CertificationItem extends PortfolioItem {
+  issuer: string;
+  date: string;
+  credentialId: string;
+  category: CertificationCategory;
+  imageUrl: string;
+}
+
+export type AchievementCategory = "ACADEMIC" | "TECHNICAL" | "COMMUNITY" | "OTHER";
+
+export interface AchievementItem extends PortfolioItem {
+  organization: string;
+  date: string;
+  category: AchievementCategory;
+  link?: LinkContent;
+}
+
+export interface CollectionPageContent<T> {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  items: T[];
+}
+
+export interface ExperienceContent extends CollectionPageContent<ExperienceItem> {
+  dialogResponsibilitiesLabel: string;
+  dialogTechnologiesLabel: string;
+}
+
+export interface CertificationsContent extends CollectionPageContent<CertificationItem> {
+  filters: ("ALL" | CertificationCategory)[];
+  loadMoreLabel: string;
+  lightboxCloseLabel: string;
+}
+
+export interface AchievementsContent extends CollectionPageContent<AchievementItem> {
+  filters: ("ALL" | AchievementCategory)[];
+}
+
 export type ProjectCategory = "Data Science" | "Data Analytics" | "AI/ML" | "Full-Stack";
 
 export interface ProjectItem extends PortfolioItem {
@@ -143,4 +194,7 @@ export interface SiteContent {
   hero: HeroContent;
   home: HomeContent;
   projects: ProjectsContent;
+  experience: ExperienceContent;
+  certifications: CertificationsContent;
+  achievements: AchievementsContent;
 }
