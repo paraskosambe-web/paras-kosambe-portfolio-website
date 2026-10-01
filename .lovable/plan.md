@@ -1,24 +1,25 @@
-# Paras Kosambe Portfolio
+# Paras Kosambe Portfolio Foundation
 
 ## Goal
-Build a premium monochrome, multi-page portfolio that presents Data Science as Paras Kosambe’s primary identity, with supporting expertise in analytics, AI/ML, and full-stack development.
+Set up the complete reusable shell for a premium monochrome portfolio, without adding section content yet.
 
-## Pages
-- Home: short introduction plus up to three cards from each portfolio section
-- Projects, Skills, Experience, Certifications, Achievements, and Art: full listing pages
-- Contact: focused contact form and verified GitHub/LinkedIn links
+## Structure
+- Shared navigation, footer, one-session preloader, smooth scrolling, route transitions, and styled 404
+- Placeholder pages for Home, About, Skills, Projects, Project Detail, Experience, Certifications, Achievements, Resume, Art, Contact, and the future Admin area
+- Typed content models, a mock-data layer, service functions, and central social/contact configuration
 
-## Experience
-- Shared editorial navigation and footer across every page
-- Consistent three/two/one-column grid depending on screen size
-- One fixed PortfolioCard design for every content type, with identical media, text, tags, and action alignment
-- Subtle entrance and interaction motion using transform and opacity only, disabled when reduced motion is preferred
-- Clearly marked placeholder content wherever Paras has not supplied facts
+## Component system
+- Strict fixed-size PortfolioCard shell with media, meta, title, description, tags, and actions slots
+- Reusable SectionHeading, PageHeader, Button, Badge, Reveal, SectionOverview, EmptyState, and matching LoadingState skeletons
+- Desktop navigation with active underlines and a full-screen animated mobile menu
+
+## Visual and motion system
+- Exact monochrome palette supplied by Paras
+- Inter Tight headings, Inter body, and JetBrains Mono labels
+- Fluid typography, sharp corners, thin borders, and a 1360px content frame
+- Transform/opacity-only transitions, reduced-motion support, and natural-speed Lenis scrolling
 
 ## Technical details
-- Keep TanStack Start’s existing router while implementing the requested React/TypeScript/Tailwind experience
-- Store all displayed portfolio content behind typed functions in `src/services`
-- Add reusable page, navigation, card, grid, and contact-form pieces
-- Use semantic monochrome tokens, Inter Tight, Inter, and JetBrains Mono
-- Use `motion/react`, Lenis, Lucide, React Hook Form, and Zod where appropriate
-- Give every route distinct page metadata and verify desktop and mobile layouts
+- Preserve TanStack Start’s required router while matching the requested route structure and behavior
+- Use Motion for React, Lenis, Lucide, React Hook Form, and Zod only where the foundation needs them
+- Give every page distinct metadata and verify desktop and mobile behavior
