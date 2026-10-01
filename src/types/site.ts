@@ -32,6 +32,51 @@ export interface PortfolioItem {
   action: LinkContent;
 }
 
+export type ProjectCategory = "Data Science" | "Data Analytics" | "AI/ML" | "Full-Stack";
+
+export interface ProjectItem extends PortfolioItem {
+  slug: string;
+  category: ProjectCategory;
+  githubUrl: string;
+  liveUrl: string;
+  overview: string;
+  problem: string;
+  solution: string;
+  features: string[];
+  technologies: string[];
+  development: string;
+  screenshots: string[];
+  learnings: string[];
+}
+
+export interface ProjectsContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  searchLabel: string;
+  searchPlaceholder: string;
+  filters: ("All" | ProjectCategory)[];
+  loadMoreLabel: string;
+  emptyTitle: string;
+  emptyDescription: string;
+  backLabel: string;
+  githubLabel: string;
+  liveLabel: string;
+  sectionLabels: {
+    overview: string;
+    problem: string;
+    solution: string;
+    features: string;
+    technologies: string;
+    development: string;
+    screenshots: string;
+    learnings: string;
+    previous: string;
+    next: string;
+  };
+  items: ProjectItem[];
+}
+
 export interface AboutPreviewContent {
   index: string;
   title: string;
@@ -94,4 +139,5 @@ export interface HomeContent {
 export interface SiteContent {
   hero: HeroContent;
   home: HomeContent;
+  projects: ProjectsContent;
 }
