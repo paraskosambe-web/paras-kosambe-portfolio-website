@@ -136,6 +136,10 @@
 }
 
 @layer base {
+  html {
+    overflow-x: hidden;
+  }
+
   * {
     border-color: var(--color-border);
   }
@@ -468,7 +472,7 @@
 @utility contact-links { & a { position: relative; display: grid; grid-template-columns: 1fr auto; border-top: 1px solid var(--color-border); padding-block: 1.4rem; color: var(--color-foreground); } & a:last-child { border-bottom: 1px solid var(--color-border); } & a[aria-disabled="true"] { color: var(--color-muted-foreground); cursor: default; } & span { grid-column: 1 / -1; margin-bottom: 0.65rem; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; } & strong { font-family: var(--font-display); font-size: 1.25rem; } & svg { width: 1rem; transition: transform 180ms ease; } & a:not([aria-disabled="true"]):hover svg { transform: translate(4px, -4px); } }
 @utility contact-form { display: grid; gap: 1.35rem; }
 @utility contact-field { display: grid; gap: 0.55rem; }
-@utility contact-field { & > span { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; } & input, & textarea, & button[role="combobox"] { border-radius: 2px; border-color: var(--color-border); background: var(--color-card); color: var(--color-foreground); box-shadow: none; } & input { height: 3.2rem; } & textarea { min-height: 190px; resize: vertical; } & input:focus-visible, & textarea:focus-visible, & button[role="combobox"]:focus-visible { border-color: var(--color-muted-foreground); ring: none; } & [aria-invalid="true"] { border-color: var(--color-destructive); } & small { min-height: 1rem; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.58rem; } & [aria-invalid="true"] + small { color: var(--color-destructive); } }
+@utility contact-field { & > span { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; } & input, & textarea, & button[role="combobox"] { border-radius: 2px; border-color: var(--color-border); background: var(--color-card); color: var(--color-foreground); box-shadow: none; } & input { height: 3.2rem; } & textarea { min-height: 190px; resize: vertical; } & input:focus-visible, & textarea:focus-visible, & button[role="combobox"]:focus-visible { border-color: var(--color-muted-foreground); outline: none; } & [aria-invalid="true"] { border-color: var(--color-destructive); } & small { min-height: 1rem; color: var(--color-muted-foreground); font-family: var(--font-mono); font-size: 0.58rem; } & [aria-invalid="true"] + small { color: var(--color-destructive); } }
 @utility honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
 @media (max-width: 900px) {
