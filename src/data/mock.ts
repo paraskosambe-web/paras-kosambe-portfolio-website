@@ -1,5 +1,56 @@
 import { siteConfig } from "@/config/site";
 import type { SiteContent } from "@/types/site";
+import project01 from "@/assets/projects/project-01.png";
+import project02 from "@/assets/projects/project-02.png";
+import project03 from "@/assets/projects/project-03.png";
+import project04 from "@/assets/projects/project-04.png";
+import project05 from "@/assets/projects/project-05.png";
+import project06 from "@/assets/projects/project-06.png";
+
+const placeholderProjectDetails = {
+  overview: "A structured placeholder for a future case study, designed to document context, process and measurable results.",
+  problem: "The verified project problem and its real-world constraints will be documented here when final details are available.",
+  solution: "The final solution narrative will explain the approach, important decisions and how the work addresses the stated problem.",
+  features: ["Defined project scope", "Documented implementation process", "Clear outcome reporting", "Reproducible technical workflow"],
+  technologies: ["Python", "TypeScript", "SQL", "Git"],
+  development: "Development details will cover research, architecture, iteration, testing and deployment without overstating unverified outcomes.",
+  learnings: ["Translate an open problem into testable steps", "Document decisions alongside implementation", "Evaluate results against the original goal"],
+};
+
+const projectImages = [project01, project02, project03, project04, project05, project06];
+const projectCategories = ["Data Science", "Data Analytics", "AI/ML", "Full-Stack", "Data Science", "Data Analytics"] as const;
+const projectTechnologies = [
+  ["Python", "Pandas", "Scikit-learn", "Jupyter"],
+  ["SQL", "Power BI", "Excel", "Python"],
+  ["Python", "TensorFlow", "NLP", "FastAPI"],
+  ["React", "TypeScript", "Node.js", "PostgreSQL"],
+  ["Python", "NumPy", "Statistics", "Matplotlib"],
+  ["SQL", "Tableau", "Pandas", "Excel"],
+];
+
+const placeholderProjects = projectImages.map((imageUrl, index) => {
+  const number = index + 1;
+  const slug = `project-${String(number).padStart(2, "0")}`;
+  const technologies = projectTechnologies[index] ?? placeholderProjectDetails.technologies;
+  return {
+    id: slug,
+    slug,
+    index: String(number).padStart(2, "0"),
+    meta: projectCategories[index],
+    category: projectCategories[index],
+    title: `Project ${String(number).padStart(2, "0")}`,
+    description: "A clearly labeled placeholder case study awaiting verified project context, implementation details and outcomes.",
+    tags: technologies,
+    imageUrl,
+    imageAlt: `Locally generated grayscale visual for Project ${String(number).padStart(2, "0")}`,
+    action: { label: "View project", href: `/projects/${slug}` },
+    githubUrl: siteConfig.github,
+    liveUrl: `/projects/${slug}`,
+    ...placeholderProjectDetails,
+    technologies,
+    screenshots: [imageUrl, imageUrl, imageUrl],
+  };
+});
 
 export const siteContent: SiteContent = {
   hero: {
@@ -74,5 +125,32 @@ export const siteContent: SiteContent = {
       items: [1, 2, 3].map((number) => ({ id: `art-${number}`, index: `0${number}`, meta: "ARTWORK · PLACEHOLDER", title: `Artwork placeholder ${number}`, description: "A future space for a piece, its medium and the idea behind it.", tags: ["Artwork pending"], imageAlt: `Placeholder for artwork ${number}`, action: { label: "View artwork", href: "/art" } })),
     },
     contact: { index: "09", title: "LET'S WORK TOGETHER", intro: "Have a project, opportunity or idea worth exploring?", action: { label: "Start a conversation", href: "/contact" } },
+  },
+  projects: {
+    eyebrow: "Selected work / 2026",
+    title: "Projects",
+    intro: "Data-led explorations, analytical systems and full-stack builds. Placeholder case studies are clearly marked until verified work is added.",
+    searchLabel: "Search projects",
+    searchPlaceholder: "Search by title, category or technology",
+    filters: ["All", "Data Science", "Data Analytics", "AI/ML", "Full-Stack"],
+    loadMoreLabel: "Load more",
+    emptyTitle: "No projects found",
+    emptyDescription: "Try another category or search term.",
+    backLabel: "Back to projects",
+    githubLabel: "GitHub",
+    liveLabel: "Live Demo",
+    sectionLabels: {
+      overview: "Overview",
+      problem: "Problem",
+      solution: "Solution",
+      features: "Features",
+      technologies: "Technologies",
+      development: "Development details",
+      screenshots: "Screenshots",
+      learnings: "Key learnings",
+      previous: "Previous project",
+      next: "Next project",
+    },
+    items: placeholderProjects,
   },
 };
