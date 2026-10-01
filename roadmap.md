@@ -21,3 +21,13 @@
 - [x] Build the filterable Art page with lightbox
 - [x] Build the validated WhatsApp Contact page
 - [x] Verify all five pages on desktop and mobile
+
+## Lovable Cloud CMS and admin
+- [ ] Create and seed the portfolio database schema with RLS and role checks
+- [ ] Configure admin-only email authentication and public storage buckets
+- [ ] Upload existing placeholder media and connect seeded rows
+- [ ] Replace mock service reads with typed Cloud-backed data loading
+- [ ] Build protected admin login, role gate, shell, dashboard, and sign-out
+- [ ] Build all collection managers with validated drawers, deletion, toggles, uploads, and ordering
+- [ ] Build resume, about, social links, and settings editors
+- [ ] Verify public/admin flows, responsive layouts, storage, RLS, and security lint
