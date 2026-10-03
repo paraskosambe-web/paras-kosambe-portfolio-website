@@ -40,7 +40,7 @@ export function AdminShell() {
         <span className="admin-brand admin-brand-desktop">PK / Admin</span>
         <nav>
           {adminNav.map((item) => (
-            <Link key={item.to} to={item.to} activeOptions={{ exact: true }} activeProps={{ className: "is-active" }} onClick={() => setOpen(false)}>{item.label}</Link>
+            <Link key={item.to} to={item.to === "/admin" ? "/admin" : "/admin/$section"} params={item.to === "/admin" ? {} : { section: item.to.slice(7) }} activeOptions={{ exact: true }} activeProps={{ className: "is-active" }} onClick={() => setOpen(false)}>{item.label}</Link>
           ))}
         </nav>
         <div className="admin-sidebar-foot">

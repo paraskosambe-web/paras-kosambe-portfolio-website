@@ -1,6 +1,6 @@
 import { useMemo, useState, type DragEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, type ZodTypeAny } from "zod";
 import { toast } from "sonner";
@@ -160,7 +160,7 @@ function RecordForm({ def, row, nextOrder, onDone }: { def: CollectionDef; row: 
     for (const k of Object.keys(base)) if (row[k] !== undefined && row[k] !== null) base[k] = row[k];
     return base;
   }, [def, row]);
-  const form = useForm<Record<string, unknown>>({ resolver: zodResolver(schema), defaultValues: defaults, mode: "onChange" });
+  const form = useForm<Record<string, unknown>>({ resolver: zodResolver(schema) as unknown as Resolver<Record<string, unknown>>, defaultValues: defaults, mode: "onChange" });
   const [slugTouched, setSlugTouched] = useState(Boolean(row));
   const hasSlug = def.fields.some((f) => f.name === "slug");
   const errors = form.formState.errors;
