@@ -1,10 +1,11 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 
 import { ProjectDetail, ProjectNotFound } from "@/components/projects/ProjectDetail";
-import { getProjectBySlug } from "@/services/site";
+import { getProjectBySlug, hydrateSiteContent, portfolioQueryOptions } from "@/services/site";
 
 export const Route = createFileRoute("/projects/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params, context }) => {
+    try { hydrateSiteContent(await context.queryClient.ensureQueryData(portfolioQueryOptions)); } catch { /* fall back to cached content */ }
     const project = getProjectBySlug(params.slug);
     if (!project) throw notFound();
     return project;

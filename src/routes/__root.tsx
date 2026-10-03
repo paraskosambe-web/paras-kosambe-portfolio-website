@@ -13,6 +13,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { useQuery } from "@tanstack/react-query";
+import { hydrateSiteContent, portfolioQueryOptions } from "@/services/site";
 
 function NotFoundComponent() {
   return (
@@ -75,6 +77,9 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: async ({ context }) => {
+    try { hydrateSiteContent(await context.queryClient.ensureQueryData(portfolioQueryOptions)); } catch { hydrateSiteContent(null); }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -123,9 +128,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ContentHydrator />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <Toaster position="bottom-right" />
     </QueryClientProvider>
   );
+}
+
+function ContentHydrator() {
+  const { data } = useQuery(portfolioQueryOptions);
+  if (data !== undefined) hydrateSiteContent(data);
+  return null;
 }
