@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AchievementsRouteImport } from './routes/achievements'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ArtRouteImport } from './routes/art'
 import { Route as CertificationsRouteImport } from './routes/certifications'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -19,6 +20,9 @@ import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as SkillsRouteImport } from './routes/skills'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminSectionRouteImport } from './routes/admin.$section'
+import { Route as AdminLoginRouteImport } from './routes/admin_.login'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as ApiPublicMediaBucketSplatRouteImport } from './routes/api/public/media.$bucket.$'
@@ -36,6 +40,11 @@ const AboutRoute = AboutRouteImport.update({
 const AchievementsRoute = AchievementsRouteImport.update({
   id: '/achievements',
   path: '/achievements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArtRoute = ArtRouteImport.update({
@@ -73,6 +82,21 @@ const SkillsRoute = SkillsRouteImport.update({
   path: '/skills',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSectionRoute = AdminSectionRouteImport.update({
+  id: '/$section',
+  path: '/$section',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin_/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -94,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRouteWithChildren
   '/art': typeof ArtRoute
   '/certifications': typeof CertificationsRoute
   '/contact': typeof ContactRoute
@@ -101,7 +126,10 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRouteWithChildren
   '/resume': typeof ResumeRoute
   '/skills': typeof SkillsRoute
+  '/admin/$section': typeof AdminSectionRoute
+  '/admin/login': typeof AdminLoginRoute
   '/projects/$slug': typeof ProjectsSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/api/public/media/$bucket/$': typeof ApiPublicMediaBucketSplatRoute
 }
@@ -115,7 +143,10 @@ export interface FileRoutesByTo {
   '/experience': typeof ExperienceRoute
   '/resume': typeof ResumeRoute
   '/skills': typeof SkillsRoute
+  '/admin/$section': typeof AdminSectionRoute
+  '/admin/login': typeof AdminLoginRoute
   '/projects/$slug': typeof ProjectsSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/api/public/media/$bucket/$': typeof ApiPublicMediaBucketSplatRoute
 }
@@ -124,6 +155,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRouteWithChildren
   '/art': typeof ArtRoute
   '/certifications': typeof CertificationsRoute
   '/contact': typeof ContactRoute
@@ -131,7 +163,10 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRouteWithChildren
   '/resume': typeof ResumeRoute
   '/skills': typeof SkillsRoute
+  '/admin/$section': typeof AdminSectionRoute
+  '/admin_/login': typeof AdminLoginRoute
   '/projects/$slug': typeof ProjectsSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/api/public/media/$bucket/$': typeof ApiPublicMediaBucketSplatRoute
 }
@@ -141,6 +176,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/achievements'
+    | '/admin'
     | '/art'
     | '/certifications'
     | '/contact'
@@ -148,7 +184,10 @@ export interface FileRouteTypes {
     | '/projects'
     | '/resume'
     | '/skills'
+    | '/admin/$section'
+    | '/admin/login'
     | '/projects/$slug'
+    | '/admin/'
     | '/projects/'
     | '/api/public/media/$bucket/$'
   fileRoutesByTo: FileRoutesByTo
@@ -162,7 +201,10 @@ export interface FileRouteTypes {
     | '/experience'
     | '/resume'
     | '/skills'
+    | '/admin/$section'
+    | '/admin/login'
     | '/projects/$slug'
+    | '/admin'
     | '/projects'
     | '/api/public/media/$bucket/$'
   id:
@@ -170,6 +212,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/achievements'
+    | '/admin'
     | '/art'
     | '/certifications'
     | '/contact'
@@ -177,7 +220,10 @@ export interface FileRouteTypes {
     | '/projects'
     | '/resume'
     | '/skills'
+    | '/admin/$section'
+    | '/admin_/login'
     | '/projects/$slug'
+    | '/admin/'
     | '/projects/'
     | '/api/public/media/$bucket/$'
   fileRoutesById: FileRoutesById
@@ -186,6 +232,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AchievementsRoute: typeof AchievementsRoute
+  AdminRoute: typeof AdminRouteWithChildren
   ArtRoute: typeof ArtRoute
   CertificationsRoute: typeof CertificationsRoute
   ContactRoute: typeof ContactRoute
@@ -193,6 +240,7 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRouteWithChildren
   ResumeRoute: typeof ResumeRoute
   SkillsRoute: typeof SkillsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ApiPublicMediaBucketSplatRoute: typeof ApiPublicMediaBucketSplatRoute
 }
 
@@ -217,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/achievements'
       fullPath: '/achievements'
       preLoaderRoute: typeof AchievementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/art': {
@@ -268,6 +323,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SkillsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/$section': {
+      id: '/admin/$section'
+      path: '/$section'
+      fullPath: '/admin/$section'
+      preLoaderRoute: typeof AdminSectionRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin_/login': {
+      id: '/admin_/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects/': {
       id: '/projects/'
       path: '/'
@@ -292,6 +368,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminSectionRoute: typeof AdminSectionRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminSectionRoute: AdminSectionRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface ProjectsRouteChildren {
   ProjectsSlugRoute: typeof ProjectsSlugRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -310,6 +398,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AchievementsRoute: AchievementsRoute,
+  AdminRoute: AdminRouteWithChildren,
   ArtRoute: ArtRoute,
   CertificationsRoute: CertificationsRoute,
   ContactRoute: ContactRoute,
@@ -317,6 +406,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRouteWithChildren,
   ResumeRoute: ResumeRoute,
   SkillsRoute: SkillsRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ApiPublicMediaBucketSplatRoute: ApiPublicMediaBucketSplatRoute,
 }
 export const routeTree = rootRouteImport
