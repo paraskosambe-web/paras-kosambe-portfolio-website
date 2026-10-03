@@ -21,6 +21,7 @@ import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as SkillsRouteImport } from './routes/skills'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
+import { Route as ApiPublicMediaBucketSplatRouteImport } from './routes/api/public/media.$bucket.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -82,6 +83,12 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ProjectsRoute,
 } as any)
+const ApiPublicMediaBucketSplatRoute =
+  ApiPublicMediaBucketSplatRouteImport.update({
+    id: '/api/public/media/$bucket/$',
+    path: '/api/public/media/$bucket/$',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/skills': typeof SkillsRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects/': typeof ProjectsIndexRoute
+  '/api/public/media/$bucket/$': typeof ApiPublicMediaBucketSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -109,6 +117,7 @@ export interface FileRoutesByTo {
   '/skills': typeof SkillsRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects': typeof ProjectsIndexRoute
+  '/api/public/media/$bucket/$': typeof ApiPublicMediaBucketSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -124,6 +133,7 @@ export interface FileRoutesById {
   '/skills': typeof SkillsRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects/': typeof ProjectsIndexRoute
+  '/api/public/media/$bucket/$': typeof ApiPublicMediaBucketSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/projects/$slug'
     | '/projects/'
+    | '/api/public/media/$bucket/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/projects/$slug'
     | '/projects'
+    | '/api/public/media/$bucket/$'
   id:
     | '__root__'
     | '/'
@@ -167,6 +179,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/projects/$slug'
     | '/projects/'
+    | '/api/public/media/$bucket/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -180,6 +193,7 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRouteWithChildren
   ResumeRoute: typeof ResumeRoute
   SkillsRoute: typeof SkillsRoute
+  ApiPublicMediaBucketSplatRoute: typeof ApiPublicMediaBucketSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -268,6 +282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof ProjectsRoute
     }
+    '/api/public/media/$bucket/$': {
+      id: '/api/public/media/$bucket/$'
+      path: '/api/public/media/$bucket/$'
+      fullPath: '/api/public/media/$bucket/$'
+      preLoaderRoute: typeof ApiPublicMediaBucketSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -296,6 +317,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRouteWithChildren,
   ResumeRoute: ResumeRoute,
   SkillsRoute: SkillsRoute,
+  ApiPublicMediaBucketSplatRoute: ApiPublicMediaBucketSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
