@@ -35,7 +35,7 @@ export function AdminDashboard() {
       {error ? <p className="admin-error">Counts could not be loaded.</p> : null}
       <div className="admin-stats">
         {(data ?? Array.from({ length: 6 }, (_, i) => ({ label: "…", value: "–", to: "/admin" as const, k: i }))).map((s, i) => (
-          <Link key={i} to={s.to} className="admin-stat" aria-busy={isLoading}>
+          <Link key={i} to="/admin/$section" params={{ section: s.to.slice(7) || "projects" }} className="admin-stat" aria-busy={isLoading}>
             <span>{s.label}</span><strong>{s.value}</strong>
           </Link>
         ))}
