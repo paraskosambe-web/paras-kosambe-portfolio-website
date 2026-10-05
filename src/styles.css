@@ -1368,3 +1368,215 @@
 .certification-filters button:first-child {
   grid-column: 1 / -1;
 }
+
+/* =========================================================
+   MOBILE POLISH — HEADER, CERTIFICATIONS, FOOTER
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .site-header,
+  .site-header-scrolled {
+    padding: 12px 16px;
+    background: color-mix(in srgb, var(--background) 96%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+  }
+
+  .site-header-inner {
+    min-height: 40px;
+  }
+
+  .site-logo {
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .site-logo-mark {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .site-logo-name {
+    display: flex;
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .mobile-menu-button {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+
+  .mobile-navigation {
+    padding: 74px 16px 16px;
+  }
+
+  .mobile-navigation-inner {
+    min-height: calc(100svh - 90px);
+  }
+
+  .mobile-navigation-label {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+  }
+
+  .mobile-nav-link {
+    min-height: 49px;
+    gap: 10px;
+    padding-block: 3px;
+    font-size: clamp(1.45rem, 7.2vw, 2rem);
+    letter-spacing: 0;
+  }
+
+  .mobile-nav-index {
+    width: 18px;
+  }
+
+  .mobile-nav-current {
+    font-size: 6px;
+    letter-spacing: 0;
+  }
+
+  .mobile-nav-arrow {
+    width: 16px;
+    height: 16px;
+  }
+
+  .mobile-navigation-footer {
+    gap: 16px;
+    padding-top: 20px;
+  }
+
+  .mobile-work-link {
+    min-height: 46px;
+  }
+
+  .projects-page {
+    padding-top: 4.5rem;
+  }
+
+  .page-header {
+    min-height: auto;
+    gap: 1.5rem;
+    padding-block: 3rem 2.5rem;
+  }
+
+  .page-header-title-long {
+    font-size: clamp(2.6rem, 12vw, 3.5rem) !important;
+    line-height: 0.9;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .page-header > p {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
+  .certification-filters {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding-block: 1.25rem 1.75rem;
+  }
+
+  .certification-filters button {
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: 8px;
+    font-size: 0.68rem;
+  }
+
+  .collection-grid .portfolio-card {
+    height: 590px;
+  }
+
+  .collection-grid .portfolio-card-body {
+    min-height: 0;
+    padding: 1.25rem;
+  }
+
+  .collection-grid .portfolio-card-body h3 {
+    margin-top: 1.15rem;
+    font-size: 1.65rem;
+  }
+
+  .collection-grid .portfolio-card-details {
+    overflow-wrap: anywhere;
+  }
+
+  .certificate-lightbox {
+    width: calc(100% - 1.5rem);
+    max-height: calc(100svh - 1.5rem);
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .certificate-lightbox h2 {
+    font-size: 1.2rem;
+    line-height: 1.15;
+  }
+
+  .certificate-lightbox img {
+    max-height: 58svh;
+  }
+
+  .site-footer {
+    margin-top: 64px;
+    padding: 56px 16px 18px;
+  }
+
+  .site-footer-top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+    padding-bottom: 52px;
+  }
+
+  .site-footer-title {
+    margin-block: 16px 20px;
+    font-size: clamp(2.8rem, 14vw, 4.25rem);
+    line-height: 0.92;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .site-footer-description {
+    max-width: 34rem;
+    font-size: 0.82rem;
+  }
+
+  .site-footer-navigation {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .site-footer-link,
+  .site-footer-social {
+    min-height: 32px;
+    font-size: 0.75rem;
+  }
+
+  .site-footer-brand {
+    padding-block: 28px 24px;
+  }
+
+  .site-footer-brand-name {
+    font-size: clamp(3.65rem, 20vw, 5.2rem);
+    line-height: 0.78;
+    letter-spacing: 0;
+  }
+
+  .site-footer-brand-name-offset {
+    margin-top: 8px;
+  }
+
+  .site-footer-bottom {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 16px;
+    line-height: 1.4;
+  }
+}
