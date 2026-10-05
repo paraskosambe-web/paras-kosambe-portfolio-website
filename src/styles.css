@@ -220,7 +220,7 @@
   .hero { background-size: 32px 32px; }
   .hero-inner { width: min(100% - 2rem, 1360px); display: block; padding-block: 4.5rem 3.5rem; }
   .hero-copy { max-width: none; }
-  .hero-name { font-size: clamp(3.8rem, 18.5vw, 6.4rem); line-height: 0.8; }
+  .hero-name { font-size: clamp(3.5rem, 17.5vw, 6.4rem); line-height: 0.8; }
   .hero-role { margin-top: 1.35rem; font-size: clamp(2.4rem, 13vw, 4.25rem); }
   .hero-disciplines { max-width: 22rem; line-height: 1.65; }
   .hero-description { margin-top: 1.2rem; font-size: 1rem; }
@@ -1562,7 +1562,7 @@
   }
 
   .site-footer-brand-name {
-    font-size: clamp(3.65rem, 20vw, 5.2rem);
+    font-size: clamp(3.4rem, 17.5vw, 5.2rem);
     line-height: 0.78;
     letter-spacing: 0;
   }
