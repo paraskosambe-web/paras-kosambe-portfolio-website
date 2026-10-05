@@ -31,3 +31,6 @@
 - [ ] Build all collection managers with validated drawers, deletion, toggles, uploads, and ordering
 - [ ] Build resume, about, social links, and settings editors
 - [ ] Verify public/admin flows, responsive layouts, storage, RLS, and security lint
+
+## Mobile presentation
+- [x] Optimize the header, footer, and Certifications page for phone screens
