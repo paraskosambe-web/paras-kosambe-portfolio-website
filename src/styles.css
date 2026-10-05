@@ -1463,10 +1463,9 @@
   }
 
   .page-header-title-long {
-    font-size: clamp(2.6rem, 12vw, 3.5rem) !important;
+    font-size: clamp(2.35rem, 10.5vw, 3.25rem) !important;
     line-height: 0.9;
-    white-space: normal;
-    overflow-wrap: anywhere;
+    white-space: nowrap;
   }
 
   .page-header > p {
