@@ -2,9 +2,9 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { collections } from "@/lib/admin/collections";
 import { CollectionManager } from "@/components/admin/CollectionManager";
 import { ResumeManager } from "@/components/admin/ResumeManager";
-import { AboutEditor, SettingsEditor, SocialLinksEditor } from "@/components/admin/SiteEditors";
+import { AboutEditor, MessagesManager, SettingsEditor, SocialLinksEditor } from "@/components/admin/SiteEditors";
 
-const special = ["resume", "about", "social-links", "settings"];
+const special = ["resume", "about", "social-links", "settings", "messages"];
 
 export const Route = createFileRoute("/admin/$section")({
   beforeLoad: ({ params }) => {
@@ -20,6 +20,7 @@ function Section() {
   if (section === "about") return <AboutEditor />;
   if (section === "social-links") return <SocialLinksEditor />;
   if (section === "settings") return <SettingsEditor />;
+  if (section === "messages") return <MessagesManager />;
   const def = collections.find((c) => c.key === section)!;
   return <CollectionManager key={def.key} def={def} />;
 }

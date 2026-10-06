@@ -15,6 +15,7 @@ export const adminNav = [
   { to: "/admin/art", label: "Art" },
   { to: "/admin/about", label: "About" },
   { to: "/admin/social-links", label: "Social Links" },
+  { to: "/admin/messages", label: "Messages" },
   { to: "/admin/settings", label: "Settings" },
 ] as const;
 
