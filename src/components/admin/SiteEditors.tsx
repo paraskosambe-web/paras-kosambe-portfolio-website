@@ -66,7 +66,7 @@ function SiteForm({ title, fields }: { title: string; fields: F[] }) {
     setErrors(errs);
     if (Object.keys(errs).length || !data) return;
     setSaving(true);
-    const { error: e } = await supabase.from("site_content").update(out).eq("id", data.id);
+    const { error: e } = await supabase.from("site_content").update(out as Partial<Site>).eq("id", data.id);
     setSaving(false);
     if (e) { toast.error(e.message); return; }
     toast.success("Saved — live on the site");
