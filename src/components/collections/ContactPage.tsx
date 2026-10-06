@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { getContactContent } from "@/services/site";
 import { siteConfig } from "@/config/site";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Enter at least 2 characters.").max(80, "Use 80 characters or fewer."),
@@ -34,6 +35,7 @@ export function ContactPage() {
       if (!/^\d+$/.test(siteConfig.whatsapp)) throw new Error("Invalid WhatsApp number");
       const message = `Hi Paras,\n\nName: ${parsed.name}\nEmail: ${parsed.email}\nInterested in: ${parsed.interest}\n\nMessage:\n${parsed.message}\n\nI would like to discuss this opportunity/project with you.`;
       const url = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(message)}`;
+      if (!values.website) void supabase.from("contact_submissions").insert({ name: parsed.name, email: parsed.email, interest: parsed.interest, message: parsed.message }).then(() => undefined);
       const popup = window.open(url, "_blank", "noopener,noreferrer");
       if (!popup) window.location.assign(url);
       toast.success(content.form.successMessage);
