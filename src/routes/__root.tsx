@@ -5,6 +5,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -161,12 +162,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const isAdmin = useRouterState({ select: (state) => state.location.pathname === "/admin" || state.location.pathname.startsWith("/admin/") });
 
   return (
     <QueryClientProvider client={queryClient}>
       <ContentHydrator />
 
-      <div className="site-app">
+      {isAdmin ? <Outlet /> : <div className="site-app">
         <Header />
 
         <div className="site-main">
@@ -174,7 +176,7 @@ function RootComponent() {
         </div>
 
         <Footer />
-      </div>
+      </div>}
 
       <Toaster position="bottom-right" />
     </QueryClientProvider>
