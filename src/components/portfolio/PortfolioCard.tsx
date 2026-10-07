@@ -2,19 +2,20 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
-import type { PortfolioItem } from "@/types/site";
+import type { LinkContent, PortfolioItem } from "@/types/site";
 
 interface PortfolioCardProps {
   item: PortfolioItem;
   visual?: ReactNode;
   compact?: boolean;
   details?: string[];
+  secondaryActions?: LinkContent[];
   delay?: number;
   onActivate?: () => void;
   onImageClick?: () => void;
 }
 
-export function PortfolioCard({ item, visual, compact = false, details = [], delay = 0, onActivate, onImageClick }: PortfolioCardProps) {
+export function PortfolioCard({ item, visual, compact = false, details = [], secondaryActions = [], delay = 0, onActivate, onImageClick }: PortfolioCardProps) {
   const reduceMotion = useReducedMotion();
   const visibleTags = item.tags.slice(0, 3);
   const extraTags = Math.max(item.tags.length - visibleTags.length, 0);
@@ -39,6 +40,12 @@ export function PortfolioCard({ item, visual, compact = false, details = [], del
         <h3>{item.title}</h3>
         <p>{item.description}</p>
         {details.length > 0 ? <div className="portfolio-card-details">{details.map((detail) => <span key={detail}>{detail}</span>)}</div> : null}
+        {secondaryActions.length > 0 ? <div className="portfolio-card-secondary-actions" aria-label={`${item.title} links`}>
+          {secondaryActions.filter((link) => link.href).map((link) => {
+            const external = /^https?:\/\//.test(link.href);
+            return <a key={link.label} href={link.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>{link.label}</a>;
+          })}
+        </div> : null}
         <div className="portfolio-card-tags" aria-label="Tags">
           {visibleTags.map((tag) => <span key={tag}>{tag}</span>)}
           {extraTags > 0 ? <span>+{extraTags}</span> : null}

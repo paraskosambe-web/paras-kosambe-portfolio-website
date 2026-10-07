@@ -123,7 +123,10 @@ export function CollectionManager({ def }: { def: CollectionDef }) {
     const destination = index + direction;
     if (index < 0 || destination < 0 || destination >= rows.length) return;
     const next = [...rows];
-    [next[index], next[destination]] = [next[destination], next[index]];
+    const currentRow = next[index];
+    const destinationRow = next[destination];
+    if (!currentRow || !destinationRow) return;
+    [next[index], next[destination]] = [destinationRow, currentRow];
     void saveOrder(next);
   }
 
@@ -133,6 +136,7 @@ export function CollectionManager({ def }: { def: CollectionDef }) {
     const next = [...rows];
     const from = next.findIndex((row) => row.id === dragId);
     const to = next.findIndex((row) => row.id === target.id);
+    if (from < 0 || to < 0) return;
     const [moved] = next.splice(from, 1);
     if (!moved) return;
     next.splice(to, 0, moved);
@@ -141,7 +145,7 @@ export function CollectionManager({ def }: { def: CollectionDef }) {
   }
 
   const canReorder = !search.trim() && !localOrder;
-  const title = (row: Row) => String(row.title ?? row.name ?? "Untitled record");
+  const title = (row: Row) => String(row["title"] ?? row["name"] ?? "Untitled record");
 
   return (
     <section className="collection-manager">
@@ -184,10 +188,10 @@ export function CollectionManager({ def }: { def: CollectionDef }) {
       ) : (
         <div className="cm-list" aria-label={`${def.label} records`}>
           {filtered.map((row, index) => {
-            const image = String(row.image_url ?? "");
+            const image = String(row["image_url"] ?? "");
             const meta = def.columns.filter((column) => column.name !== "title").map((column) => String(row[column.name] ?? "")).filter(Boolean);
-            const summary = String(row.description ?? row.overview ?? "");
-            const tags = (row.tags ?? row.technologies ?? row.skills) as unknown;
+            const summary = String(row["description"] ?? row["overview"] ?? "");
+            const tags = (row["tags"] ?? row["technologies"] ?? row["skills"]) as unknown;
             const tagList = Array.isArray(tags) ? tags.filter((tag): tag is string => typeof tag === "string") : [];
             return (
               <article key={row.id} className={`cm-card ${dragId === row.id ? "is-dragging" : ""}`}
@@ -275,7 +279,7 @@ function RecordForm({ def, row, nextOrder, featuredCount, onDone }: { def: Colle
   const hasSlug = def.fields.some((field) => field.name === "slug");
   const errors = form.formState.errors;
   const submit = form.handleSubmit(async (values) => {
-    if (values.featured && !row?.featured && featuredCount >= 3) {
+    if (values["featured"] && !row?.featured && featuredCount >= 3) {
       toast.error(`Only 3 ${def.label.toLowerCase()} can appear on the home page. Turn one off before featuring this record.`);
       return;
     }

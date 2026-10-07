@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
-import { getProjectsContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 import type { ProjectItem } from "@/types/site";
 
 function DetailSection({ index, title, children }: { index: string; title: string; children: ReactNode }) {
@@ -17,7 +17,7 @@ function DetailSection({ index, title, children }: { index: string; title: strin
 }
 
 export function ProjectDetail({ project }: { project: ProjectItem }) {
-  const content = getProjectsContent();
+  const content = useSiteContent().projects;
   const labels = content.sectionLabels;
   const projectIndex = content.items.findIndex((item) => item.slug === project.slug);
   const previous = projectIndex > 0 ? content.items[projectIndex - 1] : undefined;
@@ -58,7 +58,7 @@ export function ProjectDetail({ project }: { project: ProjectItem }) {
 }
 
 export function ProjectNotFound() {
-  const content = getProjectsContent();
+  const content = useSiteContent().projects;
   return (
     <main className="project-not-found"><span>404</span><h1>{content.notFoundTitle}</h1><p>{content.notFoundDescription}</p><Button asChild variant="hero"><Link to="/projects"><ArrowLeft />{content.backLabel}</Link></Button></main>
   );

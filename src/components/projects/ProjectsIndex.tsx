@@ -6,13 +6,13 @@ import { PageHeader } from "@/components/portfolio/PageHeader";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getProjectsContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 import type { ProjectCategory } from "@/types/site";
 
 type Filter = "All" | ProjectCategory;
 
 export function ProjectsIndex() {
-  const content = getProjectsContent();
+  const content = useSiteContent().projects;
   const reduceMotion = useReducedMotion();
   const [filter, setFilter] = useState<Filter>("All");
   const [query, setQuery] = useState("");
@@ -49,7 +49,7 @@ export function ProjectsIndex() {
           </label>
         </motion.div>
 
-        <motion.div layout className="projects-grid">
+        <motion.div layout className="collection-grid">
           <AnimatePresence mode="popLayout">
             {filteredProjects.slice(0, visibleCount).map((project) => <ProjectCard key={project.id} project={project} />)}
           </AnimatePresence>

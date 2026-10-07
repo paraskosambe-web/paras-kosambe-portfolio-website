@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { Controller, useForm } from "react-hook-form";
 import type { ReactNode } from "react";
 import { toast } from "sonner";
@@ -8,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { getContactContent } from "@/services/site";
+import { PageHeader } from "@/components/portfolio/PageHeader";
+import { useSiteContent } from "@/services/site";
 import { siteConfig } from "@/config/site";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -23,20 +25,39 @@ const contactSchema = z.object({
 type ContactValues = z.infer<typeof contactSchema>;
 
 export function ContactPage() {
-  const content = getContactContent();
+  const content = useSiteContent().contact;
+  const reduceMotion = useReducedMotion();
+  const reveal = reduceMotion ? false : { opacity: 0, y: 24 };
+  const titleWords = content.title.trim().split(/\s+/);
+  const lastTitleWord = titleWords.pop();
   const { register, handleSubmit, control, reset, watch, formState: { errors, isValid, isSubmitting } } = useForm<ContactValues>({
     resolver: zodResolver(contactSchema), mode: "onChange", defaultValues: { name: "", email: "", interest: "Data Science", message: "", website: "" },
   });
   const messageLength = watch("message").length;
 
-  const submit = (values: ContactValues) => {
+  const submit = async (values: ContactValues) => {
     try {
       const parsed = contactSchema.parse(values);
       if (!/^\d+$/.test(siteConfig.whatsapp)) throw new Error("Invalid WhatsApp number");
       const message = `Hi Paras,\n\nName: ${parsed.name}\nEmail: ${parsed.email}\nInterested in: ${parsed.interest}\n\nMessage:\n${parsed.message}\n\nI would like to discuss this opportunity/project with you.`;
       const url = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(message)}`;
-      if (!values.website) void supabase.from("contact_submissions").insert({ name: parsed.name, email: parsed.email, interest: parsed.interest, message: parsed.message }).then(() => undefined);
       const popup = window.open(url, "_blank", "noopener,noreferrer");
+
+      if (!values.website) {
+        const { error } = await supabase.from("contact_submissions").insert({
+          name: parsed.name,
+          email: parsed.email,
+          interest: parsed.interest,
+          message: parsed.message,
+        });
+
+        if (error) {
+          toast.error(content.form.errorMessage);
+          if (!popup) window.location.assign(url);
+          return;
+        }
+      }
+
       if (!popup) window.location.assign(url);
       toast.success(content.form.successMessage);
       reset();
@@ -46,17 +67,27 @@ export function ContactPage() {
   };
 
   return <main className="contact-page"><div className="projects-inner">
-    <header className="contact-page-header"><span>{content.eyebrow}</span><h1>{content.title}</h1><p>{content.intro}</p></header>
+    <PageHeader className="page-header contact-page-header" eyebrow={content.eyebrow} title={<>{titleWords.join(" ")}<br className="contact-title-break" />{lastTitleWord}</>} intro={content.intro} />
     <div className="contact-layout">
-      <div className="contact-links">{content.links.map((link, index) => <a key={link.label} href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noreferrer" : undefined} aria-disabled={link.href === "#"} onClick={link.href === "#" ? (event) => event.preventDefault() : undefined}><span>{String(index + 1).padStart(2, "0")} / {link.label}</span><strong>{link.value}</strong><ArrowUpRight /></a>)}</div>
-      <form className="contact-form" onSubmit={handleSubmit(submit)} noValidate>
+      <motion.div className="contact-links" initial={reveal} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+        <div className="contact-links-heading"><span>01 / Find me</span><h2>Choose a channel.</h2></div>
+        {content.links.map((link, index) => {
+          const isEmail = link.label.toLowerCase() === "email";
+          const href = isEmail ? "mailto:paraskosambe@gmail.com" : link.href;
+          const value = isEmail ? "paraskosambe@gmail.com" : link.value;
+          const external = href.startsWith("http");
+          return <a key={link.label} href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} aria-disabled={href === "#"} onClick={href === "#" ? (event) => event.preventDefault() : undefined}><span>{String(index + 1).padStart(2, "0")} / {link.label}</span><strong>{value}</strong><ArrowUpRight /></a>;
+        })}
+      </motion.div>
+      <motion.form className="contact-form" onSubmit={handleSubmit(submit)} noValidate initial={reveal} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.65, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}>
+        <div className="contact-form-heading"><span>02 / Send a message</span><h2>Tell me what you’re working on.</h2><p>I’ll get back to you as soon as I can.</p></div>
         <div className="honeypot" aria-hidden="true"><label htmlFor="website">Website</label><input id="website" tabIndex={-1} autoComplete="off" {...register("website")} /></div>
-        <FormField label={`${content.form.nameLabel}*`} error={errors.name?.message}><Input {...register("name")} aria-invalid={Boolean(errors.name)} maxLength={80} autoComplete="name" /></FormField>
-        <FormField label={`${content.form.emailLabel}*`} error={errors.email?.message}><Input {...register("email")} type="email" aria-invalid={Boolean(errors.email)} maxLength={255} autoComplete="email" /></FormField>
+        <div className="contact-form-row"><FormField label={`${content.form.nameLabel}*`} error={errors.name?.message}><Input {...register("name")} aria-invalid={Boolean(errors.name)} maxLength={80} autoComplete="name" /></FormField>
+        <FormField label={`${content.form.emailLabel}*`} error={errors.email?.message}><Input {...register("email")} type="email" aria-invalid={Boolean(errors.email)} maxLength={255} autoComplete="email" /></FormField></div>
         <FormField label={content.form.interestLabel} error={errors.interest?.message}><Controller control={control} name="interest" render={({ field }) => <Select value={field.value} onValueChange={field.onChange}><SelectTrigger aria-invalid={Boolean(errors.interest)}><SelectValue /></SelectTrigger><SelectContent>{content.form.interests.map((interest) => <SelectItem key={interest} value={interest}>{interest}</SelectItem>)}</SelectContent></Select>} /></FormField>
         <FormField label={`${content.form.messageLabel}*`} error={errors.message?.message} counter={`${messageLength} / 1000`}><Textarea {...register("message")} aria-invalid={Boolean(errors.message)} maxLength={1000} rows={8} /></FormField>
         <Button variant="hero" type="submit" disabled={!isValid || isSubmitting}>{content.form.submitLabel}<ArrowUpRight /></Button>
-      </form>
+      </motion.form>
     </div>
   </div></main>;
 }

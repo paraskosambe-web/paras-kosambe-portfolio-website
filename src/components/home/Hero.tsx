@@ -1,9 +1,9 @@
 import { ArrowDown, ArrowUpRight, Github, Linkedin } from "lucide-react";
-import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
-import { useState, type MouseEvent, type ReactNode } from "react";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { useEffect, useMemo, useState, type MouseEvent, type ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
-import { getSiteContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 
 const reveal = {
   hidden: { opacity: 0, y: 18 },
@@ -81,10 +81,18 @@ function DataVisual({ labels }: { labels: string[] }) {
 }
 
 export function Hero() {
-  const { hero } = getSiteContent();
+  const { hero } = useSiteContent();
   const reduceMotion = useReducedMotion();
   const [shift, setShift] = useState({ x: 0, y: 0 });
+  const roles = useMemo(() => [...new Set([hero.primaryRole, ...hero.disciplines.split(/[·,]/).map((role) => role.trim())].filter(Boolean))], [hero.primaryRole, hero.disciplines]);
+  const [roleIndex, setRoleIndex] = useState(0);
   const transition = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
+
+  useEffect(() => {
+    if (reduceMotion || roles.length < 2) return;
+    const timer = window.setInterval(() => setRoleIndex((index) => (index + 1) % roles.length), 3200);
+    return () => window.clearInterval(timer);
+  }, [reduceMotion, roles]);
 
   const handlePointerMove = (event: MouseEvent<HTMLElement>) => {
     if (reduceMotion || window.matchMedia("(pointer: coarse)").matches) return;
@@ -108,20 +116,35 @@ export function Hero() {
         >
           <motion.p className="hero-eyebrow" variants={reveal} transition={transition}>{hero.eyebrow}</motion.p>
           <h1 className="hero-name" aria-label={`${hero.firstName} ${hero.lastName}`}>
-            {[hero.firstName, hero.lastName].map((line) => (
-              <span className="hero-name-mask" key={line}>
+            {[hero.firstName, hero.lastName].map((line, index) => (
+              <span className="hero-name-mask" key={index}>
                 <motion.span
-                  variants={{ hidden: { y: "105%" }, visible: { y: 0 } }}
-                  transition={{ duration: reduceMotion ? 0 : 0.85, ease: [0.16, 1, 0.3, 1] }}
+                  initial={reduceMotion ? false : { y: "110%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.12 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 >{line}</motion.span>
               </span>
             ))}
           </h1>
-          <motion.p
+          <motion.div
             className="hero-role"
             variants={{ hidden: { opacity: 0, y: 24, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)" } }}
             transition={{ ...transition, duration: reduceMotion ? 0 : 0.8 }}
-          >{hero.primaryRole}</motion.p>
+            aria-live="off"
+          >
+            <span className="hero-role-window">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  className="hero-role-word"
+                  key={roles[roleIndex] ?? hero.primaryRole}
+                  initial={reduceMotion ? false : { opacity: 0, y: "0.55em", scale: 0.97, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                  {...(reduceMotion ? {} : { exit: { opacity: 0, y: "-0.4em", scale: 1.01, filter: "blur(8px)" } })}
+                  transition={{ duration: reduceMotion ? 0 : 0.62, ease: [0.22, 1, 0.36, 1] }}
+                >{roles[roleIndex] ?? hero.primaryRole}</motion.span>
+              </AnimatePresence>
+            </span>
+          </motion.div>
           <motion.p className="hero-disciplines" variants={reveal} transition={transition}>{hero.disciplines}</motion.p>
           <motion.p className="hero-description" variants={reveal} transition={transition}>{hero.description}</motion.p>
           <motion.div className="hero-actions" variants={reveal} transition={transition}>

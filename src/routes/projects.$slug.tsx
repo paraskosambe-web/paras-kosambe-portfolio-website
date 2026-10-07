@@ -5,7 +5,7 @@ import { getProjectBySlug, hydrateSiteContent, portfolioQueryOptions } from "@/s
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: async ({ params, context }) => {
-    try { hydrateSiteContent(await context.queryClient.ensureQueryData(portfolioQueryOptions)); } catch { /* fall back to cached content */ }
+    try { hydrateSiteContent(await context.queryClient.ensureQueryData({ ...portfolioQueryOptions, revalidateIfStale: true })); } catch { /* fall back to cached content */ }
     const project = getProjectBySlug(params.slug);
     if (!project) throw notFound();
     return project;

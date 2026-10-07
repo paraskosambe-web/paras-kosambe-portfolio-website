@@ -6,6 +6,7 @@ export type SectionTone = "ink" | "charcoal" | "grid" | "ruled" | "offset";
 export type SectionLayout = "standard" | "split" | "right" | "compact";
 
 interface SectionOverviewProps {
+  sectionName: string;
   index: string;
   title: string;
   intro?: string;
@@ -16,7 +17,7 @@ interface SectionOverviewProps {
   className?: string;
 }
 
-export function SectionOverview({ index, title, intro, action, tone = "ink", layout = "standard", children, className = "" }: SectionOverviewProps) {
+export function SectionOverview({ sectionName, index, title, intro, action, tone = "ink", layout = "standard", children, className = "" }: SectionOverviewProps) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -30,7 +31,13 @@ export function SectionOverview({ index, title, intro, action, tone = "ink", lay
       />
       <div className="overview-inner">
         <header className="overview-header">
-          <span className="overview-index">/{index}</span>
+          <motion.span
+            className="overview-index"
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+          >/{index}<span className="overview-section-name">{sectionName}</span></motion.span>
           <div className="overview-heading-mask">
             <motion.h2
               initial={reduceMotion ? false : { y: "105%" }}
@@ -39,7 +46,14 @@ export function SectionOverview({ index, title, intro, action, tone = "ink", lay
               transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
             >{title}</motion.h2>
           </div>
-          {intro ? <p>{intro}</p> : null}
+          {intro ? (
+            <motion.p
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.35 }}
+              transition={{ duration: 0.55, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            >{intro}</motion.p>
+          ) : null}
         </header>
         <div className="overview-content">{children}</div>
         {action ? (

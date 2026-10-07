@@ -37,4 +37,10 @@ export default tseslint.config(
     },
   },
   eslintPluginPrettier,
+  {
+    rules: {
+      // Respect existing LF or CRLF files so lint works consistently on Windows and CI.
+      "prettier/prettier": ["error", { endOfLine: "auto" }],
+    },
+  },
 );

@@ -1,4 +1,3 @@
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -19,15 +18,15 @@ import { useQuery } from "@tanstack/react-query";
 import { hydrateSiteContent, portfolioQueryOptions } from "@/services/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ParasAI } from "@/components/layout/ParasAI";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">
-          Page not found
-        </h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
@@ -62,8 +61,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
         </h1>
 
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back
-          home.
+          Something went wrong on our end. You can try refreshing or head back home.
         </p>
 
         <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -93,7 +91,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   loader: async ({ context }) => {
     try {
       hydrateSiteContent(
-        await context.queryClient.ensureQueryData(portfolioQueryOptions),
+        await context.queryClient.ensureQueryData({
+          ...portfolioQueryOptions,
+          revalidateIfStale: true,
+        }),
       );
     } catch {
       hydrateSiteContent(null);
@@ -162,33 +163,46 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const isAdmin = useRouterState({ select: (state) => state.location.pathname === "/admin" || state.location.pathname.startsWith("/admin/") });
+  const isAdmin = useRouterState({
+    select: (state) =>
+      state.location.pathname === "/admin" || state.location.pathname.startsWith("/admin/"),
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ContentHydrator />
-
-      {isAdmin ? <Outlet /> : <div className="site-app">
-        <Header />
-
-        <div className="site-main">
-          <Outlet />
-        </div>
-
-        <Footer />
-      </div>}
-
-      <Toaster position="bottom-right" />
+      <SiteContentRoot isAdmin={isAdmin} />
     </QueryClientProvider>
   );
 }
 
-function ContentHydrator() {
+function SiteContentRoot({ isAdmin }: { isAdmin: boolean }) {
   const { data } = useQuery(portfolioQueryOptions);
 
-  if (data !== undefined) {
-    hydrateSiteContent(data);
-  }
+  // Update the typed service after the query resolves. UI pages subscribe to
+  // that service and rerender when its snapshot changes.
+  useEffect(() => {
+    if (data !== undefined) hydrateSiteContent(data);
+  }, [data]);
 
-  return null;
+  return (
+    <>
+      {isAdmin ? (
+        <Outlet />
+      ) : (
+        <div className="site-app">
+          <Header />
+
+          <div className="site-main">
+            <Outlet />
+          </div>
+
+          <Footer />
+          <ParasAI />
+          <ScrollToTop />
+        </div>
+      )}
+
+      <Toaster position="bottom-right" />
+    </>
+  );
 }

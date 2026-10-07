@@ -1,9 +1,9 @@
 import { motion, useReducedMotion } from "motion/react";
 import { PageHeader } from "@/components/portfolio/PageHeader";
-import { getAboutContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 
 export function AboutPage() {
-  const content = getAboutContent();
+  const content = useSiteContent().about;
   const reduceMotion = useReducedMotion();
   const reveal = reduceMotion ? false : { opacity: 0, y: 24 };
 

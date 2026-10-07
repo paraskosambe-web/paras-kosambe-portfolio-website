@@ -1,4 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
+import { useSyncExternalStore } from "react";
 import { siteContent as mockContent } from "@/data/mock";
 import { siteConfig } from "@/config/site";
 import type {
@@ -12,14 +13,46 @@ import type { PortfolioData } from "./content.types";
 export const portfolioQueryOptions = queryOptions({
   queryKey: ["portfolio-content"],
   queryFn: () => fetchPortfolioData(),
-  staleTime: 15_000,
+  // Public portfolio content is edited from the admin panel. Keep it stale so
+  // a new page load always revalidates against the database instead of
+  // rendering a recently cached snapshot.
+  staleTime: 0,
 });
 
 let current: SiteContent = mockContent;
 let lastData: PortfolioData | null | undefined;
+const contentListeners = new Set<() => void>();
+
+function subscribeToContent(listener: () => void) {
+  contentListeners.add(listener);
+  return () => { contentListeners.delete(listener); };
+}
+
+function notifyContentChanged() {
+  contentListeners.forEach((listener) => listener());
+}
+
+/** Reactively read the typed portfolio content model in UI components. */
+export function useSiteContent(): SiteContent {
+  return useSyncExternalStore(subscribeToContent, () => current, () => current);
+}
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const top3 = <T extends { featured?: boolean }>(rows: T[]) => rows.filter((r) => r.featured).slice(0, 3);
+
+function portfolioImageUrl(source: string | null | undefined): string | undefined {
+  const value = source?.trim();
+  if (!value) return undefined;
+  if (/^(https?:|data:|blob:)/i.test(value)) return value;
+
+  const mediaPrefix = "/api/public/media/portfolio-images/";
+  if (value.startsWith(mediaPrefix)) return value;
+
+  const storagePath = value.match(/(?:^|\/)storage\/v1\/object\/public\/portfolio-images\/(.+)$/i)?.[1];
+  const bucketPath = value.match(/(?:^|\/)portfolio-images\/(.+)$/i)?.[1];
+  const path = (storagePath || bucketPath || value).replace(/^\/+/, "");
+  return `${mediaPrefix}${path.split("/").map(encodeURIComponent).join("/")}`;
+}
 
 function formatWhatsapp(n: string) {
   return n.length > 10 ? `+${n.slice(0, n.length - 10)} ${n.slice(-10, -5)} ${n.slice(-5)}` : n;
@@ -29,14 +62,18 @@ function formatWhatsapp(n: string) {
 export function hydrateSiteContent(data: PortfolioData | null | undefined) {
   if (data === lastData) return;
   lastData = data;
-  if (!data) { current = mockContent; return; }
+  if (!data) {
+    current = mockContent;
+    notifyContentChanged();
+    return;
+  }
   const m = mockContent;
   const s = data.site;
   const link = (p: string) => data.socials.find((x) => x.platform === p)?.url ?? "";
   siteConfig.github = link("github") || siteConfig.github;
   siteConfig.linkedin = link("linkedin") || siteConfig.linkedin;
   siteConfig.instagram = link("instagram");
-  siteConfig.email = s?.contact_email ?? "";
+  siteConfig.email = s?.contact_email || "paraskosambe@gmail.com";
   if (s?.whatsapp_number && /^\d+$/.test(s.whatsapp_number)) siteConfig.whatsapp = s.whatsapp_number;
 
   const projects: ProjectItem[] = data.projects.map((p, i) => ({
@@ -52,13 +89,16 @@ export function hydrateSiteContent(data: PortfolioData | null | undefined) {
     imageUrl: c.image_url, imageAlt: c.image_alt || c.title,
     action: { label: "View Credential", href: c.credential_url || `#certification-${c.id}` },
   }));
-  const experiences: ExperienceItem[] = data.experiences.map((e, i) => ({
-    id: e.id, index: pad(i + 1), meta: e.type || "EXPERIENCE", title: e.title, organization: e.organization, role: e.role,
-    type: e.type, dateRange: e.date_range, location: e.location, description: e.description, tags: e.technologies,
-    technologies: e.technologies, responsibilities: e.responsibilities, imageAlt: e.image_alt || e.title,
-    ...(e.image_url ? { imageUrl: e.image_url } : {}),
-    action: { label: "View details", href: e.link_url || `#experience-${e.id}` },
-  }));
+  const experiences: ExperienceItem[] = data.experiences.map((e, i) => {
+    const imageUrl = portfolioImageUrl(e.image_url);
+    return {
+      id: e.id, index: pad(i + 1), meta: e.type || "EXPERIENCE", title: e.title, organization: e.organization, role: e.role,
+      type: e.type, dateRange: e.date_range, location: e.location, description: e.description, tags: e.technologies,
+      technologies: e.technologies, responsibilities: e.responsibilities, imageAlt: e.image_alt || e.title,
+      ...(imageUrl ? { imageUrl } : {}),
+      action: { label: "View details", href: e.link_url || `#experience-${e.id}` },
+    };
+  });
   const achievements: AchievementItem[] = data.achievements.map((a, i) => ({
     id: a.id, index: pad(i + 1), meta: a.category, category: a.category as AchievementCategory, title: a.title,
     organization: a.organization, date: a.date_label, description: a.description, tags: a.tags, imageAlt: a.image_alt || a.title,
@@ -69,11 +109,14 @@ export function hydrateSiteContent(data: PortfolioData | null | undefined) {
     id: a.id, index: pad(i + 1), meta: a.category, category: a.category as ArtItem["category"], title: a.title,
     description: a.description, medium: a.medium, year: a.year, tags: a.tags, imageUrl: a.image_url, imageAlt: a.image_alt || a.title,
   }));
-  const skills: SkillsCategory[] = data.skills.map((k, i) => ({
-    id: k.id, index: pad(i + 1), meta: `${pad(k.skills.length)} SKILLS`, title: k.title, count: k.skills.length,
-    description: k.description, skills: k.skills, tags: k.skills, imageAlt: k.image_alt || k.title,
-    ...(k.image_url ? { imageUrl: k.image_url } : {}),
-  }));
+  const skills: SkillsCategory[] = data.skills.map((k, i) => {
+    const imageUrl = portfolioImageUrl(k.image_url);
+    return {
+      id: k.id, index: pad(i + 1), meta: "SKILLS", title: k.title,
+      description: k.description, skills: k.skills, tags: k.skills, imageAlt: k.image_alt || k.title,
+      ...(imageUrl ? { imageUrl } : {}),
+    };
+  });
 
   const about: AboutContent = {
     ...m.about,
@@ -132,6 +175,7 @@ export function hydrateSiteContent(data: PortfolioData | null | undefined) {
       ],
     },
   };
+  notifyContentChanged();
 }
 
 export function getSiteContent(): SiteContent { return current; }

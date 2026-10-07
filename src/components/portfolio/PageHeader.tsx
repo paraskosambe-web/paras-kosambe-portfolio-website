@@ -1,24 +1,26 @@
 import { motion, useReducedMotion } from "motion/react";
+import type { ReactNode } from "react";
 
 interface PageHeaderProps {
   eyebrow: string;
-  title: string;
+  title: ReactNode;
   intro: string;
+  className?: string;
 }
 
 export function PageHeader({
   eyebrow,
   title,
   intro,
+  className = "page-header",
 }: PageHeaderProps) {
   const reduceMotion = useReducedMotion();
 
   const isLongTitle =
-    title.toLowerCase() === "certifications" ||
-    title.toLowerCase() === "experience";
+    typeof title === "string" && (title.toLowerCase() === "certifications" || title.toLowerCase() === "experience");
 
   return (
-    <header className="page-header">
+    <header className={className}>
       <motion.span
         initial={reduceMotion ? false : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}

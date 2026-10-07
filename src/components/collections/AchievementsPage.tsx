@@ -3,13 +3,13 @@ import { useState } from "react";
 import { PageHeader } from "@/components/portfolio/PageHeader";
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
 import { Button } from "@/components/ui/button";
-import { getAchievementsContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 import type { AchievementCategory } from "@/types/site";
 
 type Filter = "ALL" | AchievementCategory;
 
 export function AchievementsPage() {
-  const content = getAchievementsContent();
+  const content = useSiteContent().achievements;
   const [filter, setFilter] = useState<Filter>("ALL");
   const items = content.items.filter((item) => filter === "ALL" || item.category === filter);
   return <main className="projects-page"><div className="projects-inner">

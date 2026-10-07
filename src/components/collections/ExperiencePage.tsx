@@ -2,16 +2,16 @@ import { useState } from "react";
 import { PageHeader } from "@/components/portfolio/PageHeader";
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { getExperienceContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 import type { ExperienceItem } from "@/types/site";
 
 export function ExperiencePage() {
-  const content = getExperienceContent();
+  const content = useSiteContent().experience;
   const [selected, setSelected] = useState<ExperienceItem | null>(null);
   return <main className="projects-page"><div className="projects-inner">
     <PageHeader eyebrow={content.eyebrow} title={content.title} intro={content.intro} />
-    <div className="collection-grid">
-      {content.items.map((item, index) => <PortfolioCard key={item.id} item={item} delay={index * 0.08} details={[item.role, item.dateRange, item.location]} onActivate={() => setSelected(item)} />)}
+    <div className="collection-grid experience-grid">
+      {content.items.map((item, index) => <PortfolioCard key={item.id} item={item} visual={<div className="experience-card-visual" aria-hidden="true"><span /></div>} delay={index * 0.08} details={[item.role, item.dateRange, item.location]} onActivate={() => setSelected(item)} />)}
     </div>
     <Dialog open={selected !== null} onOpenChange={(open) => { if (!open) setSelected(null); }}>
       <DialogContent className="record-dialog">

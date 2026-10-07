@@ -4,13 +4,13 @@ import { PageHeader } from "@/components/portfolio/PageHeader";
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { getCertificationsContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 import type { CertificationCategory, CertificationItem } from "@/types/site";
 
 type Filter = "ALL" | CertificationCategory;
 
 export function CertificationsPage() {
-  const content = getCertificationsContent();
+  const content = useSiteContent().certifications;
   const [filter, setFilter] = useState<Filter>("ALL");
   const [visibleCount, setVisibleCount] = useState(9);
   const [preview, setPreview] = useState<CertificationItem | null>(null);

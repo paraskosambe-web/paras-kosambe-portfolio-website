@@ -1,10 +1,10 @@
 import { ArrowDownToLine, Maximize2 } from "lucide-react";
 import { PageHeader } from "@/components/portfolio/PageHeader";
 import { Button } from "@/components/ui/button";
-import { getResumeContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 
 export function ResumePage() {
-  const content = getResumeContent();
+  const content = useSiteContent().resume;
   return <main className="projects-page"><div className="projects-inner">
     <PageHeader eyebrow={content.eyebrow} title={content.title} intro={content.intro} />
     <div className="resume-page-meta"><span>{content.updatedLabel}</span><strong>{content.updated}</strong><div>

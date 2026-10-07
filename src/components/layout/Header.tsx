@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 import { Link, useLocation } from "@tanstack/react-router";
@@ -20,6 +19,13 @@ const navItems = [
   { label: "Resume", href: "/resume" },
   { label: "Contact", href: "/contact" },
 ];
+
+function scrollHomeToTop() {
+  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
+  window.scrollTo({ top: 0, behavior });
+}
 
 export function Header() {
   const location = useLocation();
@@ -43,6 +49,12 @@ export function Header() {
   }, [location.pathname]);
 
   useEffect(() => {
+    if (location.pathname === "/") {
+      scrollHomeToTop();
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
 
     return () => {
@@ -55,10 +67,7 @@ export function Header() {
       return location.pathname === "/";
     }
 
-    return (
-      location.pathname === href ||
-      location.pathname.startsWith(`${href}/`)
-    );
+    return location.pathname === href || location.pathname.startsWith(`${href}/`);
   };
 
   return (
@@ -83,6 +92,9 @@ export function Header() {
             to="/"
             className="site-logo"
             aria-label="Paras Kosambe — Home"
+            onClick={() => {
+              if (location.pathname === "/") scrollHomeToTop();
+            }}
           >
             <motion.span
               className="site-logo-mark"
@@ -104,10 +116,7 @@ export function Header() {
 
           {/* DESKTOP NAVIGATION */}
 
-          <nav
-            className="desktop-nav"
-            aria-label="Primary navigation"
-          >
+          <nav className="desktop-nav" aria-label="Primary navigation">
             {navItems.map((item, index) => {
               const active = isActive(item.href);
 
@@ -115,17 +124,11 @@ export function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`desktop-nav-link ${
-                    active ? "desktop-nav-link-active" : ""
-                  }`}
+                  className={`desktop-nav-link ${active ? "desktop-nav-link-active" : ""}`}
                 >
-                  <span className="desktop-nav-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <span className="desktop-nav-number">{String(index + 1).padStart(2, "0")}</span>
 
-                  <span className="desktop-nav-label">
-                    {item.label}
-                  </span>
+                  <span className="desktop-nav-label">{item.label}</span>
 
                   <motion.span
                     className="desktop-nav-line"
@@ -147,35 +150,20 @@ export function Header() {
           {/* ACTIONS */}
 
           <div className="header-actions">
-            <Link
-              to="/contact"
-              className="header-cta"
-            >
+            <Link to="/contact" className="header-cta">
               <span>LET'S TALK</span>
 
-              <motion.span
-                className="header-cta-icon"
-                whileHover={{ x: 3, y: -3 }}
-              >
-                <ArrowUpRight
-                  size={17}
-                  strokeWidth={1.8}
-                />
+              <motion.span className="header-cta-icon" whileHover={{ x: 3, y: -3 }}>
+                <ArrowUpRight size={17} strokeWidth={1.8} />
               </motion.span>
             </Link>
 
             <button
               type="button"
               className="mobile-menu-button"
-              aria-label={
-                mobileOpen
-                  ? "Close navigation"
-                  : "Open navigation"
-              }
+              aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
               aria-expanded={mobileOpen}
-              onClick={() =>
-                setMobileOpen((value) => !value)
-              }
+              onClick={() => setMobileOpen((value) => !value)}
             >
               {mobileOpen ? (
                 <X size={23} strokeWidth={1.7} />
@@ -250,14 +238,8 @@ export function Header() {
                     >
                       <Link
                         to={item.href}
-                        className={`mobile-nav-link ${
-                          active
-                            ? "mobile-nav-link-active"
-                            : ""
-                        }`}
-                        onClick={() =>
-                          setMobileOpen(false)
-                        }
+                        className={`mobile-nav-link ${active ? "mobile-nav-link-active" : ""}`}
+                        onClick={() => setMobileOpen(false)}
                       >
                         <span className="mobile-nav-index">
                           {String(index + 1).padStart(2, "0")}
@@ -265,17 +247,9 @@ export function Header() {
 
                         <span>{item.label}</span>
 
-                        {active && (
-                          <span className="mobile-nav-current">
-                            CURRENT
-                          </span>
-                        )}
+                        {active && <span className="mobile-nav-current">CURRENT</span>}
 
-                        <ArrowUpRight
-                          className="mobile-nav-arrow"
-                          size={20}
-                          strokeWidth={1.5}
-                        />
+                        <ArrowUpRight className="mobile-nav-arrow" size={20} strokeWidth={1.5} />
                       </Link>
                     </motion.div>
                   );
@@ -288,21 +262,13 @@ export function Header() {
 
                   <div className="mobile-social-links">
                     {siteConfig.github && (
-                      <a
-                        href={siteConfig.github}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <a href={siteConfig.github} target="_blank" rel="noreferrer">
                         GitHub
                       </a>
                     )}
 
                     {siteConfig.linkedin && (
-                      <a
-                        href={siteConfig.linkedin}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <a href={siteConfig.linkedin} target="_blank" rel="noreferrer">
                         LinkedIn
                       </a>
                     )}
@@ -312,9 +278,7 @@ export function Header() {
                 <Link
                   to="/contact"
                   className="mobile-work-link"
-                  onClick={() =>
-                    setMobileOpen(false)
-                  }
+                  onClick={() => setMobileOpen(false)}
                 >
                   <span>START A CONVERSATION</span>
 

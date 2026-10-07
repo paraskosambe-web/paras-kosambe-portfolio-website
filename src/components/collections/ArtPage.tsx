@@ -5,11 +5,11 @@ import { PageHeader } from "@/components/portfolio/PageHeader";
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { getArtContent } from "@/services/site";
+import { useSiteContent } from "@/services/site";
 import type { ArtCategory, ArtItem } from "@/types/site";
 
 export function ArtPage() {
-  const content = getArtContent();
+  const content = useSiteContent().art;
   const [filter, setFilter] = useState<ArtCategory>("ALL");
   const [preview, setPreview] = useState<ArtItem | null>(null);
   const items = content.items.filter((item) => filter === "ALL" || item.category === filter);

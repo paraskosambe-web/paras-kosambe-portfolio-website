@@ -200,6 +200,7 @@ export interface ProjectsContent {
 }
 
 export interface AboutPreviewContent {
+  sectionName: string;
   index: string;
   title: string;
   imageUrl?: string;
@@ -211,11 +212,11 @@ export interface AboutPreviewContent {
 }
 
 export interface SkillsCategory extends PortfolioItem {
-  count: number;
   skills: string[];
 }
 
 export interface OverviewCollection {
+  sectionName: string;
   index: string;
   title: string;
   intro: string;
@@ -224,6 +225,7 @@ export interface OverviewCollection {
 }
 
 export interface ResumePreviewContent {
+  sectionName: string;
   index: string;
   title: string;
   updatedLabel: string;
@@ -234,6 +236,7 @@ export interface ResumePreviewContent {
 }
 
 export interface ContactPreviewContent {
+  sectionName: string;
   index: string;
   title: string;
   intro: string;
@@ -243,6 +246,7 @@ export interface ContactPreviewContent {
 export interface HomeContent {
   about: AboutPreviewContent;
   skills: {
+    sectionName: string;
     index: string;
     title: string;
     intro: string;
