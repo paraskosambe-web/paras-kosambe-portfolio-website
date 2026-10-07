@@ -1619,3 +1619,13 @@
     line-height: 1.4;
   }
 }
+/* ADMIN DASHBOARD CARDS */
+.admin-dash-sub { margin-top: .6rem; color: var(--muted-foreground); font-size: .95rem; }
+.admin-dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.admin-dash-card { display: flex; flex-direction: column; justify-content: space-between; min-height: 170px; padding: 1.5rem; border: 1px solid var(--border); border-radius: 2px; background: color-mix(in oklab, var(--foreground) 3%, transparent); transition: border-color .25s, transform .25s; }
+.admin-dash-card:hover { border-color: var(--muted-foreground); transform: translateY(-3px); }
+.admin-dash-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.admin-dash-top span { font-family: "JetBrains Mono", monospace; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-foreground); }
+.admin-dash-top i { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--border); background: var(--foreground); color: var(--background); }
+.admin-dash-top i svg { width: 18px; height: 18px; }
+.admin-dash-card strong { font-family: "Inter Tight", sans-serif; font-weight: 800; font-size: clamp(2.6rem, 5vw, 3.6rem); line-height: 1; letter-spacing: -.03em; }

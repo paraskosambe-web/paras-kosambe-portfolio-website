@@ -1,43 +1,53 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
+import { motion } from "motion/react";
+import { Award, Briefcase, FolderKanban, Image, Mail, Sparkles, Star, Trophy } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-type CountTable = "projects" | "certifications" | "experiences" | "skills" | "achievements";
+type CountTable = "projects" | "certifications" | "experiences" | "skills" | "achievements" | "artworks" | "contact_submissions";
 
-async function count(table: CountTable, featuredOnly = false) {
+async function count(table: CountTable, filter?: [string, boolean]) {
   let q = supabase.from(table).select("id", { count: "exact", head: true });
-  if (featuredOnly) q = q.eq("featured", true);
+  if (filter) q = q.eq(filter[0] as never, filter[1] as never);
   const { count: c, error } = await q;
   if (error) throw error;
   return c ?? 0;
 }
 
+const cards = [
+  { label: "Projects", section: "projects", icon: FolderKanban, q: () => count("projects") },
+  { label: "Featured projects", section: "projects", icon: Star, q: () => count("projects", ["featured", true]) },
+  { label: "Skills", section: "skills", icon: Sparkles, q: () => count("skills") },
+  { label: "Experience", section: "experience", icon: Briefcase, q: () => count("experiences") },
+  { label: "Certifications", section: "certifications", icon: Award, q: () => count("certifications") },
+  { label: "Achievements", section: "achievements", icon: Trophy, q: () => count("achievements") },
+  { label: "Artworks", section: "art", icon: Image, q: () => count("artworks") },
+  { label: "Unread messages", section: "messages", icon: Mail, q: () => count("contact_submissions", ["is_read", false]) },
+] as const;
+
 export function AdminDashboard() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "dashboard"],
-    queryFn: async () => {
-      const [projects, featured, certifications, experience, skills, achievements] = await Promise.all([
-        count("projects"), count("projects", true), count("certifications"), count("experiences"), count("skills"), count("achievements"),
-      ]);
-      return [
-        { label: "Projects", value: projects, to: "/admin/projects" },
-        { label: "Featured projects", value: featured, to: "/admin/projects" },
-        { label: "Certifications", value: certifications, to: "/admin/certifications" },
-        { label: "Experience", value: experience, to: "/admin/experience" },
-        { label: "Skills", value: skills, to: "/admin/skills" },
-        { label: "Achievements", value: achievements, to: "/admin/achievements" },
-      ] as const;
-    },
+    queryFn: () => Promise.all(cards.map((c) => c.q())),
   });
   return (
     <section>
-      <div className="admin-head"><div><span className="admin-eyebrow">Overview</span><h1>Dashboard</h1></div></div>
+      <div className="admin-head">
+        <div>
+          <span className="admin-eyebrow">Overview</span>
+          <h1>Dashboard</h1>
+          <p className="admin-dash-sub">Snapshot of everything published on your portfolio. Select a card to manage it.</p>
+        </div>
+      </div>
       {error ? <p className="admin-error">Counts could not be loaded.</p> : null}
-      <div className="admin-stats">
-        {(data ?? Array.from({ length: 6 }, (_, i) => ({ label: "…", value: "–", to: "/admin" as const, k: i }))).map((s, i) => (
-          <Link key={i} to="/admin/$section" params={{ section: s.to.slice(7) || "projects" }} className="admin-stat" aria-busy={isLoading}>
-            <span>{s.label}</span><strong>{s.value}</strong>
-          </Link>
+      <div className="admin-dash-grid">
+        {cards.map((c, i) => (
+          <motion.div key={c.label} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05, duration: 0.4 }}>
+            <Link to="/admin/$section" params={{ section: c.section }} className="admin-dash-card" aria-busy={isLoading}>
+              <div className="admin-dash-top"><span>{c.label}</span><i><c.icon /></i></div>
+              <strong>{data ? data[i] : "–"}</strong>
+            </Link>
+          </motion.div>
         ))}
       </div>
     </section>
