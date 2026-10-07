@@ -34,3 +34,8 @@
 
 ## Mobile presentation
 - [x] Optimize the header, footer, and Certifications page for phone screens
+
+## Standalone admin login
+- [x] Replace login presentation with animated monochrome owner-only form
+- [x] Remove public navigation and footer from admin pages
+- [x] Verify login rendering and anonymous admin redirect on desktop/mobile
