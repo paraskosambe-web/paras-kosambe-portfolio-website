@@ -19,7 +19,7 @@ let current: SiteContent = mockContent;
 let lastData: PortfolioData | null | undefined;
 
 const pad = (n: number) => String(n).padStart(2, "0");
-const top3 = <T extends { featured?: boolean }>(rows: T[]) => [...rows.filter((r) => r.featured), ...rows.filter((r) => !r.featured)].slice(0, 3);
+const top3 = <T extends { featured?: boolean }>(rows: T[]) => rows.filter((r) => r.featured).slice(0, 3);
 
 function formatWhatsapp(n: string) {
   return n.length > 10 ? `+${n.slice(0, n.length - 10)} ${n.slice(-10, -5)} ${n.slice(-5)}` : n;
@@ -98,7 +98,7 @@ export function hydrateSiteContent(data: PortfolioData | null | undefined) {
       intro: s?.about_intro ? [s.about_intro] : m.home.about.intro,
       currently: about.currently,
     },
-    skills: { ...m.home.skills, categories: skills.map((k) => ({ ...k, tags: k.skills.slice(0, 4), action: { label: "View skills", href: "/skills" } })) },
+    skills: { ...m.home.skills, categories: skills.filter((_, i) => data.skills[i]?.featured).slice(0, 3).map((k) => ({ ...k, tags: k.skills.slice(0, 4), action: { label: "View skills", href: "/skills" } })) },
     projects: { ...m.home.projects, items: top3(data.projects).map((r) => projects.find((p) => p.id === r.id)!) },
     experience: { ...m.home.experience, items: top3(data.experiences).map((r) => experiences.find((p) => p.id === r.id)!) },
     certifications: { ...m.home.certifications, items: top3(data.certifications).map((r) => certifications.find((p) => p.id === r.id)!) },
