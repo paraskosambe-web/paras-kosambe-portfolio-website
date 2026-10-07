@@ -232,7 +232,7 @@ export function CollectionManager({ def }: { def: CollectionDef }) {
       )}
 
       <Sheet open={editing !== null} onOpenChange={(open) => { if (!open) setEditing(null); }}>
-        <SheetContent className="cm-drawer">
+        <SheetContent className={`cm-drawer ${editing === "new" ? "is-creating" : ""}`}>
           <SheetHeader className="cm-drawer-header">
             <span className="cm-eyebrow">{def.label} / {editing === "new" ? "New record" : "Edit record"}</span>
             <SheetTitle>{editing === "new" ? `Add ${def.singular.toLowerCase()}` : `Edit ${def.singular.toLowerCase()}`}</SheetTitle>
@@ -294,7 +294,7 @@ function RecordForm({ def, row, nextOrder, featuredCount, onDone }: { def: Colle
   });
 
   return (
-    <form onSubmit={submit} className="cm-form" noValidate>
+    <form onSubmit={submit} className={`cm-form ${row === null ? "is-creating" : ""}`} noValidate>
       <div className="cm-form-scroll">
         {def.fields.map((field) => {
           const id = `f-${field.name}`;

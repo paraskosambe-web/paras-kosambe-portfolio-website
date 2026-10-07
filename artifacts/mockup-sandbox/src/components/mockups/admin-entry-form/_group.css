@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:ital,wght@0,700;0,800;0,900;1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+.entry-preview {
+  --cm-bg: #0a0a0a;
+  --cm-panel: #111;
+  --cm-panel-raised: #1a1a1a;
+  --cm-line: #262626;
+  --cm-dim: #737373;
+  --cm-muted: #a3a3a3;
+  --cm-copy: #d4d4d4;
+  --cm-white: #f5f5f5;
+  min-height: 100vh;
+  background: #050505;
+  color: var(--cm-copy);
+  font: 12px/1.5 Inter, sans-serif;
+}
+.entry-preview *,
+.entry-preview *::before,
+.entry-preview *::after { box-sizing: border-box; }
+.entry-preview .ep-app { display: flex; min-height: 100vh; justify-content: flex-end; }
+.entry-preview .ep-backdrop { display: flex; flex: 1; align-items: flex-start; gap: 14px; padding: 34px 26px; color: #737373; font: 10px/1.5 "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+.entry-preview .ep-backdrop-mark { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid #262626; color: #f5f5f5; }
+.entry-preview .ep-drawer { display: flex; width: min(760px, 100%); min-height: 100vh; flex-direction: column; border-left: 1px solid var(--cm-line); background: var(--cm-bg); color: var(--cm-copy); }
+.entry-preview .ep-header { flex: none; padding: 28px clamp(20px, 4vw, 38px) 22px; border-bottom: 1px solid var(--cm-line); text-align: left; }
+.entry-preview .ep-eyebrow { display: block; color: var(--cm-dim); font: 10px/1.5 "JetBrains Mono", monospace; letter-spacing: .09em; text-transform: uppercase; }
+.entry-preview .ep-header h1 { margin: 9px 0 6px; color: var(--cm-white); font: 700 25px/1.1 "Inter Tight", sans-serif; letter-spacing: -.025em; }
+.entry-preview .ep-header p { max-width: 480px; margin: 0; color: var(--cm-muted); font-size: 11px; line-height: 1.55; }
+.entry-preview .ep-form { display: flex; min-height: 0; flex: 1; flex-direction: column; }
+.entry-preview .ep-form-scroll { display: grid; min-height: 0; flex: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; gap: 19px 16px; overflow-y: auto; padding: 24px clamp(20px, 4vw, 38px); }
+.entry-preview .ep-field { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+.entry-preview .ep-field.is-wide,
+.entry-preview .ep-featured { grid-column: 1 / -1; }
+.entry-preview .ep-field label,
+.entry-preview .ep-featured label { color: var(--cm-copy); font-size: 11px; font-weight: 550; }
+.entry-preview .ep-field input,
+.entry-preview .ep-field textarea,
+.entry-preview .ep-field select { width: 100%; min-height: 42px; border: 1px solid var(--cm-line); border-radius: 1px; background: var(--cm-panel); color: var(--cm-white); padding: 10px 11px; font: 12px Inter, sans-serif; }
+.entry-preview .ep-field textarea { min-height: 94px; resize: vertical; line-height: 1.55; }
+.entry-preview .ep-field select { padding-inline: 10px; }
+.entry-preview .ep-field option { background: var(--cm-panel); color: var(--cm-white); }
+.entry-preview .ep-hint { margin: -2px 0 0; color: var(--cm-dim); font-size: 10px; line-height: 1.5; }
+.entry-preview .ep-tags { display: flex; min-height: 42px; flex-wrap: wrap; align-items: center; gap: 7px; border: 1px solid var(--cm-line); background: var(--cm-panel); padding: 8px; }
+.entry-preview .ep-tag { border: 1px solid var(--cm-line); padding: 3px 7px; color: var(--cm-muted); font: 9px "JetBrains Mono", monospace; text-transform: uppercase; }
+.entry-preview .ep-featured { display: flex; align-items: center; gap: 12px; border: 1px solid var(--cm-line); background: var(--cm-panel); padding: 13px; }
+.entry-preview .ep-switch { position: relative; width: 34px; height: 19px; flex: none; border: 1px solid #525252; background: #262626; }
+.entry-preview .ep-switch::after { position: absolute; top: 3px; left: 3px; width: 11px; height: 11px; background: #a3a3a3; content: ""; }
+.entry-preview .ep-featured-copy { display: grid; gap: 4px; }
+.entry-preview .ep-featured-copy p { margin: 0; color: var(--cm-dim); font-size: 10px; }
+.entry-preview .ep-footer { flex: none; border-top: 1px solid var(--cm-line); padding: 14px clamp(20px, 4vw, 38px); }
+.entry-preview .ep-submit { display: flex; width: 100%; min-height: 44px; align-items: center; justify-content: center; gap: 9px; border: 1px solid var(--cm-white); border-radius: 1px; background: var(--cm-white); color: #0a0a0a; font: 600 12px Inter, sans-serif; }
+.entry-preview .ep-submit svg { width: 15px; height: 15px; }
+
+/* Proposed treatment: a light editing surface stands apart from the dark admin shell. */
+.entry-preview--light {
+  --cm-bg: #d4d4d4;
+  --cm-panel: #fff;
+  --cm-panel-raised: #e5e5e5;
+  --cm-line: #a3a3a3;
+  --cm-dim: #525252;
+  --cm-muted: #404040;
+  --cm-copy: #171717;
+  --cm-white: #0a0a0a;
+}
+.entry-preview--light .ep-drawer { background: var(--cm-bg); }
+.entry-preview--light .ep-header { background: #e5e5e5; }
+.entry-preview--light .ep-header h1 { color: #0a0a0a; }
+.entry-preview--light .ep-field label,
+.entry-preview--light .ep-featured label { color: #171717; }
+.entry-preview--light .ep-field input,
+.entry-preview--light .ep-field textarea,
+.entry-preview--light .ep-field select,
+.entry-preview--light .ep-tags,
+.entry-preview--light .ep-featured { background: #fff; color: #0a0a0a; }
+.entry-preview--light .ep-field input::placeholder,
+.entry-preview--light .ep-field textarea::placeholder { color: #737373; }
+.entry-preview--light .ep-field option { background: #fff; color: #0a0a0a; }
+.entry-preview--light .ep-tag { border-color: #d4d4d4; background: #f5f5f5; color: #404040; }
+.entry-preview--light .ep-switch { border-color: #737373; background: #d4d4d4; }
+.entry-preview--light .ep-switch::after { background: #525252; }
+.entry-preview--light .ep-submit { border-color: #0a0a0a; background: #0a0a0a; color: #fff; }
+.entry-preview--light .ep-submit:hover { background: #262626; }
+
+@media (max-width: 680px) {
+  .entry-preview .ep-backdrop { display: none; }
+  .entry-preview .ep-drawer { border-left: 0; }
+}
+@media (max-width: 480px) {
+  .entry-preview .ep-form-scroll { grid-template-columns: 1fr; }
+  .entry-preview .ep-field.is-wide,
+  .entry-preview .ep-featured { grid-column: auto; }
+}
