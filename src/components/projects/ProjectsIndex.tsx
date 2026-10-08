@@ -49,7 +49,7 @@ export function ProjectsIndex() {
           </label>
         </motion.div>
 
-        <motion.div layout className="collection-grid">
+        <motion.div layout className="collection-grid project-grid">
           <AnimatePresence mode="popLayout">
             {filteredProjects.slice(0, visibleCount).map((project) => <ProjectCard key={project.id} project={project} />)}
           </AnimatePresence>

@@ -43,13 +43,13 @@ const top3 = <T extends { featured?: boolean }>(rows: T[]) => rows.filter((r) =>
 function portfolioImageUrl(source: string | null | undefined): string | undefined {
   const value = source?.trim();
   if (!value) return undefined;
-  if (/^(https?:|data:|blob:)/i.test(value)) return value;
 
   const mediaPrefix = "/api/public/media/portfolio-images/";
   if (value.startsWith(mediaPrefix)) return value;
 
-  const storagePath = value.match(/(?:^|\/)storage\/v1\/object\/public\/portfolio-images\/(.+)$/i)?.[1];
-  const bucketPath = value.match(/(?:^|\/)portfolio-images\/(.+)$/i)?.[1];
+  const storagePath = value.match(/(?:^|\/)storage\/v1\/object\/(?:public|sign|authenticated)\/portfolio-images\/([^?#]+)/i)?.[1];
+  const bucketPath = value.match(/(?:^|\/)portfolio-images\/([^?#]+)/i)?.[1];
+  if (!storagePath && !bucketPath && /^(https?:|data:|blob:)/i.test(value)) return value;
   const path = (storagePath || bucketPath || value).replace(/^\/+/, "");
   return `${mediaPrefix}${path.split("/").map(encodeURIComponent).join("/")}`;
 }
@@ -78,15 +78,15 @@ export function hydrateSiteContent(data: PortfolioData | null | undefined) {
 
   const projects: ProjectItem[] = data.projects.map((p, i) => ({
     id: p.id, slug: p.slug, index: pad(i + 1), meta: p.category, category: p.category as ProjectCategory,
-    title: p.title, description: p.description, tags: p.technologies, imageUrl: p.image_url, imageAlt: p.image_alt || p.title,
+    title: p.title, description: p.description, tags: p.technologies, imageUrl: portfolioImageUrl(p.image_url) ?? "", imageAlt: p.image_alt || p.title,
     action: { label: "View project", href: `/projects/${p.slug}` }, githubUrl: p.github_url, liveUrl: p.live_url,
     overview: p.overview, problem: p.problem, solution: p.solution, features: p.features, technologies: p.technologies,
-    development: p.development, screenshots: p.screenshots, learnings: p.learnings,
+    development: p.development, screenshots: p.screenshots.map(portfolioImageUrl).filter((url): url is string => Boolean(url)), learnings: p.learnings,
   }));
   const certifications: CertificationItem[] = data.certifications.map((c, i) => ({
     id: c.id, index: pad(i + 1), meta: c.category, category: c.category as CertificationCategory, title: c.title,
     issuer: c.issuer, date: c.date_label, credentialId: c.credential_id, description: c.description, tags: c.tags,
-    imageUrl: c.image_url, imageAlt: c.image_alt || c.title,
+    imageUrl: portfolioImageUrl(c.image_url) ?? "", imageAlt: c.image_alt || c.title,
     action: { label: "View Credential", href: c.credential_url || `#certification-${c.id}` },
   }));
   const experiences: ExperienceItem[] = data.experiences.map((e, i) => {
@@ -128,7 +128,7 @@ export function hydrateSiteContent(data: PortfolioData | null | undefined) {
     lookingFor: s?.looking_for ?? m.about.lookingFor,
   };
   const resumeUpdated = data.resume?.updated_label || m.resume.updated;
-  const portfolioUrl = s?.art_portfolio_url || siteConfig.instagram;
+  const portfolioUrl = m.art.portfolioUrl || s?.art_portfolio_url || siteConfig.instagram;
   const { portfolioUrl: _ignored, ...artBase } = m.art;
   void _ignored;
 

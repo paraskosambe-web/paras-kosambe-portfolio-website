@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import type { ReactNode } from "react";
 
 export type SectionTone = "ink" | "charcoal" | "grid" | "ruled" | "offset";
@@ -19,30 +20,44 @@ interface SectionOverviewProps {
 
 export function SectionOverview({ sectionName, index, title, intro, action, tone = "ink", layout = "standard", children, className = "" }: SectionOverviewProps) {
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const ruleScale = useTransform(scrollYProgress, [0, 0.18, 0.82, 1], [0.12, 1, 1, 0.12]);
 
   return (
-    <section className={`overview overview-${tone} overview-${layout} ${className}`}>
-      <motion.div
-        className="overview-rule"
-        initial={reduceMotion ? false : { scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      />
+    <section ref={sectionRef} className={`overview overview-${tone} overview-${layout} ${className}`}>
+      <motion.div className="overview-rule" style={{ scaleX: reduceMotion ? 1 : ruleScale }} />
       <div className="overview-inner">
         <header className="overview-header">
           <motion.span
             className="overview-index"
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.35 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >/{index}<span className="overview-section-name">{sectionName}</span></motion.span>
+          >/{index}</motion.span>
+          <div className="overview-section-label">
+            <motion.span
+              className="overview-section-name"
+              initial={reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.35 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >{sectionName}</motion.span>
+            <motion.span
+              className="overview-section-accent"
+              initial={reduceMotion ? false : { scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: false, amount: 0.35 }}
+              transition={{ duration: 0.65, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              aria-hidden="true"
+            />
+          </div>
           <div className="overview-heading-mask">
             <motion.h2
               initial={reduceMotion ? false : { y: "105%" }}
               whileInView={{ y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.35 }}
               transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
             >{title}</motion.h2>
           </div>

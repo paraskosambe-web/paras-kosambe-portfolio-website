@@ -11,7 +11,7 @@ export function ExperiencePage() {
   return <main className="projects-page"><div className="projects-inner">
     <PageHeader eyebrow={content.eyebrow} title={content.title} intro={content.intro} />
     <div className="collection-grid experience-grid">
-      {content.items.map((item, index) => <PortfolioCard key={item.id} item={item} visual={<div className="experience-card-visual" aria-hidden="true"><span /></div>} delay={index * 0.08} details={[item.role, item.dateRange, item.location]} onActivate={() => setSelected(item)} />)}
+      {content.items.map((item, index) => <PortfolioCard key={item.id} item={item} visual={<div className="experience-card-visual" aria-hidden="true"><span /></div>} delay={index * 0.08} details={[item.role, item.dateRange, item.location]} onActivate={() => setSelected(item)} onActionClick={() => setSelected(item)} />)}
     </div>
     <Dialog open={selected !== null} onOpenChange={(open) => { if (!open) setSelected(null); }}>
       <DialogContent className="record-dialog">

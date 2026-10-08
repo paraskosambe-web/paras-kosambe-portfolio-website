@@ -17,7 +17,7 @@ export function PageHeader({
   const reduceMotion = useReducedMotion();
 
   const isLongTitle =
-    typeof title === "string" && (title.toLowerCase() === "certifications" || title.toLowerCase() === "experience");
+    typeof title === "string" && ["achievements", "certifications", "experience"].includes(title.toLowerCase());
 
   return (
     <header className={className}>

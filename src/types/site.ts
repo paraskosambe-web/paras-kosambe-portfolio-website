@@ -98,7 +98,10 @@ export interface AboutContent {
   lookingFor: string;
 }
 
-export interface SkillsContent extends CollectionPageContent<SkillsCategory> {}
+export interface SkillsContent extends CollectionPageContent<SkillsCategory> {
+  viewSkillsLabel: string;
+  hideSkillsLabel: string;
+}
 
 export interface ResumeContent {
   eyebrow: string;

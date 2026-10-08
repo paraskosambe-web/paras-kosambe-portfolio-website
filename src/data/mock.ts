@@ -265,6 +265,8 @@ export const siteContent: SiteContent = {
     eyebrow: "Capabilities / Working toolkit",
     title: "Skills",
     intro: "A focused toolkit across data, intelligence and product engineering—shown without arbitrary proficiency scores.",
+    viewSkillsLabel: "View skills",
+    hideSkillsLabel: "Show less",
     items: [
       { ...siteContentPlaceholderSkill("skill-page-ds", "01", "Data Science", "Methods for exploring data, testing assumptions and building reproducible models.", ["Python", "Pandas", "NumPy", "Statistics", "Scikit-learn", "EDA", "Feature Engineering", "Jupyter"]) },
       { ...siteContentPlaceholderSkill("skill-page-da", "02", "Data Analytics", "Tools for querying, cleaning and communicating information for clearer decisions.", ["SQL", "Excel", "Power BI", "Tableau", "Data Cleaning", "Dashboards", "Reporting"]) },
@@ -290,7 +292,8 @@ export const siteContent: SiteContent = {
     title: "Art",
     intro: "Art is another way I explore ideas, composition and creativity. These locally generated pieces are placeholders for original work.",
     filters: ["ALL", "DIGITAL", "SKETCH", "EXPERIMENTAL"],
-    portfolioLabel: "Instagram / Art portfolio",
+    portfolioLabel: "Visit Paras Arts Website",
+    portfolioUrl: "https://paras-arts.vercel.app/",
     items: [art01, art02, art03, art04, art05, art06].map((imageUrl, index) => {
       const categories = ["DIGITAL", "SKETCH", "EXPERIMENTAL", "DIGITAL", "SKETCH", "EXPERIMENTAL"] as const;
       const category = categories[index] ?? "DIGITAL";

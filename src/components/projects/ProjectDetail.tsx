@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 import { useSiteContent } from "@/services/site";
 import type { ProjectItem } from "@/types/site";
 
-function DetailSection({ index, title, children }: { index: string; title: string; children: ReactNode }) {
+function DetailSection({ index, title, children, className = "" }: { index: string; title: string; children: ReactNode; className?: string }) {
   const reduceMotion = useReducedMotion();
   return (
-    <motion.section className="project-detail-section" initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.18 }}>
+    <motion.section className={`project-detail-section ${className}`} initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.18 }}>
       <span>{index}</span><h2>{title}</h2><div>{children}</div>
     </motion.section>
   );
@@ -42,11 +42,15 @@ export function ProjectDetail({ project }: { project: ProjectItem }) {
           <DetailSection index="02" title={labels.problem}><p>{project.problem}</p></DetailSection>
           <DetailSection index="03" title={labels.solution}><p>{project.solution}</p></DetailSection>
         </div>
-        <DetailSection index="04" title={labels.features}><ol>{project.features.map((feature, index) => <li key={feature}><span>{String(index + 1).padStart(2, "0")}</span>{feature}</li>)}</ol></DetailSection>
-        <DetailSection index="05" title={labels.technologies}><div className="project-tech-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div></DetailSection>
-        <DetailSection index="06" title={labels.development}><p>{project.development}</p></DetailSection>
-        <DetailSection index="07" title={labels.screenshots}><div className="project-screenshots">{project.screenshots.map((screenshot, index) => <img key={`${screenshot}-${index}`} src={screenshot} alt={`${project.title} placeholder screenshot ${index + 1}`} />)}</div></DetailSection>
-        <DetailSection index="08" title={labels.learnings}><ul>{project.learnings.map((learning) => <li key={learning}>{learning}</li>)}</ul></DetailSection>
+        <div className="project-detail-pair">
+          <DetailSection index="04" title={labels.features}><ol>{project.features.map((feature, index) => <li key={feature}><span>{String(index + 1).padStart(2, "0")}</span>{feature}</li>)}</ol></DetailSection>
+          <DetailSection index="05" title={labels.technologies}><div className="project-tech-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div></DetailSection>
+        </div>
+        {project.screenshots.length > 0 ? <DetailSection index="06" title={labels.screenshots} className="project-screenshots-section"><div className="project-screenshots">{project.screenshots.map((screenshot, index) => <img key={`${screenshot}-${index}`} src={screenshot} alt={`${project.title} screenshot ${index + 1}`} loading="lazy" decoding="async" />)}</div></DetailSection> : null}
+        <div className="project-detail-pair">
+          <DetailSection index="07" title={labels.development}><p>{project.development}</p></DetailSection>
+          <DetailSection index="08" title={labels.learnings}><ul>{project.learnings.map((learning) => <li key={learning}>{learning}</li>)}</ul></DetailSection>
+        </div>
 
         <nav className="project-pagination" aria-label="Project pagination">
           {previous ? <Link to="/projects/$slug" params={{ slug: previous.slug }}><ArrowLeft /><span>{labels.previous}<strong>{previous.title}</strong></span></Link> : <span />}
