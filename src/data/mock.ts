@@ -132,7 +132,7 @@ export const siteContent: SiteContent = {
     },
     resume: {
       sectionName: "Resume",
-      index: "07", title: "Resume", updatedLabel: "Last updated", updated: "October 2026", intro: "A concise record of education, capabilities and selected work.", viewAction: { label: "View Resume", href: "/resume" }, downloadAction: { label: "Download", href: "/resume" },
+      index: "07", title: "Resume", updatedLabel: "Last updated", updated: "October 2026", intro: "My background combines practical project work in data science, AI/ML, analytics, and full-stack development with a focus on turning real-world problems into useful solutions.", viewAction: { label: "View Resume", href: "/resume" }, downloadAction: { label: "Download", href: "/resume" },
     },
     art: {
       sectionName: "Artworks",
