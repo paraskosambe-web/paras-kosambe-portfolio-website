@@ -144,7 +144,7 @@ export const siteContent: SiteContent = {
   projects: {
     eyebrow: "Selected work / 2026",
     title: "Projects",
-    intro: "Data-led explorations, analytical systems and full-stack builds. Placeholder case studies are clearly marked until verified work is added.",
+    intro: "Practical projects where data, machine learning, AI, and software engineering come together to solve meaningful problems.",
     searchLabel: "Search projects",
     searchPlaceholder: "Search by title, category or technology",
     filters: ["All", "Data Science", "Data Analytics", "AI/ML", "Full-Stack"],
@@ -173,7 +173,7 @@ export const siteContent: SiteContent = {
   experience: {
     eyebrow: "Experience / Placeholder records",
     title: "Experience",
-    intro: "A structured space for verified roles, responsibilities and practical contributions. All current entries are clearly marked placeholders.",
+    intro: "A record of practical experience across data science, AI, and full-stack development, reflecting hands-on work, continuous learning, and independent project development.",
     dialogResponsibilitiesLabel: "Responsibilities",
     dialogTechnologiesLabel: "Technologies",
     items: [1, 2, 3].map((number) => ({
@@ -197,7 +197,7 @@ export const siteContent: SiteContent = {
   certifications: {
     eyebrow: "Credentials / Placeholder records",
     title: "Certifications",
-    intro: "A filterable archive prepared for verified certificates, issuers and credential details. Current records are placeholders.",
+    intro: "A collection of industry-recognized certifications and professional learning milestones across data science, AI, machine learning, analytics, and software development.",
     filters: ["ALL", "DATA", "AI-ML", "DEVELOPMENT", "CLOUD", "OTHER"],
     loadMoreLabel: "Load more",
     lightboxCloseLabel: "Close preview",
@@ -247,7 +247,7 @@ export const siteContent: SiteContent = {
   about: {
     eyebrow: "Profile / About",
     title: "About",
-    intro: "The person behind the data, systems and digital experiences.",
+    intro: "Exploring data, building models, and solving real-world problems.",
     imageAlt: "Portrait of Paras Kosambe",
     bio: [
       "I am a final-year B.Sc. Computer Science student at the University of Mumbai, developing a practical foundation across data science, analytics, artificial intelligence and software engineering.",
@@ -264,7 +264,7 @@ export const siteContent: SiteContent = {
   skills: {
     eyebrow: "Capabilities / Working toolkit",
     title: "Skills",
-    intro: "A focused toolkit across data, intelligence and product engineering—shown without arbitrary proficiency scores.",
+    intro: "A practical toolkit spanning data science, machine learning, AI, analytics, and full-stack development.",
     viewSkillsLabel: "View skills",
     hideSkillsLabel: "Show less",
     items: [
@@ -293,6 +293,7 @@ export const siteContent: SiteContent = {
     intro: "Art is another way I explore ideas, composition and creativity. These locally generated pieces are placeholders for original work.",
     filters: ["ALL", "DIGITAL", "SKETCH", "EXPERIMENTAL"],
     portfolioLabel: "Visit Paras Arts Website",
+    portfolioDescription: "Explore the full collection of my artwork and creative projects.",
     portfolioUrl: "https://paras-arts.vercel.app/",
     items: [art01, art02, art03, art04, art05, art06].map((imageUrl, index) => {
       const categories = ["DIGITAL", "SKETCH", "EXPERIMENTAL", "DIGITAL", "SKETCH", "EXPERIMENTAL"] as const;

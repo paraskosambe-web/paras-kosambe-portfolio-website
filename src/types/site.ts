@@ -128,6 +128,7 @@ export interface ArtItem extends PortfolioItem {
 export interface ArtContent extends CollectionPageContent<ArtItem> {
   filters: ArtCategory[];
   portfolioLabel: string;
+  portfolioDescription: string;
   portfolioUrl?: string;
 }
 

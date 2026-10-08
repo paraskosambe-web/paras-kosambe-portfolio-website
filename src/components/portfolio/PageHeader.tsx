@@ -46,13 +46,13 @@ export function PageHeader({
         </motion.h1>
       </div>
 
-      <motion.p
+      {intro ? <motion.p
         initial={reduceMotion ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
         {intro}
-      </motion.p>
+      </motion.p> : null}
     </header>
   );
 }

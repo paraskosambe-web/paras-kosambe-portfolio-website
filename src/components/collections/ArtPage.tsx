@@ -17,7 +17,7 @@ export function ArtPage() {
     <PageHeader eyebrow={content.eyebrow} title={content.title} intro={content.intro} />
     <div className="art-controls"><div className="project-filters" aria-label="Artwork categories">{content.filters.map((category) => <Button key={category} variant="outline" aria-pressed={filter === category} onClick={() => setFilter(category)}>{category}</Button>)}</div></div>
     <motion.div layout className="collection-grid art-grid"><AnimatePresence mode="popLayout">{items.map((item, index) => <PortfolioCard key={item.id} item={item} delay={index * 0.06} details={[item.medium, item.year]} onImageClick={() => setPreview(item)} />)}</AnimatePresence></motion.div>
-    {content.portfolioUrl ? <div className="art-portfolio-link"><Button asChild variant="hero"><a href={content.portfolioUrl} target="_blank" rel="noreferrer">{content.portfolioLabel}<ArrowUpRight /></a></Button></div> : null}
+    {content.portfolioUrl ? <div className="art-portfolio-link"><p>{content.portfolioDescription}</p><Button asChild variant="hero"><a href={content.portfolioUrl} target="_blank" rel="noreferrer">{content.portfolioLabel}<ArrowUpRight /></a></Button></div> : null}
     <Dialog open={preview !== null} onOpenChange={(open) => { if (!open) setPreview(null); }}><DialogContent className="art-lightbox">{preview ? <><DialogTitle>{preview.title}</DialogTitle><img src={preview.imageUrl} alt={preview.imageAlt} /><span>{preview.medium} · {preview.year}</span></> : null}</DialogContent></Dialog>
   </div></main>;
 }
