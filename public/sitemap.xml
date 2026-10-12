@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/</loc>
+    <loc>https://paras-kosambe.vercel.app/</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/about</loc>
+    <loc>https://paras-kosambe.vercel.app/about</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/achievements</loc>
+    <loc>https://paras-kosambe.vercel.app/achievements</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/art</loc>
+    <loc>https://paras-kosambe.vercel.app/art</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/certifications</loc>
+    <loc>https://paras-kosambe.vercel.app/certifications</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/contact</loc>
+    <loc>https://paras-kosambe.vercel.app/contact</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/experience</loc>
+    <loc>https://paras-kosambe.vercel.app/experience</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/projects</loc>
+    <loc>https://paras-kosambe.vercel.app/projects</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/resume</loc>
+    <loc>https://paras-kosambe.vercel.app/resume</loc>
   </url>
 
   <url>
-    <loc>https://paras-kosambe-portfolio-website.vercel.app/skills</loc>
+    <loc>https://paras-kosambe.vercel.app/skills</loc>
   </url>
 
 </urlset>
