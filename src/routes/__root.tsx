@@ -108,6 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Paras Kosambe" },
       { name: "description", content: "Portfolio of Paras Kosambe." },
       { name: "author", content: "Paras Kosambe" },
+      { property: "og:site_name", content: "Paras Kosambe" },
       { property: "og:title", content: "Paras Kosambe" },
       { property: "og:description", content: "Portfolio of Paras Kosambe." },
       { property: "og:type", content: "website" },
@@ -131,6 +132,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:ital,wght@0,700;0,800;0,900;1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
+      {
+        rel: "icon",
+        href: "/favicon.svg",
+        type: "image/svg+xml",
       },
       {
         rel: "icon",
