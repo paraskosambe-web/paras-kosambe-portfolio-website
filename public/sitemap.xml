@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/about</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/achievements</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/art</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/certifications</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/contact</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/experience</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/projects</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/resume</loc>
+  </url>
+
+  <url>
+    <loc>https://paras-kosambe-portfolio-website.vercel.app/skills</loc>
+  </url>
+
+</urlset>
