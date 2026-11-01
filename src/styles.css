@@ -838,12 +838,31 @@
     background 0.3s ease,
     color 0.3s ease,
     transform 0.3s ease;
+  animation: header-cta-pulse 2.4s ease-in-out infinite;
 }
 
 .header-cta:hover {
   background: transparent;
   color: var(--foreground);
   transform: translateY(-2px);
+  animation-play-state: paused;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 24%), 0 0 28px rgb(255 255 255 / 28%);
+}
+
+.header-cta:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 4px;
+  animation-play-state: paused;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 24%), 0 0 28px rgb(255 255 255 / 28%);
+}
+
+@keyframes header-cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(255 255 255 / 0%); }
+  50% { box-shadow: 0 0 20px 3px rgb(255 255 255 / 22%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-cta { animation: none; }
 }
 
 .header-cta-icon {
@@ -2188,4 +2207,16 @@
 .projects-page .project-card:focus-visible,
 .projects-page .project-card:active {
   box-shadow: 0 0 0 1px rgb(255 255 255 / 28%), 0 16px 42px rgb(255 255 255 / 20%), 0 0 58px rgb(255 255 255 / 16%);
+}
+
+.site-app button:not(:disabled),
+.site-app a.inline-flex {
+  transition: box-shadow 220ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.site-app button:not(:disabled):hover,
+.site-app button:not(:disabled):focus-visible,
+.site-app a.inline-flex:hover,
+.site-app a.inline-flex:focus-visible {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 18%), 0 7px 20px rgb(255 255 255 / 16%);
 }
