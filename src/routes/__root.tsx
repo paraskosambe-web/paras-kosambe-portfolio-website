@@ -21,6 +21,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ParasAI } from "@/components/layout/ParasAI";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { AestheticCursor } from "@/components/layout/AestheticCursor";
+import { PortfolioPreloader } from "@/components/layout/PortfolioPreloader";
 
 function NotFoundComponent() {
   return (
@@ -197,6 +198,7 @@ function SiteContentRoot({ isAdmin }: { isAdmin: boolean }) {
         <Outlet />
       ) : (
         <div className="site-app">
+          <PortfolioPreloader />
           <AestheticCursor />
           <Header />
 

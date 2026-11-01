@@ -84,6 +84,7 @@ export function Hero() {
   const { hero } = useSiteContent();
   const reduceMotion = useReducedMotion();
   const [shift, setShift] = useState({ x: 0, y: 0 });
+  const [nameAnimationReady, setNameAnimationReady] = useState(false);
   const roles = useMemo(() => [...new Set([hero.primaryRole, ...hero.disciplines.split(/[·,]/).map((role) => role.trim())].filter(Boolean))], [hero.primaryRole, hero.disciplines]);
   const [roleIndex, setRoleIndex] = useState(0);
   const transition = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
@@ -93,6 +94,17 @@ export function Hero() {
     const timer = window.setInterval(() => setRoleIndex((index) => (index + 1) % roles.length), 3200);
     return () => window.clearInterval(timer);
   }, [reduceMotion, roles]);
+
+  useEffect(() => {
+    if (!document.querySelector(".portfolio-preloader")) {
+      setNameAnimationReady(true);
+      return;
+    }
+
+    const finishPreloader = () => setNameAnimationReady(true);
+    window.addEventListener("portfolio-preloader-finished", finishPreloader);
+    return () => window.removeEventListener("portfolio-preloader-finished", finishPreloader);
+  }, []);
 
   const handlePointerMove = (event: MouseEvent<HTMLElement>) => {
     if (reduceMotion || window.matchMedia("(pointer: coarse)").matches) return;
@@ -120,7 +132,7 @@ export function Hero() {
               <span className="hero-name-mask" key={index}>
                 <motion.span
                   initial={reduceMotion ? false : { y: "110%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
+                  animate={nameAnimationReady ? { y: 0, opacity: 1 } : { y: "110%", opacity: 0 }}
                   transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.12 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 >{line}</motion.span>
               </span>
