@@ -33,7 +33,7 @@ export function ExperiencePage() {
       ]} onActivate={() => setSelected(item)} onActionClick={() => setSelected(item)} />)}
     </div>
     <Dialog open={selected !== null} onOpenChange={(open) => { if (!open) setSelected(null); }}>
-      <DialogContent className="record-dialog experience-detail-dialog">
+      <DialogContent className="record-dialog experience-detail-dialog" overlayClassName="experience-detail-overlay">
         {selected ? <>
           <DialogHeader className="experience-detail-header">
             <span className="experience-detail-type">{selected.type || "Experience"}</span>

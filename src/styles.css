@@ -2244,11 +2244,16 @@
 
 .experience-detail-dialog {
   display: grid;
+  z-index: 111;
   grid-template-rows: auto minmax(0, 1fr);
   width: min(calc(100% - 2rem), 820px);
   max-height: min(88dvh, 860px);
   overflow: hidden;
   gap: 1.25rem;
+}
+
+.experience-detail-overlay {
+  z-index: 110;
 }
 
 .experience-detail-header {
