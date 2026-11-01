@@ -153,7 +153,7 @@ export function Hero() {
           </motion.div>
           <motion.div className="hero-socials" variants={reveal} transition={transition}>
             {hero.socials.map((social) => (
-              <a key={social.label} href={social.href} target="_blank" rel="noreferrer" aria-label={social.label} title={social.label}>
+              <a key={social.label} className={`hero-social-link hero-social-link-${social.label.toLowerCase()}`} href={social.href} target="_blank" rel="noreferrer" aria-label={social.label} title={social.label}>
                 {social.label === "GitHub" ? <Github /> : <Linkedin />}
               </a>
             ))}
