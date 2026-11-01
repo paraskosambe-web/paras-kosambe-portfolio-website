@@ -69,6 +69,7 @@ export const collections: CollectionDef[] = [
       { name: "organization", label: "Organization", type: "text" },
       { name: "role", label: "Role", type: "text" },
       { name: "type", label: "Type", type: "text", hint: "e.g. Internship, Freelance" },
+      { name: "link_url", label: "Certificate link", type: "url", hint: "Optional certificate or proof-of-completion URL." },
       { name: "github_url", label: "GitHub link to your work", type: "url", hint: "Optional repository link for this experience." },
       { name: "date_range", label: "Date range", type: "text" },
       { name: "location", label: "Location", type: "text" },
@@ -77,7 +78,6 @@ export const collections: CollectionDef[] = [
       { name: "technologies", label: "Technologies", type: "tags" },
       { name: "image_url", label: "Image", type: "image" },
       { name: "image_alt", label: "Image description", type: "text" },
-      { name: "link_url", label: "Certificate / related link", type: "url" },
     ],
   },
   {

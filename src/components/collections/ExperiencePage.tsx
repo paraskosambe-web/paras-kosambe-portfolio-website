@@ -28,7 +28,7 @@ export function ExperiencePage() {
     </div> : null}
     <div className="collection-grid experience-grid">
       {filteredItems.map((item, index) => <PortfolioCard key={item.id} item={item} visual={<div className="experience-card-visual" aria-hidden="true"><span /></div>} delay={index * 0.08} details={[item.role, item.dateRange, item.location]} secondaryActions={[
-        ...(item.linkUrl ? [{ label: "Certificate / Link", href: item.linkUrl }] : []),
+        ...(item.linkUrl ? [{ label: "Certificate", href: item.linkUrl }] : []),
         ...(item.githubUrl ? [{ label: "GitHub", href: item.githubUrl }] : []),
       ]} onActivate={() => setSelected(item)} onActionClick={() => setSelected(item)} />)}
     </div>
@@ -53,7 +53,7 @@ export function ExperiencePage() {
               <div className="experience-detail-links">
                 {selected.linkUrl ? <a href={selected.linkUrl} target="_blank" rel="noreferrer">
                   <span className="experience-link-icon"><ExternalLink aria-hidden="true" /></span>
-                  <span><strong>Certificate / related link</strong><small>Open link</small></span>
+                  <span><strong>Certificate</strong><small>Open certificate</small></span>
                   <ExternalLink className="experience-link-arrow" aria-hidden="true" />
                 </a> : null}
                 {selected.githubUrl ? <a href={selected.githubUrl} target="_blank" rel="noreferrer">
