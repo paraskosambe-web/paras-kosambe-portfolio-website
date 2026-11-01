@@ -30,8 +30,16 @@ interface PortfolioCardProps {
 export function PortfolioCard({ item, visual, compact = false, details = [], secondaryActions = [], expandableTags, replayOnView = false, delay = 0, onActivate, onActionClick, onImageClick, imageLoading = "lazy", imageFetchPriority = "auto" }: PortfolioCardProps) {
   const reduceMotion = useReducedMotion();
   const [tagsExpanded, setTagsExpanded] = useState(false);
+  const [unoptimizedImageUrl, setUnoptimizedImageUrl] = useState<string | null>(null);
+  const [failedImageUrl, setFailedImageUrl] = useState<string | null>(null);
   const visibleTags = tagsExpanded ? item.tags : item.tags.slice(0, 3);
   const extraTags = tagsExpanded ? 0 : Math.max(item.tags.length - visibleTags.length, 0);
+  const imageUrl = item.imageUrl || undefined;
+  const cardImageUrl = imageUrl
+    ? unoptimizedImageUrl === imageUrl
+      ? imageUrl
+      : getCardImageUrl(imageUrl)
+    : undefined;
 
   return (
     <motion.article
@@ -46,7 +54,23 @@ export function PortfolioCard({ item, visual, compact = false, details = [], sec
       tabIndex={onActivate ? 0 : undefined}
     >
       <div className={`portfolio-card-media${onImageClick ? " is-interactive" : ""}`} onClick={onImageClick ? (event) => { event.stopPropagation(); onImageClick(); } : undefined}>
-        {item.imageUrl ? <img src={getCardImageUrl(item.imageUrl)} alt={item.imageAlt} loading={imageLoading} fetchPriority={imageFetchPriority} decoding="async" sizes="(max-width: 639px) 100vw, (max-width: 900px) 50vw, 33vw" /> : visual ?? <span>{item.index}</span>}
+        {imageUrl && failedImageUrl !== imageUrl ? (
+          <img
+            src={cardImageUrl}
+            alt={item.imageAlt}
+            loading={imageLoading}
+            fetchPriority={imageFetchPriority}
+            decoding="async"
+            sizes="(max-width: 639px) 100vw, (max-width: 900px) 50vw, 33vw"
+            onError={() => {
+              if (cardImageUrl !== imageUrl && unoptimizedImageUrl !== imageUrl) {
+                setUnoptimizedImageUrl(imageUrl);
+              } else {
+                setFailedImageUrl(imageUrl);
+              }
+            }}
+          />
+        ) : visual ?? <span>{item.index}</span>}
       </div>
       <div className="portfolio-card-body">
         <div className="portfolio-card-meta"><span>{item.index}</span><span>{item.meta}</span></div>
