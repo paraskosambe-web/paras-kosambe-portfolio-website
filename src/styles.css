@@ -2257,8 +2257,38 @@
 }
 
 .experience-detail-header {
-  padding-right: 2rem;
+  padding-right: 3.5rem;
   text-align: left;
+}
+
+.experience-detail-dialog > button {
+  position: absolute;
+  top: .85rem;
+  right: .85rem;
+  z-index: 2;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-card);
+  color: var(--color-foreground);
+  opacity: 1;
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.experience-detail-dialog > button:hover,
+.experience-detail-dialog > button:focus-visible {
+  border-color: color-mix(in oklab, var(--color-foreground) 55%, transparent);
+  background: color-mix(in oklab, var(--color-foreground) 7%, var(--color-card));
+  box-shadow: 0 0 20px rgb(255 255 255 / 18%);
+  transform: rotate(90deg);
+}
+
+.experience-detail-dialog > button svg {
+  width: 1.15rem;
+  height: 1.15rem;
 }
 
 .experience-detail-header .experience-detail-type {
