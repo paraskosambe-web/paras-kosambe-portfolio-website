@@ -1995,8 +1995,10 @@
 
 .portfolio-card:hover,
 .portfolio-card:focus-visible,
+.portfolio-card:active,
 .project-card:hover,
-.project-card:focus-visible {
+.project-card:focus-visible,
+.project-card:active {
   box-shadow: 0 0 0 1px rgb(255 255 255 / 18%), 0 14px 36px rgb(255 255 255 / 11%), 0 0 48px rgb(255 255 255 / 9%);
 }
 
@@ -2174,13 +2176,16 @@
 }
 
 .hero ~ .overview .portfolio-card:hover,
-.hero ~ .overview .portfolio-card:focus-visible {
+.hero ~ .overview .portfolio-card:focus-visible,
+.hero ~ .overview .portfolio-card:active {
   box-shadow: 0 0 0 1px rgb(255 255 255 / 18%), 0 14px 36px rgb(255 255 255 / 11%), 0 0 48px rgb(255 255 255 / 9%);
 }
 
 .projects-page .portfolio-card:hover,
 .projects-page .portfolio-card:focus-visible,
+.projects-page .portfolio-card:active,
 .projects-page .project-card:hover,
-.projects-page .project-card:focus-visible {
+.projects-page .project-card:focus-visible,
+.projects-page .project-card:active {
   box-shadow: 0 0 0 1px rgb(255 255 255 / 28%), 0 16px 42px rgb(255 255 255 / 20%), 0 0 58px rgb(255 255 255 / 16%);
 }
