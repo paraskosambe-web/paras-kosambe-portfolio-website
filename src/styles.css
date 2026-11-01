@@ -1958,6 +1958,16 @@
 .paras-ai-message-user { margin-left: auto; border-color: rgb(255 255 255 / 24%); background: #f0f0f0; color: #111; }
 .paras-ai-message-user .paras-ai-message-label { color: #616161; }
 .paras-ai-message p { margin: .4rem 0 0; font-size: .82rem; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.paras-ai-answer { margin-top: .45rem; color: inherit; font-size: .82rem; line-height: 1.65; overflow-wrap: anywhere; }
+.paras-ai-answer p { margin: 0 0 .65rem; font-size: inherit; line-height: inherit; white-space: normal; }
+.paras-ai-answer p:last-child { margin-bottom: 0; }
+.paras-ai-answer h3 { margin: .9rem 0 .35rem; color: inherit; font-family: var(--font-display); font-size: .86rem; font-weight: 600; letter-spacing: -.01em; }
+.paras-ai-answer ul, .paras-ai-answer ol { display: grid; gap: .3rem; margin: .35rem 0 .7rem; padding-left: 1.2rem; }
+.paras-ai-answer li { padding-left: .1rem; }
+.paras-ai-answer li::marker { color: #929292; }
+.paras-ai-answer strong { color: inherit; font-weight: 650; }
+.paras-ai-answer code { padding: .08rem .25rem; background: rgb(255 255 255 / 8%); font-family: var(--font-mono); font-size: .92em; }
+.paras-ai-message-user p { white-space: pre-wrap; }
 .paras-ai-links { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .7rem; }
 .paras-ai-links a { display: inline-flex; align-items: center; gap: .35rem; padding: .38rem .48rem; border: 1px solid rgb(255 255 255 / 19%); color: #f3f3f3; font-family: var(--font-mono); font-size: .56rem; text-decoration: none; text-transform: uppercase; transition: background 160ms ease; }
 .paras-ai-links a:hover { background: rgb(255 255 255 / 10%); }

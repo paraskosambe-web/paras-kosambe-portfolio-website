@@ -10,6 +10,59 @@ type ChatMessage = {
   links?: ParasAILink[];
 };
 
+function formatInline(text: string) {
+  return text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g).map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    if (part.startsWith("`") && part.endsWith("`")) {
+      return <code key={index}>{part.slice(1, -1)}</code>;
+    }
+    return part;
+  });
+}
+
+function FormattedAnswer({ text }: { text: string }) {
+  const lines = text.replace(/\r/g, "").split("\n");
+  const blocks: Array<{ type: "paragraph" | "list" | "heading"; lines: string[]; ordered?: boolean }> = [];
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    const heading = line.match(/^#{1,3}\s+(.+)$/);
+    const bullet = line.match(/^[-*•]\s+(.+)$/);
+    const numbered = line.match(/^\d+[.)]\s+(.+)$/);
+    if (heading) {
+      blocks.push({ type: "heading", lines: [heading[1]] });
+    } else if (bullet || numbered) {
+      const ordered = Boolean(numbered);
+      const previous = blocks.at(-1);
+      if (previous?.type === "list" && previous.ordered === ordered) {
+        previous.lines.push((bullet ?? numbered)![1]);
+      } else {
+        blocks.push({ type: "list", ordered, lines: [(bullet ?? numbered)![1]] });
+      }
+    } else {
+      const previous = blocks.at(-1);
+      if (previous?.type === "paragraph") previous.lines.push(line);
+      else blocks.push({ type: "paragraph", lines: [line] });
+    }
+  }
+
+  return (
+    <div className="paras-ai-answer">
+      {blocks.map((block, index) => {
+        if (block.type === "heading") return <h3 key={index}>{formatInline(block.lines[0])}</h3>;
+        if (block.type === "list") {
+          const List = block.ordered ? "ol" : "ul";
+          return <List key={index}>{block.lines.map((line, itemIndex) => <li key={itemIndex}>{formatInline(line)}</li>)}</List>;
+        }
+        return <p key={index}>{formatInline(block.lines.join(" "))}</p>;
+      })}
+    </div>
+  );
+}
+
 const suggestedQuestions = [
   "Who is Paras?",
   "Show me his Data Science projects",
@@ -57,11 +110,8 @@ export function ParasAI() {
           links: reply.links,
         },
       ]);
-    } catch (caught) {
-      const message =
-        caught instanceof Error
-          ? caught.message
-          : "Paras AI couldn’t answer just now. Please try again.";
+    } catch {
+      const message = "I’m sorry, I couldn’t answer just now. Please try again in a moment.";
       setError(message);
     } finally {
       setBusy(false);
@@ -164,7 +214,11 @@ export function ParasAI() {
                 <span className="paras-ai-message-label">
                   {message.role === "assistant" ? "PARAS AI" : "YOU"}
                 </span>
-                <p>{message.text}</p>
+                {message.role === "assistant" ? (
+                  <FormattedAnswer text={message.text} />
+                ) : (
+                  <p>{message.text}</p>
+                )}
                 {message.links && message.links.length > 0 && (
                   <div className="paras-ai-links">
                     {message.links.map((link) => (
@@ -181,7 +235,7 @@ export function ParasAI() {
             {busy && (
               <div className="paras-ai-typing" role="status">
                 <LoaderCircle aria-hidden="true" />
-                <span>Looking through the portfolio…</span>
+                <span>Taking a look through the portfolio…</span>
               </div>
             )}
             {error && (
@@ -201,7 +255,7 @@ export function ParasAI() {
               value={question}
               onChange={(event) => setQuestion(event.target.value.slice(0, 600))}
               onKeyDown={handleKeyDown}
-              placeholder="Ask about projects, skills, experience…"
+              placeholder="Ask about projects, skills, or experience…"
               rows={1}
               maxLength={600}
               disabled={busy}
