@@ -1986,6 +1986,26 @@
 .paras-ai-form > button svg { width: 1rem; height: 1rem; }
 .paras-ai-form > small { grid-column: 1 / -1; padding-inline: .1rem; color: #777; font-family: var(--font-mono); font-size: .53rem; }
 .paras-ai-panel button:focus-visible, .paras-ai-panel a:focus-visible, .paras-ai-form textarea:focus-visible { outline: 2px solid #f4f4f4; outline-offset: 2px; }
+
+/* Shared portfolio cards get a subtle white glow whenever they are hovered or focused. */
+.portfolio-card,
+.project-card {
+  transition: box-shadow 280ms ease, border-color 280ms ease, transform 400ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.portfolio-card:hover,
+.portfolio-card:focus-visible,
+.project-card:hover,
+.project-card:focus-visible {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 18%), 0 14px 36px rgb(255 255 255 / 11%), 0 0 48px rgb(255 255 255 / 9%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-card,
+  .project-card {
+    transition-duration: 0.01ms;
+  }
+}
 @media (max-width: 520px) {
   .scroll-to-top { left: .75rem; bottom: .75rem; width: 3rem; height: 3rem; }
   .paras-ai-root { right: .75rem; bottom: .75rem; }
@@ -2151,4 +2171,16 @@
   .hero ~ .overview .portfolio-card,
   .hero ~ .about-overview .currently-block li,
   .hero ~ .contact-overview .contact-cta > a { transition: none; }
+}
+
+.hero ~ .overview .portfolio-card:hover,
+.hero ~ .overview .portfolio-card:focus-visible {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 18%), 0 14px 36px rgb(255 255 255 / 11%), 0 0 48px rgb(255 255 255 / 9%);
+}
+
+.projects-page .portfolio-card:hover,
+.projects-page .portfolio-card:focus-visible,
+.projects-page .project-card:hover,
+.projects-page .project-card:focus-visible {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 28%), 0 16px 42px rgb(255 255 255 / 20%), 0 0 58px rgb(255 255 255 / 16%);
 }
