@@ -1481,6 +1481,22 @@
   color: var(--color-background);
 }
 
+.experience-filters {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.experience-filters button {
+  width: auto;
+  min-width: 120px;
+}
+
+.experience-filters button:first-child {
+  grid-column: auto;
+}
+
 /* =========================================================
    MOBILE POLISH — HEADER, CERTIFICATIONS, FOOTER
    ========================================================= */
