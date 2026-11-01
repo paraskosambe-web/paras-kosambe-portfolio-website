@@ -94,6 +94,7 @@ export function hydrateSiteContent(data: PortfolioData | null | undefined) {
     return {
       id: e.id, index: pad(i + 1), meta: e.type || "EXPERIENCE", title: e.title, organization: e.organization, role: e.role,
       type: e.type, dateRange: e.date_range, location: e.location, description: e.description, tags: e.technologies,
+      linkUrl: e.link_url, githubUrl: e.github_url,
       technologies: e.technologies, responsibilities: e.responsibilities, imageAlt: e.image_alt || e.title,
       ...(imageUrl ? { imageUrl } : {}),
       action: { label: "View details", href: e.link_url || `#experience-${e.id}` },

@@ -80,7 +80,7 @@ export function PortfolioCard({ item, visual, compact = false, details = [], sec
         {secondaryActions.length > 0 ? <div className="portfolio-card-secondary-actions" aria-label={`${item.title} links`}>
           {secondaryActions.filter((link) => link.href).map((link) => {
             const external = /^https?:\/\//.test(link.href);
-            return <a key={link.label} href={link.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>{link.label}</a>;
+            return <a key={link.label} href={link.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} onClick={(event) => event.stopPropagation()}>{link.label}</a>;
           })}
         </div> : null}
         <div className="portfolio-card-tags" aria-label="Tags">

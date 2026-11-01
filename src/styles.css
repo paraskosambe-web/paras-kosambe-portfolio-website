@@ -2236,3 +2236,211 @@
 .site-app a.inline-flex:focus-visible {
   box-shadow: 0 0 0 1px rgb(255 255 255 / 18%), 0 7px 20px rgb(255 255 255 / 16%);
 }
+
+.experience-grid {
+  grid-auto-rows: auto;
+  row-gap: clamp(4.5rem, 6.5vw, 5.5rem);
+}
+
+.experience-detail-dialog {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(calc(100% - 2rem), 820px);
+  max-height: min(88dvh, 860px);
+  overflow: hidden;
+  gap: 1.25rem;
+}
+
+.experience-detail-header {
+  padding-right: 2rem;
+  text-align: left;
+}
+
+.experience-detail-header .experience-detail-type {
+  width: fit-content;
+  padding: .35rem .55rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted-foreground);
+}
+
+.experience-detail-dialog .experience-detail-header h2 {
+  margin: .35rem 0 .2rem;
+  font-size: clamp(1.65rem, 4vw, 2.8rem);
+  line-height: 1.08;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+.experience-detail-dialog .experience-detail-header p {
+  margin: 0;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.experience-detail-scroll {
+  display: grid;
+  min-height: 0;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 .35rem .15rem 0;
+  scrollbar-color: #555 transparent;
+  scrollbar-width: thin;
+}
+
+.experience-detail-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+  margin: 0;
+}
+
+.experience-detail-facts > div {
+  min-width: 0;
+  padding: .8rem .9rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--color-foreground) 3%, transparent);
+}
+
+.experience-detail-facts dt,
+.experience-detail-section h3 {
+  margin: 0 0 .4rem;
+  color: var(--color-muted-foreground);
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.experience-detail-facts dd {
+  margin: 0;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.experience-detail-section {
+  min-width: 0;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+}
+
+.experience-detail-description {
+  margin: 0;
+  color: var(--color-muted-foreground);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.experience-detail-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+}
+
+.experience-detail-links a {
+  display: grid;
+  min-width: 0;
+  min-height: 4rem;
+  grid-template-columns: 2.2rem minmax(0, 1fr) 1rem;
+  align-items: center;
+  gap: .65rem;
+  padding: .7rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-foreground);
+  text-decoration: none;
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.experience-detail-links a:hover,
+.experience-detail-links a:focus-visible {
+  border-color: color-mix(in oklab, var(--color-foreground) 48%, transparent);
+  background: color-mix(in oklab, var(--color-foreground) 5%, transparent);
+  box-shadow: 0 0 22px rgb(255 255 255 / 10%);
+}
+
+.experience-link-icon {
+  display: grid;
+  width: 2.2rem;
+  height: 2.2rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+}
+
+.experience-link-icon svg,
+.experience-link-arrow {
+  width: .95rem;
+  height: .95rem;
+}
+
+.experience-detail-links a > span:nth-child(2) {
+  display: grid;
+  min-width: 0;
+  gap: .25rem;
+}
+
+.experience-detail-links strong,
+.experience-detail-links small {
+  overflow-wrap: anywhere;
+}
+
+.experience-detail-links strong {
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+.experience-detail-links small {
+  color: var(--color-muted-foreground);
+  font-family: var(--font-mono);
+  font-size: .55rem;
+  text-transform: uppercase;
+}
+
+.experience-detail-responsibilities {
+  display: grid;
+  gap: .55rem;
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--color-muted-foreground);
+  line-height: 1.65;
+}
+
+.experience-detail-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.experience-detail-technologies span {
+  max-width: 100%;
+  padding: .45rem .6rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted-foreground);
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 639px) {
+  .experience-grid {
+    row-gap: 3.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .experience-detail-dialog {
+    width: calc(100% - 1rem);
+    max-height: calc(100dvh - 1rem);
+    padding: 1.15rem;
+    gap: 1rem;
+  }
+
+  .experience-detail-facts,
+  .experience-detail-links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .experience-detail-facts > div {
+    padding: .7rem .75rem;
+  }
+}

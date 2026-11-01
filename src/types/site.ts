@@ -38,6 +38,8 @@ export interface ExperienceItem extends PortfolioItem {
   type: string;
   dateRange: string;
   location: string;
+  linkUrl?: string;
+  githubUrl?: string;
   responsibilities: string[];
   technologies: string[];
 }
