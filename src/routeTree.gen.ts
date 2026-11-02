@@ -23,6 +23,7 @@ import { Route as SkillsRouteImport } from './routes/skills'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminSectionRouteImport } from './routes/admin.$section'
 import { Route as AdminLoginRouteImport } from './routes/admin_.login'
+import { Route as ApiParasAiRouteImport } from './routes/api/paras-ai'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as ApiPublicMediaBucketSplatRouteImport } from './routes/api/public/media.$bucket.$'
@@ -97,6 +98,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiParasAiRoute = ApiParasAiRouteImport.update({
+  id: '/api/paras-ai',
+  path: '/api/paras-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/skills': typeof SkillsRoute
   '/admin/$section': typeof AdminSectionRoute
   '/admin/login': typeof AdminLoginRoute
+  '/api/paras-ai': typeof ApiParasAiRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/skills': typeof SkillsRoute
   '/admin/$section': typeof AdminSectionRoute
   '/admin/login': typeof AdminLoginRoute
+  '/api/paras-ai': typeof ApiParasAiRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/admin': typeof AdminIndexRoute
   '/projects': typeof ProjectsIndexRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/skills': typeof SkillsRoute
   '/admin/$section': typeof AdminSectionRoute
   '/admin_/login': typeof AdminLoginRoute
+  '/api/paras-ai': typeof ApiParasAiRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/admin/$section'
     | '/admin/login'
+    | '/api/paras-ai'
     | '/projects/$slug'
     | '/admin/'
     | '/projects/'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/admin/$section'
     | '/admin/login'
+    | '/api/paras-ai'
     | '/projects/$slug'
     | '/admin'
     | '/projects'
@@ -222,6 +233,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/admin/$section'
     | '/admin_/login'
+    | '/api/paras-ai'
     | '/projects/$slug'
     | '/admin/'
     | '/projects/'
@@ -241,6 +253,7 @@ export interface RootRouteChildren {
   ResumeRoute: typeof ResumeRoute
   SkillsRoute: typeof SkillsRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  ApiParasAiRoute: typeof ApiParasAiRoute
   ApiPublicMediaBucketSplatRoute: typeof ApiPublicMediaBucketSplatRoute
 }
 
@@ -344,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/paras-ai': {
+      id: '/api/paras-ai'
+      path: '/api/paras-ai'
+      fullPath: '/api/paras-ai'
+      preLoaderRoute: typeof ApiParasAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects/': {
       id: '/projects/'
       path: '/'
@@ -407,6 +427,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResumeRoute: ResumeRoute,
   SkillsRoute: SkillsRoute,
   AdminLoginRoute: AdminLoginRoute,
+  ApiParasAiRoute: ApiParasAiRoute,
   ApiPublicMediaBucketSplatRoute: ApiPublicMediaBucketSplatRoute,
 }
 export const routeTree = rootRouteImport
