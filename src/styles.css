@@ -2072,6 +2072,12 @@
   .paras-ai-typing svg, .paras-ai-spin { animation-duration: 2.5s; }
 }
 
+/* Keep the contact title and its supporting copy balanced on narrow screens. */
+@media (max-width: 480px) {
+  .page-header.contact-page-header .page-header-mask { margin-top: 1.75rem; }
+  .page-header.contact-page-header > p { margin: 1.25rem 0 0; }
+}
+
 /* Homepage editorial motion and depth. Scoped below the hero so the shared
    header, footer, and all interior pages retain their current presentation. */
 .hero ~ .overview {
