@@ -1,12 +1,14 @@
 <!-- ═══════════════════════ HEADER ═══════════════════════ -->
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=venom&color=0:080808,100:262626&height=250&section=header&text=Paras%20Kosambe&fontSize=64&fontColor=ffffff&fontAlignY=40&animation=fadeIn&desc=DATA%20SCIENCE%20%7C%20AI%2FML%20%7C%20DEVELOPMENT&descSize=17&descAlignY=63" width="100%" alt="Paras Kosambe portfolio"/>
+<img src="https://capsule-render.vercel.app/api?type=venom&color=0:080808,100:262626&height=220&section=header&text=Paras%20Kosambe&fontSize=54&fontColor=ffffff&fontAlignY=40&animation=fadeIn&desc=DATA%20SCIENCE%20%7C%20AI%2FML%20%7C%20DEVELOPMENT&descSize=15&descAlignY=63" width="100%" alt="Paras Kosambe portfolio"/>
 
 <br/>
 
 <img src="https://img.shields.io/badge/Type-Personal%20Portfolio-f5f5f5?style=for-the-badge&labelColor=111111" alt="Personal portfolio"/>
+<br/>
 <img src="https://img.shields.io/badge/Stack-TanStack%20Start%20%7C%20React%20%7C%20TypeScript-737373?style=for-the-badge&labelColor=111111" alt="TanStack Start, React and TypeScript"/>
+<br/>
 <a href="https://github.com/paraskosambe-web/paras-kosambe-portfolio-website/commits/main"><img src="https://img.shields.io/github/last-commit/paraskosambe-web/paras-kosambe-portfolio-website?style=for-the-badge&label=Last%20update&color=737373&labelColor=111111" alt="Last update"/></a>
 
 <br/><br/>
@@ -29,88 +31,68 @@
 
 > 💡 **In one line:** Explore Paras’s work, learn about his background, get in touch, or ask **ParasAI** about general topics and the portfolio.
 
-<div align="center">
+**For visitors**
 
-| 👀 **For visitors** | 🛠️ **For the portfolio owner** |
-|:---|:---|
-| Explore projects and detailed case studies | Edit portfolio content in the admin area |
-| Browse skills, experience, certifications, and achievements | Manage projects, artwork, resume, and site information |
-| View the art collection and resume | Review contact form submissions |
-| Contact Paras through the contact page | Keep content backed by Supabase |
-| Ask ParasAI general or portfolio questions | |
+- Explore projects and detailed case studies.
+- Browse skills, experience, certifications, and achievements.
+- View the art collection and resume.
+- Contact Paras or ask ParasAI general and portfolio questions.
 
-</div>
+**For the portfolio owner**
+
+- Edit projects, artwork, resume, and site information in the admin area.
+- Review contact form submissions.
+- Manage published content backed by Supabase.
 
 <!-- ═══════════════════════ FEATURES ═══════════════════════ -->
 <a id="features"></a>
 
 ## ✨ Features
 
-<table>
-<tr>
-<td width="50%" valign="top">
-
 ### 🧭 Portfolio pages
+
 Individual pages cover the main areas of Paras’s work and background.
+
 - Home overview and About page
 - Projects collection and project details
 - Skills, experience, certifications, and achievements
 - Art gallery, resume, and contact page
 
-</td>
-<td width="50%" valign="top">
-
 ### 🗂️ Consistent content system
+
 Portfolio copy is read through typed service functions, with mock content available when the database is not connected. Collection pages share a common card component for a consistent browsing experience.
 
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
 ### 🤖 ParasAI
+
 An AI assistant for general questions and portfolio-aware answers, with streaming responses, conversation context, browser-saved history, Markdown, code blocks, copy and regenerate actions, stop generation, and text/code file attachments.
 
-</td>
-<td width="50%" valign="top">
-
 ### 🔐 Admin area
+
 A standalone sign-in and management experience for editing portfolio content and reviewing contact submissions, outside the public navigation shell.
 
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
 ### 📱 Responsive design
+
 An editorial, monochrome interface that adapts across desktop and mobile screens, with motion that respects reduced-motion preferences.
 
-</td>
-<td width="50%" valign="top">
-
 ### ☁️ Managed content and media
+
 Supabase provides public portfolio data, authentication, contact submissions, and media storage. The server exposes public media through a controlled route.
 
-</td>
-</tr>
-</table>
 
 ### 🗺️ Main routes
 
-| Route | Page |
-|:---|:---|
-| `/` | Home |
-| `/about` | About Paras |
-| `/projects` | Project collection |
-| `/projects/:slug` | Project details |
-| `/skills` | Skills |
-| `/experience` | Experience |
-| `/certifications` | Certifications |
-| `/achievements` | Achievements |
-| `/art` | Art collection |
-| `/resume` | Resume |
-| `/contact` | Contact |
-| `/admin` | Admin sign-in and content management |
+- `/` — Home
+- `/about` — About Paras
+- `/projects` — Project collection
+- `/projects/:slug` — Project details
+- `/skills` — Skills
+- `/experience` — Experience
+- `/certifications` — Certifications
+- `/achievements` — Achievements
+- `/art` — Art collection
+- `/resume` — Resume
+- `/contact` — Contact
+- `/admin` and `/admin/login` — Admin management and sign-in
 
 <!-- ═══════════════════════ ARCHITECTURE ═══════════════════════ -->
 <a id="architecture"></a>
@@ -120,7 +102,7 @@ Supabase provides public portfolio data, authentication, contact submissions, an
 TanStack Start handles file-based routes, server rendering, and server endpoints. Typed service functions provide portfolio data to the interface. Supabase stores managed content, while ParasAI calls OpenRouter from the server so its API key stays private.
 
 ```mermaid
-flowchart LR
+flowchart TB
     V["👤 Visitor"] --> UI["⚛️ React UI<br/>TanStack Start"]
     UI --> S["🧩 Typed services<br/>portfolio content"]
     S --> DB[("🗄️ Supabase<br/>content · auth · storage")]
@@ -140,15 +122,13 @@ flowchart LR
 
 ## 🛠️ Tech Stack
 
-| Area | Technologies |
-|:---|:---|
-| UI | React 19, TypeScript, Tailwind CSS 4 |
-| App framework and routes | TanStack Start, TanStack Router, Vite |
-| Motion and components | Motion, Lucide, Radix UI, shadcn-style components |
-| Forms and validation | React Hook Form, Zod |
-| Data and auth | Supabase, TanStack Query |
-| AI | OpenRouter-compatible chat completions API |
-| Deployment | Vercel |
+- **UI:** React 19, TypeScript, Tailwind CSS 4
+- **App framework and routes:** TanStack Start, TanStack Router, Vite
+- **Motion and components:** Motion, Lucide, Radix UI, shadcn-style components
+- **Forms and validation:** React Hook Form, Zod
+- **Data and auth:** Supabase, TanStack Query
+- **AI:** OpenRouter-compatible chat completions API
+- **Deployment:** Vercel
 
 <!-- ═══════════════════════ PARASAI ═══════════════════════ -->
 <a id="parasai"></a>
@@ -158,7 +138,7 @@ flowchart LR
 ParasAI combines general-purpose assistance with answers grounded in public portfolio information. Portfolio facts are retrieved server-side from the current public content before being sent to the model. The model API key is used only on the server.
 
 ```mermaid
-flowchart LR
+flowchart TB
     Q["💬 Visitor question"] --> R["🔎 Retrieve public<br/>portfolio facts"]
     R --> M["🤖 OpenRouter model<br/>streaming response"]
     M --> A["📝 ParasAI answer<br/>with relevant links"]
@@ -224,33 +204,24 @@ Open the local URL printed by Vite.
 
 ### Available scripts
 
-| Command | Purpose |
-|:---|:---|
-| `npm run dev` | Start the local development server |
-| `npm run build` | Build the production app |
-| `npm run preview` | Preview a production build locally |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format project files with Prettier |
+- `npm run dev` — Start the local development server.
+- `npm run build` — Build the production app.
+- `npm run preview` — Preview a production build locally.
+- `npm run lint` — Run ESLint.
+- `npm run format` — Format project files with Prettier.
 
 <!-- ═══════════════════════ PROJECT STRUCTURE ═══════════════════════ -->
 ## 📂 Project Structure
 
-```text
-src/
-├── components/       # Page, layout, portfolio, and admin UI
-├── config/           # Site configuration
-├── data/             # Mock portfolio content
-├── integrations/     # Supabase clients, auth, and generated types
-├── routes/           # TanStack file-based routes and API endpoints
-├── services/         # Typed content, portfolio, and ParasAI services
-├── types/            # Shared site types
-├── styles.css        # Global styles
-├── router.tsx        # Router setup
-└── server.ts         # Server entry and error handling
-supabase/
-└── migrations/       # Database migrations
-public/               # Public assets and resume
-```
+- `src/components/` — Page, layout, portfolio, and admin UI.
+- `src/routes/` — TanStack file-based routes and API endpoints.
+- `src/services/` — Typed content, portfolio, and ParasAI services.
+- `src/integrations/` — Supabase clients, auth, and generated types.
+- `src/data/` — Mock portfolio content.
+- `src/types/` — Shared site types.
+- `src/styles.css` — Global styles.
+- `supabase/migrations/` — Database migrations.
+- `public/` — Public assets and resume.
 
 <!-- ═══════════════════════ DEPLOYMENT ═══════════════════════ -->
 ## 🚀 Deployment
