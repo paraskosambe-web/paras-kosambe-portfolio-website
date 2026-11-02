@@ -2076,6 +2076,11 @@
 @media (max-width: 480px) {
   .page-header.contact-page-header .page-header-mask { margin-top: 1.75rem; }
   .page-header.contact-page-header > p { margin: 1.25rem 0 0; }
+  .page-header.contact-page-header h1 { font-size: clamp(3.35rem, 15vw, 4.3rem); line-height: 0.9; }
+}
+
+@media (max-width: 900px) {
+  .contact-page { padding-top: 1.75rem; }
 }
 
 /* Homepage editorial motion and depth. Scoped below the hero so the shared
