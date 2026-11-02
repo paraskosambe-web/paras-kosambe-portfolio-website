@@ -230,10 +230,9 @@ The repository is configured for Vercel with TanStack Start. Add the required en
 
 ## 🔗 Links
 
-- **Live portfolio:** [paras-kosambe.lovable.app](https://paras-kosambe.lovable.app)
+- **Live portfolio:** [paras-kosambe.vercel.app](https://paras-kosambe.vercel.app)
 - **GitHub:** [paraskosambe-web](https://github.com/paraskosambe-web)
 - **LinkedIn:** [Paras Kosambe](https://www.linkedin.com/in/paras-kosambe)
-- **Lovable project:** [Open in Lovable](https://lovable.dev/projects/e41028ad-5804-4c23-bd80-223946e943a0)
 
 ---
 
