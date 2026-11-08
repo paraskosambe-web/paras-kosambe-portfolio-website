@@ -806,8 +806,30 @@
   bottom: 4px;
   left: 0;
   height: 1px;
+  overflow: hidden;
   transform-origin: left center;
   background: var(--foreground);
+}
+
+.desktop-nav-line::after {
+  position: absolute;
+  inset: 0 auto 0 -55%;
+  width: 48%;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 95%), transparent);
+}
+
+.desktop-nav-link-active .desktop-nav-line::after {
+  animation: header-nav-line-sweep 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes header-nav-line-sweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(330%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-nav-link-active .desktop-nav-line::after { animation: none; }
 }
 
 /* ---------- HEADER CTA ---------- */
