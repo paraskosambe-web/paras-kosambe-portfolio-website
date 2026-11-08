@@ -38,8 +38,8 @@ export function AestheticCursor() {
       const element = target instanceof Element ? target : null;
       const isTextField = Boolean(element?.closest(textSelector));
       const isInteractive = Boolean(element?.closest(interactiveSelector));
-      cursor.dataset.mode = isTextField ? "text" : isInteractive ? "interactive" : "default";
-      trail.dataset.mode = cursor.dataset.mode;
+      cursor.dataset["mode"] = isTextField ? "text" : isInteractive ? "interactive" : "default";
+      trail.dataset["mode"] = cursor.dataset["mode"];
     };
 
     const handlePointerMove = (event: PointerEvent) => {
@@ -48,24 +48,24 @@ export function AestheticCursor() {
       targetY = event.clientY;
       cursor.style.setProperty("--cursor-x", `${event.clientX}px`);
       cursor.style.setProperty("--cursor-y", `${event.clientY}px`);
-      cursor.dataset.visible = "true";
-      trail.dataset.visible = "true";
+      cursor.dataset["visible"] = "true";
+      trail.dataset["visible"] = "true";
       setModeFromTarget(event.target);
       if (!frame) frame = window.requestAnimationFrame(animateTrail);
     };
 
     const handlePointerDown = (event: PointerEvent) => {
-      if (event.pointerType === "mouse") cursor.dataset.pressed = "true";
+      if (event.pointerType === "mouse") cursor.dataset["pressed"] = "true";
     };
 
     const handlePointerUp = () => {
-      delete cursor.dataset.pressed;
+      delete cursor.dataset["pressed"];
     };
 
     const hideCursor = () => {
-      delete cursor.dataset.visible;
-      delete trail.dataset.visible;
-      delete cursor.dataset.pressed;
+      delete cursor.dataset["visible"];
+      delete trail.dataset["visible"];
+      delete cursor.dataset["pressed"];
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });

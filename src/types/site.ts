@@ -221,12 +221,12 @@ export interface SkillsCategory extends PortfolioItem {
   skills: string[];
 }
 
-export interface OverviewCollection {
+export interface OverviewCollection<T extends PortfolioItem = PortfolioItem> {
   sectionName: string;
   index: string;
   title: string;
   intro: string;
-  items: PortfolioItem[];
+  items: T[];
   action: LinkContent;
 }
 
@@ -260,7 +260,7 @@ export interface HomeContent {
     action: LinkContent;
   };
   projects: OverviewCollection;
-  experience: OverviewCollection;
+  experience: OverviewCollection<ExperienceItem>;
   certifications: OverviewCollection;
   achievements: OverviewCollection;
   resume: ResumePreviewContent;

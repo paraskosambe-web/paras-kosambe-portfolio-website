@@ -72,9 +72,8 @@ export function ContactPage() {
       <motion.div className="contact-links" initial={reveal} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
         <div className="contact-links-heading"><span>01 / Find me</span><h2>Choose a channel.</h2></div>
         {content.links.map((link, index) => {
-          const isEmail = link.label.toLowerCase() === "email";
-          const href = isEmail ? "mailto:paraskosambe@gmail.com" : link.href;
-          const value = isEmail ? "paraskosambe@gmail.com" : link.value;
+          const href = link.href;
+          const value = link.value;
           const external = href.startsWith("http");
           return <a key={link.label} href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} aria-disabled={href === "#"} onClick={href === "#" ? (event) => event.preventDefault() : undefined}><span>{String(index + 1).padStart(2, "0")} / {link.label}</span><strong>{value}</strong><ArrowUpRight /></a>;
         })}

@@ -118,7 +118,7 @@ export const siteContent: SiteContent = {
     experience: {
       sectionName: "Experience",
       index: "04", title: "Experience", intro: "Learning, contribution and practical work in context.", action: { label: "View all experience", href: "/experience" },
-      items: [1, 2, 3].map((number) => ({ id: `experience-${number}`, index: `0${number}`, meta: "EXPERIENCE · PLACEHOLDER", title: `Experience placeholder ${number}`, description: "Verified role, organisation and impact details will be added here.", tags: ["Role pending", "Details pending"], imageAlt: `Placeholder for experience ${number}`, action: { label: "View experience", href: "/experience" } })),
+      items: [1, 2, 3].map((number) => ({ id: `experience-${number}`, index: `0${number}`, meta: "EXPERIENCE · PLACEHOLDER", title: `Experience placeholder ${number}`, description: "Verified role, organisation and impact details will be added here.", tags: ["Role pending", "Details pending"], imageAlt: `Placeholder for experience ${number}`, organization: "Organization details pending", role: "Role details pending", type: "Experience", dateRange: "", location: "", responsibilities: [], technologies: ["Details pending"], action: { label: "View details", href: "/experience" } })),
     },
     certifications: {
       sectionName: "Certifications",

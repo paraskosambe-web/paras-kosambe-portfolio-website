@@ -9,7 +9,7 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -18,10 +18,11 @@ import { useQuery } from "@tanstack/react-query";
 import { hydrateSiteContent, portfolioQueryOptions } from "@/services/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ParasAI } from "@/components/layout/ParasAI";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { AestheticCursor } from "@/components/layout/AestheticCursor";
 import { PortfolioPreloader } from "@/components/layout/PortfolioPreloader";
+
+const ParasAI = lazy(() => import("@/components/layout/ParasAI").then((module) => ({ default: module.ParasAI })));
 
 function NotFoundComponent() {
   return (
@@ -207,7 +208,7 @@ function SiteContentRoot({ isAdmin }: { isAdmin: boolean }) {
           </div>
 
           <Footer />
-          <ParasAI />
+          <Suspense fallback={null}><ParasAI /></Suspense>
           <ScrollToTop />
         </div>
       )}

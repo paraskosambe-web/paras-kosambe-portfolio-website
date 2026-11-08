@@ -9,22 +9,26 @@ import { Button } from "@/components/ui/button";
 import { useSiteContent } from "@/services/site";
 import type { ExperienceItem, OverviewCollection } from "@/types/site";
 
-function CardCollection({ collection, className = "", experience = false }: { collection: OverviewCollection; className?: string; experience?: boolean }) {
+function CardCollection({ collection, className = "", experience = false }: { collection: OverviewCollection | OverviewCollection<ExperienceItem>; className?: string; experience?: boolean }) {
   const [selected, setSelected] = useState<ExperienceItem | null>(null);
   const experienceContent = useSiteContent().experience;
   return (
     <>
       <div className={`portfolio-grid ${className}`}>
         {collection.items.slice(0, 3).map((item, index) => {
-          const experienceItem = experience ? item as ExperienceItem : null;
+          const experienceItem = experience && "responsibilities" in item && Array.isArray(item.responsibilities)
+            ? item as ExperienceItem
+            : null;
           return <PortfolioCard key={item.id} item={item} delay={index * 0.08} replayOnView
-            details={experienceItem ? [experienceItem.role, experienceItem.dateRange, experienceItem.location] : []}
+            details={experienceItem ? [experienceItem.role, experienceItem.dateRange, experienceItem.location].filter(Boolean) : []}
             secondaryActions={experienceItem ? [
               ...(experienceItem.linkUrl ? [{ label: "Certificate", href: experienceItem.linkUrl }] : []),
               ...(experienceItem.githubUrl ? [{ label: "GitHub", href: experienceItem.githubUrl }] : []),
             ] : []}
-            onActivate={experienceItem ? () => setSelected(experienceItem) : undefined}
-            onActionClick={experienceItem ? () => setSelected(experienceItem) : undefined} />;
+            {...(experienceItem ? {
+              onActivate: () => setSelected(experienceItem),
+              onActionClick: () => setSelected(experienceItem),
+            } : {})} />;
         })}
       </div>
       {experience ? <ExperienceDetailDialog selected={selected} onOpenChange={(open) => { if (!open) setSelected(null); }} responsibilitiesLabel={experienceContent.dialogResponsibilitiesLabel} technologiesLabel={experienceContent.dialogTechnologiesLabel} /> : null}

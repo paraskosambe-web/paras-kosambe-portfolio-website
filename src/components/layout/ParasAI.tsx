@@ -21,22 +21,23 @@ function FormattedAnswer({ text }: { text: string }) {
   const lines = text.replace(/\r/g, "").split("\n");
   const blocks: Array<{ type: "paragraph" | "list" | "heading" | "code"; lines: string[]; ordered?: boolean; lang?: string }> = [];
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
+    const line = lines[i] ?? "";
     const fence = line.match(/^```(.*)$/);
     if (fence) {
       const code: string[] = [];
-      while (++i < lines.length && !lines[i].startsWith("```")) code.push(lines[i]);
-      blocks.push({ type: "code", lines: code, lang: fence[1].trim() }); continue;
+      while (++i < lines.length && !(lines[i] ?? "").startsWith("```")) code.push(lines[i] ?? "");
+      blocks.push({ type: "code", lines: code, lang: (fence[1] ?? "").trim() }); continue;
     }
     if (!line.trim()) continue;
     const heading = line.match(/^#{1,3}\s+(.+)$/);
     const bullet = line.match(/^\s*[-*+]\s+(.+)$/);
     const numbered = line.match(/^\s*\d+[.)]\s+(.+)$/);
-    if (heading) blocks.push({ type: "heading", lines: [heading[1]] });
+    if (heading) blocks.push({ type: "heading", lines: [heading[1] ?? ""] });
     else if (bullet || numbered) {
       const ordered = Boolean(numbered), previous = blocks.at(-1);
-      if (previous?.type === "list" && previous.ordered === ordered) previous.lines.push((bullet ?? numbered)![1]);
-      else blocks.push({ type: "list", ordered, lines: [(bullet ?? numbered)![1]] });
+      const listItem = (bullet ?? numbered)?.[1] ?? "";
+      if (previous?.type === "list" && previous.ordered === ordered) previous.lines.push(listItem);
+      else blocks.push({ type: "list", ordered, lines: [listItem] });
     } else {
       const previous = blocks.at(-1);
       if (previous?.type === "paragraph") previous.lines.push(line);
@@ -44,7 +45,7 @@ function FormattedAnswer({ text }: { text: string }) {
     }
   }
   return <div className="paras-ai-answer">{blocks.map((block, i) => {
-    if (block.type === "heading") return <h3 key={i}>{inline(block.lines[0])}</h3>;
+    if (block.type === "heading") return <h3 key={i}>{inline(block.lines[0] ?? "")}</h3>;
     if (block.type === "code") return <pre className="paras-ai-code" key={i}><div><span>{block.lang || "CODE"}</span><button type="button" onClick={() => void navigator.clipboard.writeText(block.lines.join("\n"))} aria-label="Copy code"><Copy /></button></div><code>{block.lines.join("\n")}</code></pre>;
     if (block.type === "list") { const List = block.ordered ? "ol" : "ul"; return <List key={i}>{block.lines.map((item, n) => <li key={n}>{inline(item)}</li>)}</List>; }
     return <p key={i}>{inline(block.lines.join(" "))}</p>;
@@ -105,7 +106,7 @@ export function ParasAI() {
       if (!response.ok) throw new Error(await response.text());
       if (response.headers.get("content-type")?.includes("application/json")) {
         const result = await response.json() as { answer?: string; links?: ParasAILink[] };
-        setConversations((previous) => previous.map((item) => item.id === conversation.id ? { ...item, messages: item.messages.map((message) => message.id === placeholder.id ? { ...message, text: result.answer ?? "", links: result.links } : message) } : item));
+        setConversations((previous) => previous.map((item) => item.id === conversation.id ? { ...item, messages: item.messages.map((message) => message.id === placeholder.id ? { ...message, text: result.answer ?? "", ...(result.links ? { links: result.links } : {}) } : message) } : item));
         return;
       }
       if (!response.body) throw new Error("Streaming is unavailable in this browser.");
@@ -116,7 +117,11 @@ export function ParasAI() {
         for (const event of events) {
           const line = event.split("\n").find((part) => part.startsWith("data: ")); if (!line) continue;
           const payload = JSON.parse(line.slice(6)) as { text?: string; done?: boolean; links?: ParasAILink[] };
-          if (payload.text || payload.links) setConversations((previous) => previous.map((item) => item.id === conversation.id ? { ...item, messages: item.messages.map((message) => message.id === placeholder.id ? { ...message, text: message.text + (payload.text ?? ""), links: payload.links ?? message.links } : message) } : item));
+          if (payload.text || payload.links) setConversations((previous) => previous.map((item) => item.id === conversation.id ? { ...item, messages: item.messages.map((message) => {
+            if (message.id !== placeholder.id) return message;
+            const links = payload.links ?? message.links;
+            return { ...message, text: message.text + (payload.text ?? ""), ...(links ? { links } : {}) };
+          }) } : item));
         }
       }
     } catch (cause) { if (!controller.signal.aborted) setError(cause instanceof Error ? cause.message : "Paras AI couldn't answer just now. Please try again."); }
