@@ -2270,6 +2270,16 @@
   row-gap: clamp(4.5rem, 6.5vw, 5.5rem);
 }
 
+/* Experience cards have variable content, so let the shared card shell grow with it. */
+.experience-grid .portfolio-card {
+  height: auto;
+  min-height: 0;
+}
+
+.experience-grid .portfolio-card-body {
+  min-height: 0;
+}
+
 .experience-detail-dialog {
   display: grid;
   z-index: 111;

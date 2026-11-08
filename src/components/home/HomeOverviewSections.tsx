@@ -1,17 +1,34 @@
 import { ArrowDownToLine, ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import { useState } from "react";
 
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
+import { ExperienceDetailDialog } from "@/components/collections/ExperienceDetailDialog";
 import { SectionOverview } from "@/components/portfolio/SectionOverview";
 import { Button } from "@/components/ui/button";
 import { useSiteContent } from "@/services/site";
-import type { OverviewCollection } from "@/types/site";
+import type { ExperienceItem, OverviewCollection } from "@/types/site";
 
-function CardCollection({ collection, className = "" }: { collection: OverviewCollection; className?: string }) {
+function CardCollection({ collection, className = "", experience = false }: { collection: OverviewCollection; className?: string; experience?: boolean }) {
+  const [selected, setSelected] = useState<ExperienceItem | null>(null);
+  const experienceContent = useSiteContent().experience;
   return (
-    <div className={`portfolio-grid ${className}`}>
-      {collection.items.slice(0, 3).map((item, index) => <PortfolioCard key={item.id} item={item} delay={index * 0.08} replayOnView />)}
-    </div>
+    <>
+      <div className={`portfolio-grid ${className}`}>
+        {collection.items.slice(0, 3).map((item, index) => {
+          const experienceItem = experience ? item as ExperienceItem : null;
+          return <PortfolioCard key={item.id} item={item} delay={index * 0.08} replayOnView
+            details={experienceItem ? [experienceItem.role, experienceItem.dateRange, experienceItem.location] : []}
+            secondaryActions={experienceItem ? [
+              ...(experienceItem.linkUrl ? [{ label: "Certificate", href: experienceItem.linkUrl }] : []),
+              ...(experienceItem.githubUrl ? [{ label: "GitHub", href: experienceItem.githubUrl }] : []),
+            ] : []}
+            onActivate={experienceItem ? () => setSelected(experienceItem) : undefined}
+            onActionClick={experienceItem ? () => setSelected(experienceItem) : undefined} />;
+        })}
+      </div>
+      {experience ? <ExperienceDetailDialog selected={selected} onOpenChange={(open) => { if (!open) setSelected(null); }} responsibilitiesLabel={experienceContent.dialogResponsibilitiesLabel} technologiesLabel={experienceContent.dialogTechnologiesLabel} /> : null}
+    </>
   );
 }
 
@@ -51,7 +68,7 @@ export function HomeOverviewSections() {
       </SectionOverview>
 
       <SectionOverview sectionName={content.experience.sectionName} index={content.experience.index} title={content.experience.title} intro={content.experience.intro} action={content.experience.action} tone="ruled" layout="split">
-        <CardCollection collection={content.experience} />
+        <CardCollection collection={content.experience} experience />
       </SectionOverview>
 
       <SectionOverview sectionName={content.certifications.sectionName} index={content.certifications.index} title={content.certifications.title} intro={content.certifications.intro} action={content.certifications.action} tone="charcoal" layout="right">
