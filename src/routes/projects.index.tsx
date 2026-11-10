@@ -6,6 +6,7 @@ import {
   hydrateSiteContent,
   portfolioQueryOptions,
 } from "@/services/site";
+import { pageHead } from "@/services/seo";
 
 export const Route = createFileRoute("/projects/")({
   loader: async ({ context }) => {
@@ -22,33 +23,15 @@ export const Route = createFileRoute("/projects/")({
     }
   },
 
-  head: () => ({
-    meta: [
-      { title: "Projects — Paras Kosambe" },
-      {
-        name: "description",
-        content:
-          "Selected data science, analytics, AI/ML and full-stack projects by Paras Kosambe.",
-      },
-      {
-        property: "og:title",
-        content: "Projects — Paras Kosambe",
-      },
-      {
-        property: "og:description",
-        content:
-          "Explore selected data-led projects and technical case studies.",
-      },
-      {
-        property: "og:type",
-        content: "website",
-      },
-      {
-        name: "twitter:card",
-        content: "summary_large_image",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      canonicalPath: "/projects",
+      title: "Projects — Paras Kosambe",
+      description:
+        "Selected data science, analytics, AI/ML and full-stack projects by Paras Kosambe.",
+      openGraphDescription:
+        "Explore selected data-led projects and technical case studies.",
+    }),
 
   component: ProjectsIndex,
 });

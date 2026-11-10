@@ -1,8 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ResumePage } from "@/components/collections/ResumePage";
+import { pageHead } from "@/services/seo";
 
-export const Route = createFileRoute("/resume")({ head: () => ({ meta: [
-  { title: "Resume — Paras Kosambe" }, { name: "description", content: "View or download the resume of Paras Kosambe." },
-  { property: "og:title", content: "Resume — Paras Kosambe" }, { property: "og:description", content: "Education, capabilities and selected work by Paras Kosambe." },
-  { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
-] }), component: ResumePage });
+export const Route = createFileRoute("/resume")({
+  head: () =>
+    pageHead({
+      canonicalPath: "/resume",
+      title: "Resume — Paras Kosambe",
+      description: "View or download the resume of Paras Kosambe.",
+      openGraphDescription:
+        "Education, capabilities and selected work by Paras Kosambe.",
+    }),
+  component: ResumePage,
+});

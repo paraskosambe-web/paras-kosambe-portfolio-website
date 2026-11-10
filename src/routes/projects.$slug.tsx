@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 
 import { ProjectDetail, ProjectNotFound } from "@/components/projects/ProjectDetail";
 import { getProjectBySlug, hydrateSiteContent, portfolioQueryOptions } from "@/services/site";
+import { pageHead } from "@/services/seo";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: async ({ params, context }) => {
@@ -13,11 +14,15 @@ export const Route = createFileRoute("/projects/$slug")({
   head: ({ loaderData }) => {
     const title = loaderData ? `${loaderData.title} — Paras Kosambe` : "Project not found — Paras Kosambe";
     const description = loaderData?.description ?? "The requested project could not be found.";
-    return { meta: [
-      { title }, { name: "description", content: description },
-      { property: "og:title", content: title }, { property: "og:description", content: description },
-      { property: "og:type", content: "article" }, { name: "twitter:card", content: "summary_large_image" },
-    ] };
+    return pageHead({
+      ...(loaderData
+        ? { canonicalPath: `/projects/${encodeURIComponent(loaderData.slug)}` }
+        : {}),
+      title,
+      description,
+      type: "article",
+      indexable: Boolean(loaderData),
+    });
   },
   notFoundComponent: ProjectNotFound,
   component: ProjectRoute,
