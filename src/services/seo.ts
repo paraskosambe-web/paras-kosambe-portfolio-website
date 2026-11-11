@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site";
 
-export const SITE_URL = "https://paras-kosambe.vercel.app";
+export const SITE_URL = "https://paras-kosambe.lovable.app";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}/og-image.png`;
 
 const SOCIAL_IMAGE_ALT =
