@@ -3,8 +3,12 @@ import { siteConfig } from "@/config/site";
 export const SITE_URL = "https://paras-kosambe.vercel.app";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}/og-image.png`;
 
-const SOCIAL_IMAGE_ALT = 
+const SOCIAL_IMAGE_ALT =
   "Paras Kosambe — aspiring data scientist working across data, AI, and software";
+
+export function canonicalUrlForPath(path: string): string {
+  return new URL(path, `${SITE_URL}/`).toString();
+}
 
 type PageHeadOptions = {
   canonicalPath?: string;
@@ -25,9 +29,7 @@ export function pageHead({
   indexable = true,
   jsonLd,
 }: PageHeadOptions) {
-  const canonicalUrl = canonicalPath
-    ? new URL(canonicalPath, SITE_URL).toString()
-    : undefined;
+  const canonicalUrl = canonicalPath ? canonicalUrlForPath(canonicalPath) : undefined;
 
   return {
     ...(canonicalUrl
@@ -88,5 +90,23 @@ export function profilePageStructuredData(): Record<string, unknown> {
       jobTitle: "Aspiring Data Scientist",
       sameAs: [siteConfig.github, siteConfig.linkedin].filter(Boolean),
     },
+  };
+}
+
+export function projectStructuredData(project: {
+  slug: string;
+  title: string;
+  description: string;
+}): Record<string, unknown> {
+  const url = canonicalUrlForPath(`/projects/${encodeURIComponent(project.slug)}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `${url}#project`,
+    url,
+    name: project.title,
+    description: project.description,
+    author: { "@id": `${SITE_URL}/about#person` },
   };
 }

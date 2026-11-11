@@ -2,7 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 
 import { ProjectDetail, ProjectNotFound } from "@/components/projects/ProjectDetail";
 import { getProjectBySlug, hydrateSiteContent, portfolioQueryOptions } from "@/services/site";
-import { pageHead } from "@/services/seo";
+import { pageHead, projectStructuredData } from "@/services/seo";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: async ({ params, context }) => {
@@ -22,6 +22,7 @@ export const Route = createFileRoute("/projects/$slug")({
       description,
       type: "article",
       indexable: Boolean(loaderData),
+      ...(loaderData ? { jsonLd: projectStructuredData(loaderData) } : {}),
     });
   },
   notFoundComponent: ProjectNotFound,
