@@ -8,8 +8,9 @@ export const Route = createFileRoute("/about")({
       canonicalPath: "/about",
       title: "About — Paras Kosambe",
       description:
-        "Learn about Paras Kosambe, a final-year Computer Science student focused on data and software.",
-      openGraphDescription: "Education, current focus and goals of Paras Kosambe.",
+        "Learn about Paras Kosambe, a final-year B.Sc. Computer Science student at the University of Mumbai focused on data science, data analytics, AI/ML, machine learning, and full-stack development.",
+      openGraphDescription:
+        "Education and current work in data science, data analytics, AI/ML, machine learning, and full-stack development.",
       jsonLd: profilePageStructuredData(),
     }),
   component: AboutPage,

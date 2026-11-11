@@ -111,7 +111,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Paras Kosambe" },
       { name: "description", content: "Portfolio of Paras Kosambe." },
       { name: "author", content: "Paras Kosambe" },
-      { property: "og:site_name", content: "Paras Kosambe" },
       { property: "og:title", content: "Paras Kosambe" },
       { property: "og:description", content: "Portfolio of Paras Kosambe." },
       { property: "og:type", content: "website" },

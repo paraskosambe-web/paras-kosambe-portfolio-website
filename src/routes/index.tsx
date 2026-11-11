@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
       canonicalPath: "/",
       title: "Paras Kosambe — Aspiring Data Scientist",
       description:
-        "Portfolio of Paras Kosambe, an aspiring Data Scientist working across analytics, AI/ML, and full-stack development.",
+        "Portfolio of Paras Kosambe, a final-year Computer Science student focused on data science, data analytics, AI/ML, machine learning, and full-stack development.",
       openGraphDescription:
         "Data-driven systems, intelligent applications, and scalable digital experiences.",
       jsonLd: websiteStructuredData(),

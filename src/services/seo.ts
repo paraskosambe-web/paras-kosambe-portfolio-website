@@ -39,6 +39,7 @@ export function pageHead({
       { title },
       { name: "description", content: description },
       ...(canonicalUrl ? [{ property: "og:url", content: canonicalUrl }] : []),
+      { property: "og:site_name", content: "Paras Kosambe" },
       { property: "og:title", content: title },
       {
         property: "og:description",
@@ -54,7 +55,7 @@ export function pageHead({
       { name: "twitter:description", content: description },
       { name: "twitter:image", content: SOCIAL_IMAGE_URL },
       { name: "twitter:image:alt", content: SOCIAL_IMAGE_ALT },
-      ...(!indexable ? [{ name: "robots", content: "noindex, follow" }] : []),
+      { name: "robots", content: indexable ? "index, follow" : "noindex, follow" },
       ...(jsonLd ? [{ "script:ld+json": jsonLd }] : []),
     ],
   };
@@ -86,8 +87,15 @@ export function profilePageStructuredData(): Record<string, unknown> {
       name: "Paras Kosambe",
       url: `${SITE_URL}/about`,
       description:
-        "Learn about Paras Kosambe, a final-year Computer Science student focused on data and software.",
+        "Learn about Paras Kosambe, a final-year B.Sc. Computer Science student at the University of Mumbai focused on data science, data analytics, AI/ML, machine learning, and full-stack development.",
       jobTitle: "Aspiring Data Scientist",
+      knowsAbout: [
+        "Data science",
+        "Data analytics",
+        "Machine learning",
+        "Artificial intelligence",
+        "Full-stack development",
+      ],
       sameAs: [siteConfig.github, siteConfig.linkedin].filter(Boolean),
     },
   };
