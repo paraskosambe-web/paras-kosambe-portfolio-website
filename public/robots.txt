@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://paras-kosambe.vercel.app/sitemap.xml
+Sitemap: https://paras-kosambe.lovable.app/sitemap.xml
