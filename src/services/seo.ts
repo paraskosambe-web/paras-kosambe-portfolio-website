@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 export const SITE_URL = "https://paras-kosambe.vercel.app";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}/og-image.png`;
 
-const SOCIAL_IMAGE_ALT =
+const SOCIAL_IMAGE_ALT = 
   "Paras Kosambe — aspiring data scientist working across data, AI, and software";
 
 type PageHeadOptions = {
