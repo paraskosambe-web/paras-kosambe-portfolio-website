@@ -209,7 +209,6 @@ export type Database = {
           date_range: string
           description: string
           featured: boolean
-          github_url: string
           id: string
           image_alt: string
           image_url: string
@@ -229,7 +228,6 @@ export type Database = {
           date_range?: string
           description?: string
           featured?: boolean
-          github_url?: string
           id?: string
           image_alt?: string
           image_url?: string
@@ -249,7 +247,6 @@ export type Database = {
           date_range?: string
           description?: string
           featured?: boolean
-          github_url?: string
           id?: string
           image_alt?: string
           image_url?: string
