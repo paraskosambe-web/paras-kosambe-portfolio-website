@@ -1,4 +1,4 @@
-import { M as require_jsx_runtime } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
+import { P as require_jsx_runtime } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
 import { t as useReducedMotion } from "../_libs/framer-motion+[...].mjs";
 import { t as motion } from "../_libs/motion.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/PageHeader-DICjnaAB.js

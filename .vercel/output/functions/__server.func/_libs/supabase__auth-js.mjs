@@ -1,4 +1,4 @@
-import { __rest } from "tslib";
+import { A as __rest } from "./@radix-ui/react-alert-dialog+[...].mjs";
 //#region node_modules/@supabase/auth-js/dist/module/lib/version.js
 var version = "2.117.3";
 //#endregion

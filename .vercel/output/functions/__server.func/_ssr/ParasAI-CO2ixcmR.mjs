@@ -1,6 +1,6 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
-import { M as require_jsx_runtime } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
+import { P as require_jsx_runtime } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
 import { H as ArrowUpRight, P as Copy, b as LoaderCircle, d as RotateCcw, f as Plus, k as FileUp, l as Send, m as MessageCircle, o as Square, t as X, z as Bot } from "../_libs/lucide-react.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/ParasAI-CO2ixcmR.js
 var import_react = /* @__PURE__ */ __toESM(require_react());

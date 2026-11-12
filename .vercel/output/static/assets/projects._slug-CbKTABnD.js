@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-BkSabwWG.js";import{t}from"./ProjectDetail-_abloOGo.js";import{t as n}from"./index-BYTmwl4n.js";var r=e();function i(){let e=n.useLoaderData();return(0,r.jsx)(t,{project:e})}export{i as component};

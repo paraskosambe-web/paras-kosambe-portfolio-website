@@ -1,4 +1,4 @@
-import { M as require_jsx_runtime } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
+import { P as require_jsx_runtime } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
 import { B as Award, O as FolderKanban, R as Briefcase, _ as Mail, a as Star, r as Trophy, s as Sparkles, w as Image } from "../_libs/lucide-react.mjs";
 import { x as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as useQuery } from "../_libs/tanstack__react-query.mjs";

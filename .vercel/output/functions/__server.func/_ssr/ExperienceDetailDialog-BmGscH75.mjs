@@ -1,4 +1,4 @@
-import { M as require_jsx_runtime } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
+import { P as require_jsx_runtime } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
 import { D as Github, N as ExternalLink } from "../_libs/lucide-react.mjs";
 import { a as DialogTitle, i as DialogHeader, n as DialogContent, r as DialogDescription, t as Dialog } from "./dialog-Pbaw5HFo.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/ExperienceDetailDialog-BmGscH75.js
